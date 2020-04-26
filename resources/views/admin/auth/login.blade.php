@@ -15,11 +15,11 @@
                 <span class="invalid-feedback" role="alert">
                     <strong style="color: red;">{{ $message }}</strong>
                 </span>
-             @enderror
+            @enderror
 
             <div class="form-group">
               <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-               @error('password')
+                @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

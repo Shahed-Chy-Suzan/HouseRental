@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><strong>Admin</strong> Change Password</div>
+                <div class="card-header"><strong>Admin </strong> Password Change</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ Route('admin.password.update') }}" aria-label="{{ __('Reset Password') }}">
@@ -51,9 +51,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-10 offset-md-4 text-md-right">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                                    {{ __('Password Change') }}
                                 </button>
                             </div>
                         </div>
