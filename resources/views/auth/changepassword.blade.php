@@ -10,7 +10,7 @@
                 <div class="card-header text-center">{{ __('Change Your Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}" aria-label="{{ __('Reset Password') }}">
+                    <form method="POST" action="{{ route('update.password') }}" aria-label="{{ __('Reset Password') }}">
                         @csrf
 
 
@@ -72,8 +72,7 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a href="{{ route('password.change') }}"> Password Change </a></li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item"><a href="{{ route('password.change') }}"> Edit Profile </a></li>
                   </ul>
                   <div class="card-body">
                     <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>

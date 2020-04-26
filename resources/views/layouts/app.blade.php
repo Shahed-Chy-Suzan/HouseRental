@@ -91,7 +91,7 @@
                                 {{-- @if(session()->get('lang') == 'bangla')
                                 রেজিস্টার / লগইন
                                 @else --}}
-                                Register/Login
+                                <div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>Register/Login
                                 {{-- @endif --}}
                             </a></div>
                         @else
@@ -101,8 +101,7 @@
                                     <ul>
                                         <li><a href="{{ route('home') }}">Profile<i class="fas fa-chevron-down"></i></a></li>
                                         <li><a href="">Add My Property</a></li>
-                                        <li><a href="">Wishlist</a></li>
-                                        <li><a href="">Checkout</a></li>
+                                        <li><a href="{{ route('user.logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
 
