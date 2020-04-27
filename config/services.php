@@ -30,10 +30,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-     'google' => [
-     'client_id' => '1022825030130-pjqqhr5dqo7dfvt5b6gsho8ja0tgims5.apps.googleusercontent.com',
-     'client_secret' => 'pxik4e9pgGR1fX0C_ce7SJ6R',
-     'redirect' => 'http://localhost/online_shop/callback/google',
-     ],
+    'google' => [
+        'client_id' => '326396424247-g3k0mugsr9ts1ef48fo1f36dgfrelnpn.apps.googleusercontent.com',
+        'client_secret' => 'fRa0DImYy8pvP1CnXPfZwDFP',
+        'redirect' => 'http://localhost/HouseRental/callback/google',
+    ],
+
+    // 'facebook' => [
+    //     'client_id' => 'xxxx',
+    //     'client_secret' => 'xxx',
+    //     'redirect' => 'http://localhost/HouseRental/callback/facebook',
+    // ],
 
 ];
