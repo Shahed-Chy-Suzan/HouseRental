@@ -394,7 +394,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        Copyright &copy; 2020 All Rights Reserved By : <span><a href="www.facebook.com/armanulalam/" target="_blank"> Arman-Ul-Alam </a> & <a href="www.facebook.com/shahedchysuzan/" target="_blank"> Shahed Chy Suzan </a></span>
+                        Copyright &copy; 2020 All Rights Reserved By : <span><a href="https://facebook.com/arman.u.alam" target="_blank"> Arman-Ul-Alam </a> & <a href="https://facebook.com/Shahedchysuzan/" target="_blank"> Shahed Chy Suzan </a></span>
                     </p>
                 </div>
             </div>
