@@ -17,63 +17,6 @@
 
 
 
-<!-- Characteristics -->
-
-{{-- <div class="characteristics">
-    <div class="container">
-        <div class="row">
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="images/char_1.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="images/char_2.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="images/char_3.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="images/char_4.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
 <!-- Deals of the week -->
 
 <div class="deals_featured">
@@ -6058,10 +6001,14 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
             </div>
         </div>
     </div>
-</div>
+</div>           <!-------------Ends // Review/Default---------------->
 
 
 
+
+@php
+    $setting=DB::table('sitesetting')->first();
+@endphp
 
         <!-------------stats // we deliver services---------------->
  <section id="stats">
@@ -6079,7 +6026,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                     <!--stats-item 01-->
                     <div class="stats-item text-center">
                         <i class="far fa-chart-bar"></i>
-                        <h3 class="counter">26</h3>
+                        <h3 class="counter">{{ $setting->experience }}</h3>
                         <p>Years Experiance</p>
                     </div>
                 </div>
@@ -6087,7 +6034,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                     <!--stats-item 02-->
                     <div class="stats-item text-center">
                         <i class="fab fa-codepen"></i>
-                        <h3 class="counter">300</h3>
+                        <h3 class="counter">{{ $setting->project }}</h3>
                         <p>Project Done</p>
                     </div>
                 </div>
@@ -6095,7 +6042,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                     <!--stats-item 03-->
                     <div class="stats-item text-center">
                         <i class="fas fa-trophy"></i>
-                        <h3 class="counter">100</h3>
+                        <h3 class="counter">{{ $setting->award }}</h3>
                         <p>Awards Received</p>
                     </div>
                 </div>
@@ -6103,7 +6050,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                     <!--stats-item 04-->
                     <div class="stats-item text-center">
                         <i class="fa fa-users"></i>
-                        <h3 class="counter">276</h3>
+                        <h3 class="counter">{{ $setting->clients }}</h3>
                         <p>Happy Clients</p>
                     </div>
                 </div>
@@ -6186,7 +6133,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
 
 <!-- Recently Viewed -->
 
-<div class="viewed">
+{{-- <div class="viewed">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -6298,7 +6245,10 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+
+
 
 <!-- Brands -->
 
@@ -6333,6 +6283,9 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
     </div>
 </div> --}}
 
+
+
+
 <!-- Newsletter -->
 
 <div class="newsletter">
@@ -6346,17 +6299,111 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                         <div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
                     </div>
                     <div class="newsletter_content clearfix">
-                        <form action="#" class="newsletter_form">
-                            <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
-                            <button class="newsletter_button">Subscribe</button>
+                        <form action="{{ route('store.newsletters') }}" class="newsletter_form" method="post">
+                            @csrf
+                            <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address" name="email">
+                            <button class="newsletter_button" type="submit">Subscribe</button>
                         </form>
-                        <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+                        <div class="newsletter_unsubscribe_link"><a href="">unsubscribe</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>      <!------------End Newsletter -------------->
+
+
+
+
+
+
+<!----------------------------------- FAQ ------------------------------------->
+<div id="accordion" role="tablist" class="bg-dark py-5 text-light text-center ">
+    <div class="container py-4">
+        <div class="row text-center">
+            <div class="col">
+                <h2 class="mb-0">Frequently Asked Questions</h2>
+            </div>
+        </div>
+        <div class="row mt-5">
+        <div class="col-md-12">
+
+            <div class="card bg-light text-dark my-2">
+                <div class="card-header text-primary" role="tab">
+                    <h4 class="mb-0">
+                    <div data-toggle="collapse" href="#questionOne"><i class="fa fa-arrow-circle-down pr-2"></i>How do I post a property for rent/sell? </div>
+                    </h4>
+                </div>
+                <div class="collapse" id="questionOne" data-parent="#accordion">
+                    <div class="card-body text-left">
+                    <p class="mb-0">
+                        <ol class="offset-md-3 text-muted" style="font-size: 15px; word-spacing: 4px">
+                            <li> At first “Log-in” to your account, then go to your “profile” page.</li>
+                            <li> Select the “Add My Property” option from the menu to get started.</li>
+                            <li> Then a “form” will appear in your screens to fill up and submit.</li>
+                            <li> Enter basic information about your properties including lease terms and utilities.</li>
+                            <li> Upload a few photos too of your properties for rent or sell.</li>
+                            <li> Preview your listing to make sure everything looks right.</li>
+                            <li> “Submit” your listing.</li>
+                        </ol>
+                    </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="card bg-light text-dark my-2">
+                <div class="card-header text-primary" role="tab">
+                    <h4 class="mb-0">
+                    <div data-toggle="collapse" href="#questionTwo"><i class="fa fa-arrow-circle-down pr-2"></i>What will my rental listing look like? </div>
+                    </h4>
+                </div>
+                <div class="collapse" id="questionTwo" data-parent="#accordion">
+                    <div class="card-body">
+                    <p class="mb-0" style="font-size: 15px">If you're posting a Rent, you'll see a preview screen before publish your listing through our mail. This shows you a page similar to what renters will see, so you can make any edits you want before it goes live.</p>
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class="card bg-light text-dark my-2">
+                <div class="card-header text-primary" role="tab">
+                    <h4 class="mb-0">
+                    <div data-toggle="collapse" href="#questionThree"><i class="fa fa-arrow-circle-down pr-2"></i>How can I submit feedback on my experience?</div>
+                    </h4>
+                </div>
+                <div class="collapse" id="questionThree" data-parent="#accordion">
+                    <div class="card-body">
+                    <p class="mb-0" style="font-size: 15px">We’re always open to feedback that will help us give you the best experience possible. If you’re posting a Room for Rent, send your thoughts and suggestions to <a href="mailto:{{ $setting->email_one }}"> {{ $setting->email_one }} </a>. For feedback on other types of rentals you can email <a href="mailto:{{ $setting->email_two }}"> {{ $setting->email_two }} </a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light text-dark my-2">
+                <div class="card-header text-primary" role="tab">
+                    <h4 class="mb-0">
+                    <div data-toggle="collapse" href="#questionFour"><i class="fa fa-arrow-circle-down pr-2"></i>How will I know when a renter is interested in my listing?</div>
+                    </h4>
+                </div>
+                <div class="collapse" id="questionFour" data-parent="#accordion">
+                    <div class="card-body">
+                    <p class="mb-0" style="font-size: 15px; word-spacing: 2px">How renters contact you is up to you. You can choose to display your phone number so renters can call or text you directly. If you don’t want to share your number we’ll personally knock you and will forward renter’s written inquiries to your email address. We don’t display your email address, so you don’t have to worry about spam.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </div>
+</div>      <!-------------------End FAQ ------------------>
+
+
+
+
+
+
+
+
+
 
 
 

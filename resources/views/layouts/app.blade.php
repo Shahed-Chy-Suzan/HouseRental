@@ -53,33 +53,45 @@
     <!-- Header -->
     <header class="header smooth-scroll" id="home">
 
+
+@php
+    $setting=DB::table('sitesetting')->first();
+@endphp
+
+
 <div class="top_bar">
     <div class="container">
         <div class="row">
             <div class="col d-flex flex-row">
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><a href="{{ url('/') }}"> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="65px" height="65px"> <span class="text-primary h5" >BariWala<small style="font-size:12px">.com</small></span></a></div></div>
+                <div class="top_bar_contact_item"><div class="top_bar_icon"><a href="{{ url('/') }}"> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="65px" height="65px"> <span class="text-primary h5" >{{ $setting->company_name }}<small style="font-size:12px">.com</small></span></a></div></div>
 
-                <div class="top_bar_contact_item mx-5"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/phone.png')}}" alt=""></div>+38 068 005 3570</div>
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/mail.png')}}" alt=""></div><a href="https://colorlib.com/cdn-cgi/l/email-protection#234542505750424f465063444e424a4f0d404c4e"><span class="__cf_email__" data-cfemail="34525547404755585147745359555d581a575b59">[email&#160;protected]</span></a></div>
+                <div class="top_bar_contact_item mx-5"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/phone.png')}}" alt=""></div>{{ $setting->phone_one }}</div>
+                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/mail.png')}}" alt=""></div><a href="mailto:{{ $setting->email_one }}">{{$setting->email_one}}</a></div>
+
+
 
                 <div class="top_bar_content ml-auto">
                     <div class="top_bar_menu">
                         <ul class="standard_dropdown top_bar_dropdown">
+    <!------Languaga(bangla/english)------->
+                            @php
+                                $language=session()->get('lang');
+                            @endphp
                             <li>
-                                <a href="#">English<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li><a href="#">Italian</a></li>
-                                    <li><a href="#">Spanish</a></li>
-                                    <li><a href="#">Japanese</a></li>
-                                </ul>
+                                @if(session()->get('lang') == 'bangla')
+                                <a href="{{ route('language.english') }}">English<i class="fas fa-chevron-down"></i></a>
+                                @else
+                                <a href="{{ route('language.bangla') }}">Bangla<i class="fas fa-chevron-down"></i></a>
+                                @endif
                             </li>
                             <li>
-                                <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                <ul>
+                                <a href="{{ route('add.property.user')}}">Ad</a>
+                                {{-- <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a> --}}
+                                {{-- <ul>
                                     <li><a href="#">EUR Euro</a></li>
                                     <li><a href="#">GBP British Pound</a></li>
                                     <li><a href="#">JPY Japanese Yen</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
                         </ul>
                     </div>
@@ -88,19 +100,21 @@
                     <div class="top_bar_user">
                         @guest
                             <div><a href="{{ route('login') }}">
-                                {{-- @if(session()->get('lang') == 'bangla')
-                                রেজিস্টার / লগইন
-                                @else --}}
-                                <div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>Register/Login
-                                {{-- @endif --}}
-                            </a></div>
+                                <div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
+                                @if(session()->get('lang') == 'bangla')
+                                    রেজিস্টার/লগইন
+                                @else
+                                    Register/Login
+                                @endif
+                                </a>
+                            </div>
                         @else
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li> <a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
                                     Profile<i class="fas fa-chevron-down"></i></a>
                                     <ul>
                                         <li><a href="{{ route('home') }}">Profile<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="">Add My Property</a></li>
+                                        <li><a href="{{ route('add.property.user')}}">Add My Property</a></li>
                                         <li><a href="{{ route('user.logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
@@ -123,12 +137,25 @@
             <!-- Logo -->
             <div class="col-lg-2 col-sm-3 col-3 order-1" data-aos="fade-up-right">
                 <div class="logo_container">
-                <div class="logo" style="">
-                    <a href="{{ url('/') }}" class="text-primary">BariWala</a></div>
+                <div class="logo">
+                    <a href="{{ url('/') }}" class="text-primary">
+                        @if(session()->get('lang') == 'bangla')
+                            বাড়িওয়ালা
+					    @else
+                            {{ $setting->company_name }}
+					    @endif
+                    </a>
+                </div>
                 </div>
             </div>
 
-            <!-- Search -->
+
+
+@php
+    $city=DB::table('cities')->get();
+@endphp
+
+<!-------------- Search ----------------->
             <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                 <div class="header_search">
                     <div class="header_search_content">
@@ -137,15 +164,12 @@
                                 <input type="search" required="required" class="header_search_input" placeholder="Search by city or state...">
                                 <div class="custom_dropdown">
                                     <div class="custom_dropdown_list">
-                                        <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                        <span class="custom_dropdown_placeholder clc">All Cities</span>
                                         <i class="fas fa-chevron-down"></i>
                                         <ul class="custom_list clc">
-                                            <li><a class="clc" href="#">All Categories</a></li>
-                                            <li><a class="clc" href="#">Computers</a></li>
-                                            <li><a class="clc" href="#">Laptops</a></li>
-                                            <li><a class="clc" href="#">Cameras</a></li>
-                                            <li><a class="clc" href="#">Hardware</a></li>
-                                            <li><a class="clc" href="#">Smartphones</a></li>
+                                            @foreach($city as $row)
+                                                <li><a class="clc" href="#">{{ $row->city_name }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -194,7 +218,7 @@
     @yield('content')
 
 
-            <!-------- Start Footer ----------->
+            <!--------------------------- Start Footer ------------------------------>
 	<!-- Footer -->
 
 	<!--<footer class="footer">
@@ -298,9 +322,9 @@
                                         <div class="branch">
                                             <h4 style="color: blue">Chittagong</h4>
                                             <ul class="brance-details">
-                                                <li><i class="fa fa-mobile"></i>+(60) 888-98 00 99</li>
-                                                <li><i class="far fa-envelope"></i>support.suzan@chittagong.com</li>
-                                                <li><i class="fa fa-map-marker"></i>Chittagong, Bangladesh</li>
+                                                <li><i class="fa fa-mobile"></i>{{ $setting->phone_one }}</li>
+                                                <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_one }}" style="color:black"> {{ $setting->email_one }} </a></li>
+                                                <li><i class="fa fa-map-marker"></i>{{ $setting->address_one }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -308,9 +332,9 @@
                                         <div class="branch">
                                             <h4 style="color: blue">Dhaka</h4>
                                             <ul class="brance-details">
-                                                <li><i class="fa fa-mobile"></i>+(60) 999-98 00 98</li>
-                                                <li><i class="far fa-envelope"></i>support.arman@dhaka.com</li>
-                                                <li><i class="fa fa-map-marker"></i>Dhaka, Bangladesh</li>
+                                                <li><i class="fa fa-mobile"></i>{{ $setting->phone_two }}</li>
+                                                <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></li></li>
+                                                <li><i class="fa fa-map-marker"></i>{{ $setting->address_two }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -318,73 +342,69 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <ul class="social-links">
-                                    <li title="Follow us on Facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li title="Follow us on Linkedin"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li title="Follow us on Twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li title="Follow us on Youtube"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    <li title="Follow us on Instagram"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li title="Follow us on Pinterest"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                    <li title="Follow us on Whatsapp"><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                    <li title="Follow us on Facebook"><a href="{{ $setting->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li title="Follow us on Linkedin"><a href="{{ $setting->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li title="Follow us on Twitter"><a href="{{ $setting->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                    <li title="Follow us on Youtube"><a href="{{ $setting->youtube }}"><i class="fab fa-youtube"></i></a></li>
+                                    <li title="Follow us on Instagram"><a href="{{ $setting->instagram }}"><i class="fab fa-instagram"></i></a></li>
+                                    <li title="Follow us on Pinterest"><a href="{{ $setting->pinterest }}"><i class="fab fa-pinterest"></i></a></li>
+                                    <li title="Follow us on Whatsapp"><a href="{{ $setting->whatsapp }}"><i class="fab fa-whatsapp"></i></a></li>
                                 </ul>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="col-md-6">
+<div class="col-md-6">
 
-                        <!--contact right-->
-                        <div id="contact-right">
-                            <form>
-                                <h4 style="color: blue">Send Message</h4>
-                                <p>Feel free to contant with us at any moment...</p>
+    <!--contact right-->
+    <div id="contact-right">
+        <form action="{{route('store.contact')}}" method="post">
+                @csrf
+            <h4 style="color: blue">Send Message</h4>
+            <p>Feel free to contact with us at any moment...</p>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="name" placeholder="Your Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="email" placeholder="Email Address">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="phone" placeholder="Phone No">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="subject" placeholder="Subject">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="3" cols="4" name="message" placeholder="Your Message Will Go Here"></textarea>
-                                </div>
-
-                                <div id="submit-btn">
-                                    <a class="btn btn-info btn-block" href="#" title="submit" role="button">Submit</a>
-                                </div>
-
-                                <table>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="phone" placeholder="Phone No" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject">
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="3" cols="4" name="message" placeholder="Your Message Will Go Here" required></textarea>
+            </div>
+
+            <div id="submit-btn">
+                <button class="btn btn-info btn-block text-light" title="submit" role="button">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
                 </div>
             </div>
         </div>
     </section>
-    <!------------------contact Ends------------------------>
+<!---------------------------------contact Ends-------------------------------->
 
 
 
@@ -407,6 +427,7 @@
 
     </div>
     <!--footer Ends-->
+
 <!--------- Order Tracking Modal -------------->
 <!--
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -451,7 +472,6 @@
 <!----------newly added-------->
 <script src="{{asset('public/frontend/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/aos.js')}}"></script>
-<script src="{{asset('public/frontend/js/jquery.counterup.min.js')}}"></script>    <!--counterup-->
 
 {{-- <script src="{{ asset('public/frontend/js/product_custom.js') }}"></script> --}}
 {{-- <script src="{{asset('public/backend/js/sweetalert2.min.js')}}"></script> --}}

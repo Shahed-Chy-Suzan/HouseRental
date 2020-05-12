@@ -16,46 +16,28 @@
                             {{-- <small style="font-size:10px; text-transform:capitalize;">Explore Rentals</small> --}}
                         </div>
 
-                        <ul class="cat_menu">
+{{---------- here ---------}}
+@php
+$city=DB::table('cities')->get();
+@endphp
+                    <ul class="cat_menu">
+                        @foreach( $city as $cat)
                             <li class="hassubs">
-                                <a href="#">Chattogram<i class="fas fa-chevron-right"></i></a>
+                                <a href="#">{{ $cat->city_name }}<i class="fas fa-arrow-circle-right"></i></a>
                                 <ul>
-                                    <li><a href="#">Raozan<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Moradpur<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">GEC<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Halisahar<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Colonel Hat<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Agrabad<i class="fas fa-chevron-right"></i></a></li>
+                                    @php
+                                        $subcity=DB::table('subcities')->where('city_id',$cat->id)->get();
+                                    @endphp
+                                    @foreach($subcity as $row)
+                                    <li><a href="{{ url('products/'.$row->id) }}">{{  $row->subcity_name }}<i class="fas fa-arrow-circle-right z-index-100"></i></a></li>
+                                    @endforeach
                                 </ul>
                             </li>
+                        @endforeach
+                    </ul>
+                </div>
 
-                            <li><a href="#">Dhaka<i class="fas fa-chevron-right"></i></a></li>
 
-                            <li class="hassubs">
-                                <a href="#">Rajshahi<i class="fas fa-chevron-right"></i></a>
-                                <ul>
-                                    <li class="hassubs">
-                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Barishal<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Khulna<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Sylhet<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Comilla<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Mymonshing<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Rongpur<i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                    </div>
 
                     <!-- Main Nav Menu -->
 
@@ -68,16 +50,17 @@
                                 <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="#">Product<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="#">Blog Post<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="#">Regular Post<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </li>
-                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                            <li><a href="contact.html">About Us<i class="fas fa-chevron-down"></i></a></li>
+
+                            <li><a href="{{ route('blog.post') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                            <li><a href="#">About Us<i class="fas fa-chevron-down"></i></a></li>
                         </ul>
                     </div>
 
@@ -209,7 +192,7 @@
 </div> --}}
 
 
-<section id="showcase" class="">
+<section id="showcase">
     <div id="slider" class="carousel slide" data-ride="carousel"> <!--.carousel-fade-->
       <ol class="carousel-indicators">
          <li class="active" data-target="#slider" data-slide-to="0"></li>
