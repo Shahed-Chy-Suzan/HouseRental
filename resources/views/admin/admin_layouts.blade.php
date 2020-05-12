@@ -5,37 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Twitter -->
-    {{-- <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Starlight">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/starlight/img/starlight-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/starlight">
-    <meta property="og:title" content="Starlight">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/starlight/img/starlight-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/starlight/img/starlight-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600"> --}}
-
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
+    <!-- title -->
     <title>Admin Panel-HouseRental</title>
 
+    <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('public/frontend/logo/logo3.jpg')}}" type="image/x-icon">
+
     <!-- vendor css -->
     <link href="{{asset('public/backend/lib/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/Ionicons/css/ionicons.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/rickshaw/rickshaw.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/backend/lib/highlightjs/github.css') }}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
@@ -62,101 +50,202 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-        <a href="widgets.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Cards &amp; Widgets</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
 
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Charts</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-          <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-          <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
-        </ul>
+        @if(Auth::user()->places == 1)
+            <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+                <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+                <span class="menu-item-label">Places</span>
+                <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            <ul class="sl-menu-sub nav flex-column">
+                <li class="nav-item"><a href="{{ route('city') }}" class="nav-link">City</a></li>
+                <li class="nav-item"><a href="{{ route('subcity') }}" class="nav-link">Sub-City</a></li>
+            </ul>
+        @else
+        @endif
 
+
+        @if(Auth::user()->coupon == 1)
         <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-paper-outline tx-20"></i>
+              <span class="menu-item-label">Coupon</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{route('coupons')}}" class="nav-link">Coupon</a></li>
+          </ul>
+        @else
+        @endif
+
+        {{-- <a href="mailbox.html" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-            <span class="menu-item-label">Forms</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+            <i class="menu-item-icon icon ion-ios-paper-outline tx-24"></i>
+            <span class="menu-item-label"><a href="{{ }}">Coupon</a></span>
           </div><!-- menu-item -->
+        </a><!-- sl-menu-link --> --}}
+
+
+        @if(Auth::user()->blogs == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+              <span class="menu-item-label">Blogs</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('postCategory.name') }}" class="nav-link">Category</a></li>
+            <li class="nav-item"><a href="{{ route('add.blogpost') }}" class="nav-link">Add Post</a></li>
+            <li class="nav-item"><a href="{{ route('all.blogpost') }}" class="nav-link">All Post</a></li>
+          </ul>
+        @else
+        @endif
+
+
+@if(Auth::user()->all_properties == 1)
+<a href="#" class="sl-menu-link">
+    <div class="sl-menu-item">
+    <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+    <span class="menu-item-label">All Properties</span>
+    <i class="menu-item-arrow fa fa-angle-down"></i>
+    </div><!-- menu-item -->
+</a><!-- sl-menu-link -->
+<ul class="sl-menu-sub nav flex-column">
+    <li class="nav-item"><a href="{{ route('admin.add.property') }}" class="nav-link">Add New Property</a></li>
+    <li class="nav-item"><a href="{{ route('pending.user_property') }}" class="nav-link">Pending for Approval</a></li>
+    <li class="nav-item"><a href="{{ route('admin.uploaded.property') }}" class="nav-link">Uploaded Properties</a></li>
+    <li class="nav-item"><a href="{{ route('admin.delivery.progress') }}" class="nav-link">Delivery On Progress</a></li>
+    <li class="nav-item"><a href="{{ route('admin.delivered.property') }}" class="nav-link">Successfully Delivered</a></li>
+    <li class="nav-item"><a href="{{ route('admin.cancelled.property') }}" class="nav-link">Cancelled Properties</a></li>
+</ul>
+@else
+@endif
+
+
+        @if(Auth::user()->orders == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-cart-outline tx-24"></i>
+              <span class="menu-item-label">Orders</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-          <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-          <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-          <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-          <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
+            <li class="nav-item"><a href="" class="nav-link">New pending Properties</a></li>
         </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">UI Elements</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-          <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
-          <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-          <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-        </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-            <span class="menu-item-label">Tables</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
-          <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
-        </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
-            <span class="menu-item-label">Maps</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="map-google.html" class="nav-link">Google Maps</a></li>
-          <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
-        </ul>
-        <a href="mailbox.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-            <span class="menu-item-label">Mailbox</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+        @else
+        @endif
+
+
+        @if(Auth::user()->reports == 1)
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-            <span class="menu-item-label">Pages</span>
+            <span class="menu-item-label">Reports</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
-          <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
-          <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
-          <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Today Order</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Today Delevered</a></li>
+          <li class="nav-item"><a href="" class="nav-link">This Month</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Search Report</a></li>
         </ul>
-      </div><!-- sl-sideleft-menu -->
+        @else
+        @endif
+
+
+        @if(Auth::user()->user_role == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
+            <span class="menu-item-label">User Role</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('create.admin') }}" class="nav-link">Create User</a></li>
+            <li class="nav-item"><a href="{{ route('create.user.role') }}" class="nav-link">All User</a></li>
+        </ul>
+        @else
+        @endif
+
+
+        @if(Auth::user()->newsletter == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-paper-outline tx-20"></i>
+            <span class="menu-item-label">Newsletter</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{route('admin.newsletter')}}" class="nav-link">Newsletter</a></li>
+        </ul>
+        @else
+        @endif
+
+
+        @if(Auth::user()->contact_messages == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-filing-outline tx-20"></i>
+            <span class="menu-item-label">Contact Messages</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{route('admin.new.contact')}}" class="nav-link">New Messages</a></li>
+            <li class="nav-item"><a href="{{route('admin.all.contact')}}" class="nav-link">All Messages</a></li>
+        </ul>
+        @else
+        @endif
+
+
+        @if(Auth::user()->site_setting == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-gear-outline tx-20"></i>
+            <span class="menu-item-label">Site Settings</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('admin.site.setting') }}" class="nav-link">Site Setting</a></li>
+        </ul>
+        @else
+        @endif
+
+
+        @if(Auth::user()->database_backup == 1)
+        <a href="#" class="sl-menu-link">
+            <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-gear-outline tx-20"></i>
+            <span class="menu-item-label">Database Backup</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('admin.database.backup') }}" class="nav-link">Databse Backup </a></li>
+        </ul>
+        @else
+        @endif
+
+
+    </div><!-- sl-sideleft-menu -->
+
 
       <br>
     </div><!-- sl-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
+
+
+
+
 
     <!-- ########## START: HEAD PANEL ########## -->
     <div class="sl-header">
@@ -193,8 +282,11 @@
     <!-- ########## END: HEAD PANEL ########## -->
 
 
+
+
+
     <!-- ########## START: RIGHT PANEL ########## -->
-    <div class="sl-sideright">
+    {{-- <div class="sl-sideright">
       <ul class="nav nav-tabs nav-fill sidebar-tabs" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" role="tab" href="#messages">Messages (2)</a>
@@ -347,7 +439,7 @@
         </div><!-- #notifications -->
 
       </div><!-- tab-content -->
-    </div><!-- sl-sideright -->
+    </div><!-- sl-sideright --> --}}
     <!--------------------- ########## END: RIGHT PANEL ########## --------------------->
 
 
@@ -358,28 +450,96 @@
 
 
 
-    <script src="{{asset('public/backend/lib/jquery/jquery.js')}}"></script>
-    <script src="{{asset('public/backend/lib/popper.js/popper.js')}}"></script>
-    <script src="{{asset('public/backend/lib/bootstrap/bootstrap.js')}}"></script>
-    <script src="{{asset('public/backend/lib/jquery-ui/jquery-ui.js')}}"></script>
-    <script src="{{asset('public/backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
-    <script src="{{asset('public/backend/lib/jquery.sparkline.bower/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('public/backend/lib/d3/d3.js')}}"></script>
-    <script src="{{asset('public/backend/lib/rickshaw/rickshaw.min.js')}}"></script>
-    <script src="{{asset('public/backend/lib/chart.js/Chart.js')}}"></script>
-    <script src="{{asset('public/backend/lib/Flot/jquery.flot.js')}}"></script>
-    <script src="{{asset('public/backend/lib/Flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{asset('public/backend/lib/Flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{asset('public/backend/lib/flot-spline/jquery.flot.spline.js')}}"></script>
-    <script src="{{asset('public/backend/js/starlight.js')}}"></script>
-    <script src="{{asset('public/backend/js/ResizeSensor.js')}}"></script>
-    <script src="{{asset('public/backend/js/dashboard.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/popper.js/popper.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/bootstrap/bootstrap.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/highlightjs/highlight.pack.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/summernote/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('public/backend/lib/medium-editor/medium-editor.js') }}"></script>
+    <script src="{{ asset('public/backend/js/starlight.js') }}"></script>
+
+<!-----for Description box------->
+     <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
+    <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote1').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
+
+{{-------- data Tables JS -------}}
+    <script>
+      $(function(){
+        'use strict';
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+        $('#datatable2').DataTable({
+          bLengthChange: false,
+          searching: false,
+          responsive: true
+        });
+
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
+    </script>
+
+
+
+    <script src="{{ asset('public/backend/lib/jquery-ui/jquery-ui.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/jquery.sparkline.bower/jquery.sparkline.min.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/d3/d3.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/rickshaw/rickshaw.min.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/chart.js/Chart.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.resize.js')}}"></script>
+    <script src="{{ asset('public/backend/lib/flot-spline/jquery.flot.spline.js')}}"></script>
+    <script src="{{ asset('public/backend/js/ResizeSensor.js')}}"></script>
+    <script src="{{ asset('public/backend/js/dashboard.js')}}"></script>
 
     <script src="{{asset('public/backend/js/sweetalert2.min.js')}}"></script>
     <script src="{{asset('public/backend/js/toastr.min.js')}}"></script>
 
     {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>  --}}
+
+
+
 
 {{---- sweet alert -----}}
     <script>
@@ -401,7 +561,6 @@
                   swal("Safe Data!");
               }
               });
-
       });
   </script>
 
@@ -431,172 +590,3 @@
 
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-{{-- --------------------------------------------------------------------- --}}
-{{-- --------------------------------------------------------------------- --}}
-
-
-
-
-
-
-
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Ecommerce Admin Panel</title>
-
-      <!-- vendor css -->
-    <link href="{{ asset('public/backend/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/Ionicons/css/ionicons.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/highlightjs/github.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/select2/css/select2.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('public/backend/css/starlight.css') }}">
-     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-    <!-- Starlight CSS -->
-    <link rel="stylesheet" href="{{asset('public/backend/css/starlight.css')}}">
-    <link href="{{ asset('public/backend/lib/datatables/jquery.dataTables.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
-  </head>
-
-  <body>
-
-
-     @yield('admin_content')
-
-    <script src="{{ asset('public/backend/lib/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/popper.js/popper.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/bootstrap/bootstrap.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/highlightjs/highlight.pack.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/select2/js/select2.min.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/summernote/summernote-bs4.min.js') }}"></script>
-    <script src="{{ asset('public/backend/js/starlight.js') }}"></script>
-    <script src="{{ asset('public/backend/lib/medium-editor/medium-editor.js') }}"></script>
-     <script>
-      $(function(){
-        'use strict';
-
-        // Inline editor
-        var editor = new MediumEditor('.editable');
-
-        // Summernote editor
-        $('#summernote').summernote({
-          height: 150,
-          tooltip: false
-        })
-      });
-    </script>
-    <script>
-      $(function(){
-        'use strict';
-
-        // Inline editor
-        var editor = new MediumEditor('.editable');
-
-        // Summernote editor
-        $('#summernote1').summernote({
-          height: 150,
-          tooltip: false
-        })
-      });
-    </script>
-    <script>
-      $(function(){
-        'use strict';
-
-        $('#datatable1').DataTable({
-          responsive: true,
-          language: {
-            searchPlaceholder: 'Search...',
-            sSearch: '',
-            lengthMenu: '_MENU_ items/page',
-          }
-        });
-
-        $('#datatable2').DataTable({
-          bLengthChange: false,
-          searching: false,
-          responsive: true
-        });
-
-        // Select2
-        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
-
-      });
-    </script>
-
-
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-    <script src="{{ asset('public/backend/lib/jquery-ui/jquery-ui.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/jquery.sparkline.bower/jquery.sparkline.min.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/d3/d3.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/rickshaw/rickshaw.min.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/chart.js/Chart.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/Flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{ asset('public/backend/lib/flot-spline/jquery.flot.spline.js')}}"></script>
-    <script src="{{ asset('public/backend/js/ResizeSensor.js')}}"></script>
-    <script src="{{ asset('public/backend/js/dashboard.js')}}"></script> --}}
-
-    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-    <script>
-        @if(Session::has('messege'))
-          var type="{{Session::get('alert-type','info')}}"
-          switch(type){
-              case 'info':
-                   toastr.info("{{ Session::get('messege') }}");
-                   break;
-              case 'success':
-                  toastr.success("{{ Session::get('messege') }}");
-                  break;
-              case 'warning':
-                 toastr.warning("{{ Session::get('messege') }}");
-                  break;
-              case 'error':
-                  toastr.error("{{ Session::get('messege') }}");
-                  break;
-          }
-        @endif
-     </script>
-
-     <script>
-         $(document).on("click", "#delete", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to delete?",
-                  text: "Once Delete, This will be Permanently Delete!",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
-    </script>
-
-  </body>
-</html>  --}}

@@ -14,7 +14,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/socialite": "^4.3",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "spatie/laravel-backup": "^6.9"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

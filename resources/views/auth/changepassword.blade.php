@@ -66,13 +66,17 @@
         <div class="col-4">     <!---------------------------------------------->
             <div class="col-4">
                  <div class="card" style="width: 18rem;">
-                  <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top rounded-circle mt-3" style="height: 90px; width: 90px; margin-left: 34%;" >
-                  <div class="card-body">
-                    <h5 class="card-title text-center">{{ Auth::user()->name }}</h5>
-                  </div>
+
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top mt-3" style="height: 90px; width: 90px; margin-left: 34%;" >
+                    </a>
+                    <div class="card-body">
+                        <a href="{{ route('home') }}"> <h5 class="card-title text-center">{{ Auth::user()->name }}</h5></a>
+                    </div>
+
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a href="{{ route('password.change') }}"> Password Change </a></li>
-                    <li class="list-group-item"><a href="{{ route('password.change') }}"> Edit Profile </a></li>
+                    <li class="list-group-item"><a href=""> Add My Property </a></li>
                   </ul>
                   <div class="card-body">
                     <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
