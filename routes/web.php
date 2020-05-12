@@ -12,9 +12,6 @@ Route::get('blog/description/{id}','BlogController@description');
 
 
 
-
-
-
 //----------------------------------------------------------------------------------------------------------------
 Route::get('/', function(){
     return view('pages.index');
@@ -40,7 +37,6 @@ Route::post('admin/update/reset', 'Admin\ResetPasswordController@reset')->name('
 Route::get('/admin/Change/Password', 'AdminController@ChangePassword')->name('admin.password.change');
 Route::post('/admin/password/update', 'AdminController@Update_pass')->name('admin.password.update');
 Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');		//--d--
-
 
 
                         //--------Admin Section-------------
@@ -102,9 +98,6 @@ Route::get('admin/database/backup', 'Admin\SettingController@DatabaseBackup')->n
 Route::get('admin/database/backup/now', 'Admin\SettingController@BackupNow')->name('admin.backup.now');
 Route::get('delete/database/{getFilename}', 'Admin\SettingController@DeleteDatabase');
 Route::get('{getFilename}','Admin\SettingController@DownloadDatabase');
-
-
-
         //--------User_Property_Request_to_Admin-------------
 Route::get('admin/property/add', 'Admin\PropertyController@create')->name('admin.add.property');  //--nav
 // Route::post('admin/store/property', 'Admin\PropertyController@store')->name('store.property');
@@ -131,8 +124,8 @@ Route::get('admin/cancelled/property', 'Admin\PropertyController@cancelledProper
 
 
 
-//=============================================================================
-//=============================================================================
+//============================================================================================
+//============================================================================================
 
 
         //---------Frontend All Routes are here:---------------

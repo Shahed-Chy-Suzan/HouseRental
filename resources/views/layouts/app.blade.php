@@ -31,14 +31,12 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css')}}">
 {{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
-{{-- <link rel="stylesheet" href="sweetalert2.min.css">          <!--new another--> --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> --}}
 
     <!---for Product_details page---->
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_responsive.css') }}">
     <!---for Stripe---->
-<script src="https://js.stripe.com/v3/"></script>
+{{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/responsive.css')}}">
