@@ -84,15 +84,6 @@
                                 <a href="{{ route('language.bangla') }}">Bangla<i class="fas fa-chevron-down"></i></a>
                                 @endif
                             </li>
-                            <li>
-                                <a href="{{ route('add.property.user')}}">Ad</a>
-                                {{-- <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a> --}}
-                                {{-- <ul>
-                                    <li><a href="#">EUR Euro</a></li>
-                                    <li><a href="#">GBP British Pound</a></li>
-                                    <li><a href="#">JPY Japanese Yen</a></li>
-                                </ul> --}}
-                            </li>
                         </ul>
                     </div>
 
