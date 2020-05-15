@@ -9,7 +9,9 @@ Route::get('blog/post','BlogController@blog')->name('blog.post');
 Route::get('language/bangla','BlogController@Bangla')->name('language.bangla');
 Route::get('language/english','BlogController@English')->name('language.english');
 Route::get('blog/description/{id}','BlogController@description');
-
+        //-------------Wishlists-------------
+Route::get('add/wishlist/{id}','WishlistController@AddWishlist');
+Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist');  //--nav--
 
 
 //----------------------------------------------------------------------------------------------------------------

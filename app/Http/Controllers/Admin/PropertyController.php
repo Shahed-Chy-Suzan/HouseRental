@@ -26,6 +26,7 @@ class PropertyController extends Controller
 //         Status = 2 = Delivery_Progress
 //         Status = 3 = Successfully_Delivered
 //         Status = 4 = Cancelled_Property
+// --frontend e show korbe = 1 && 2 hole
 //-----------------------------------------------------------------------------
 
 
@@ -212,7 +213,8 @@ class PropertyController extends Controller
     	$data['area']=$request->area;
         $data['price']=$request->price;
         $data['discount_price']=$request->discount_price;
-    	$data['category']=$request->category;
+        $data['category']=$request->category;
+        $data['floor']=$request->floor;
     	$data['details']=$request->details;
     	$data['video']=$request->video;
         $data['purpose']=$request->purpose;
