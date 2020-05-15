@@ -12,7 +12,7 @@
                     <div class="cat_menu_container">
                         <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                             <div class="cat_burger"><span></span><span></span><span></span></div>
-                            <div class="cat_menu_text" style="">Choose Places</div>
+                            <div class="cat_menu_text" style="">@if(session()->get('lang') == 'bangla') জায়গা পছন্দ করুন @else Choose Places @endif</div>
                             {{-- <small style="font-size:10px; text-transform:capitalize;">Explore Rentals</small> --}}
                         </div>
 
@@ -44,10 +44,10 @@ $city=DB::table('cities')->get();
                     <div class="main_nav_menu ml-auto">
                         <ul class="standard_dropdown main_nav_dropdown">
 
-                            <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+                            <li><a href="#">@if(session()->get('lang') == 'bangla') হোম @else Home @endif</a></li>
 
                             <li class="hassubs">
-                                <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+                                <a href="#">@if(session()->get('lang') == 'bangla') পেইজ @else Pages @endif<i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="#">Product<i class="fas fa-chevron-down"></i></a></li>
@@ -59,8 +59,8 @@ $city=DB::table('cities')->get();
                                 </ul>
                             </li>
 
-                            <li><a href="{{ route('blog.post') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
-                            <li><a href="#">About Us<i class="fas fa-chevron-down"></i></a></li>
+                            <li><a href="{{ route('blog.post') }}">@if(session()->get('lang') == 'bangla') ব্লগ @else Blog @endif </a></li>
+                            <li><a href="#">@if(session()->get('lang') == 'bangla') আমাদের সম্পর্কে @else About Us @endif </a></li>
                         </ul>
                     </div>
 
@@ -204,7 +204,7 @@ $city=DB::table('cities')->get();
             <div class="container">
                 <div class="col-lg-8 offset-lg-4 pt-5" data-aos="flip-right">
                     <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8">
-                        <h1 class="text-light p-3" style="">Search properties for sale and rent in Bangladesh</h1>
+                        <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif </h1>
                     </div>
                 </div>
             </div>
@@ -213,7 +213,7 @@ $city=DB::table('cities')->get();
              <div class="container">
                 <div class="col-lg-8 offset-lg-4 pt-5">
                 <div class="shadow-lg rounded" style="background:#AC5488; opacity: .8">
-                    <h1 class="text-light p-3" style="">Search properties for sale and rent in Bangladesh</h1>
+                    <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif</h1>
                 </div>
                 </div>
                </div>
@@ -222,7 +222,7 @@ $city=DB::table('cities')->get();
                   <div class="container">
                       <div class="col-lg-8 offset-lg-4 pt-5">
                         <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8">
-                            <h1 class="text-light p-3" style="">Search properties for sale and rent in Bangladesh</h1>
+                            <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif</h1>
                         </div>
                     </div>
                     </div>

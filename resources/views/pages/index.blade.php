@@ -4,21 +4,22 @@
 @section('content')
 @include('layouts.menubar')
 
-{{----------- for applying ajax in wishlist --------------}}
-{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> --}}
-<script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>
-
-{{-- @php
- $featured=DB::table('products')->where('status',1)->orderBy('id','desc')->limit(24)->get();    //sob_product(available)
- $trend=DB::table('products')->where('status',1)->where('trend',1)->orderBy('id','desc')->limit(24)->get();
- $best=DB::table('products')->where('status',1)->where('best_rated',1)->orderBy('id','desc')->limit(24)->get();
- $hot=DB::table('products')->join('brands','products.brand_id','brands.id')->select('brands.brand_name','products.*')->where('products.status',1)->where('hot_deal',1)->orderBy('id','desc')->limit(4)->get();
-@endphp --}}
 
 
+<!---------------------- Start 'Deals of the week' ---------------------------->
+@php
+  $Deals=DB::table('user_properties')
+        ->join('cities','user_properties.city_id','cities.id')
+        ->join('subcities','user_properties.subcity_id','subcities.id')
+        ->select('user_properties.*','cities.city_name','subcities.subcity_name')
+        ->whereIn('status', [1,2])
+        ->where('hot_new',1)
+        ->orderBy('id','desc')
+        ->limit(4)
+        ->get();
+@endphp
 
-<!-- Deals of the week -->
-
+<!-----'Deals of the week' ------>
 <div class="deals_featured">
     <div class="container">
         <div class="row">
@@ -32,47 +33,58 @@
 
                         <!-- Deals Slider -->
                         <div class="owl-carousel owl-theme deals_slider">
-
+<!---------------------------------------------------------------->
+                    @foreach($Deals as $ht)
                             <!-- Deals Item -->
                             <div class="owl-item deals_item">
 
                                 <div class="deals_image portfolio-item" title="Click for details">
-                                    <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}">
+                                    {{-- <a href="{{ url('product/details/'.$ht->id.'/'.$ht->product_name) }}"><img src="{{ asset($ht->image_one) }}" style="width: 300px;"></a> --}}
+                                    <a href=""><img src="{{ asset($ht->image_one) }}" style="width: 310px;"></a>
                                     <div class="portfolio-item-overlay">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
-                                            <h3>Flat for Rent</h3>
+                                            <h3>{{ $ht->type }} for {{ $ht->purpose }}</h3>
                                             <!--item strips-->
                                             <span></span>
                                             <!--item description-->
-                                            <p>Dhanmonti, Dhaka</p>
+                                            <p>{{$ht->subcity_name}}, {{$ht->city_name}}</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="deals_content">
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">Dhaka</a></div>
-                                        <div class="deals_item_price_a ml-auto"><del>৳ 60,000</del></div>
+                                        <div class="deals_item_category"><a href="#">{{$ht->city_name}}</a></div>
+                                        @if($ht->discount_price == NULL)
+                                        @else
+                                          <div class="deals_item_price_a ml-auto"><del>৳ {{ $ht->price }}</del></div>
+                                        @endif
                                     </div>
+
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_name">Dhanmondi</div>
-                                        <div class="deals_item_price ml-auto" style="font-size: 18px">৳ 55,000</div>
+                                        <div class="deals_item_name">{{ $ht->subcity_name }}</div>
+
+                                        @if($ht->discount_price == NULL)
+                                          <div class="deals_item_price ml-auto" style="font-size: 18px">৳ {{ $ht->price }}</div>
+                                        @else
+                                          <div class="deals_item_price ml-auto" style="font-size: 18px">৳ {{ $ht->discount_price }}</div>
+                                        @endif
                                     </div>
 
 
                                     <div class="DealsWeek row no-gutters align-items-center justify-content-start mt-1">
-                                        <span class="col-md-5">Flat For Rent</span> <span class="col-md-7 mr-auto justify-content-start"><hr></span>
+                                      <span class="col-md-5">{{ $ht->type }} for {{ $ht->purpose }}</span> <span class="col-md-7 mr-auto justify-content-start"><hr></span>
                                     </div>
 
 
                                     <div class="row mb-4">
-                                        <div class="col-md-12 mb-2">Road NO 1, Dhanmodi</div>
+                                        <div class="col-md-12 mb-2">{{$ht->address}}</div>
                                         <div class="col-md-12">
-                                            <i class="fas fa-bed" title="Bed Room"> 5</i>|
-                                            <i class="fas fa-bath" title="Bath Room"> 4</i>|
-                                            <i class="fas fa-car" title="Parking"> 1</i>|
-                                            <i class="fas fa-home" title="Area"> 1,686 sqft.</i>
+                                            <i class="fas fa-bed" title="Bed Room"> {{$ht->bedroom}}</i>|
+                                            <i class="fas fa-bath" title="Bath Room"> {{$ht->bathroom}}</i>|
+                                            <i class="fas fa-car" title="Parking"> {{$ht->parking}}</i>|
+                                            <i class="fas fa-home" title="Area"> {{$ht->area}}</i>
                                         </div>
                                     </div>
 
@@ -101,145 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!-- Deals Item -->
-                            <div class="owl-item deals_item">
-
-                                <div class="deals_image portfolio-item" title="Click for details">
-                                    <img src="{{asset('public/frontend/images/sample/bed (2).jpg')}}">
-                                    <div class="portfolio-item-overlay">
-                                        <div class="portfolio-item-details text-center">
-                                            <!--item logo-->
-                                            <h3>Apartment For Sell</h3>
-                                            <!--item strips-->
-                                            <span></span>
-                                            <!--item description-->
-                                            <p>Halishahar, Chattogram</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="deals_content">
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">Chattogram</a></div>
-                                        <div class="deals_item_price_a ml-auto"><del>৳ 6,500,000</del></div>
-                                    </div>
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_name">Halishahar</div>
-                                        <div class="deals_item_price ml-auto" style="font-size: 18px">৳ 5,900,000</div>
-                                    </div>
-
-
-                                    <div class="DealsWeek row  no-gutters align-items-center justify-content-start mt-1">
-                                        <span class="col-md-5">Building For Rent</span> <span class="col-md-7 mr-auto justify-content-start"><hr></span>
-                                    </div>
-
-
-                                    <div class="row mb-4">
-                                        <div class="col-md-12 mb-2">39 No. South Halishahar Ward, Halishahar</div>
-                                        <div class="col-md-12">
-                                            <i class="fas fa-bed" title="Bed Room"> 4</i>|
-                                            <i class="fas fa-bath" title="Bath Room"> 4</i>|
-                                            <i class="fas fa-car" title="Parking"> 2</i>|
-                                            <i class="fas fa-home" title="Area"> 1,486 sqft.</i>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
-                                        <div class="deals_timer_title_container">
-                                            <div class="deals_timer_title">Hurry Up</div>
-                                            <div class="deals_timer_subtitle">Offer ends in:</div>
-                                        </div>
-                                        <div class="deals_timer_content ml-auto">
-                                            <div class="deals_timer_box clearfix" data-target-time="">
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_hr" class="deals_timer_hr"></div>
-                                                    <span>hours</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_min" class="deals_timer_min"></div>
-                                                    <span>mins</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_sec" class="deals_timer_sec"></div>
-                                                    <span>secs</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!-- Deals Item -->
-                            <div class="owl-item deals_item">
-
-                                <div class="deals_image portfolio-item" title="Click for details">
-                                    <img src="{{asset('public/frontend/images/sample/bed (1).jpg')}}">
-                                    <div class="portfolio-item-overlay">
-                                        <div class="portfolio-item-details text-center">
-                                            <!--item logo-->
-                                            <h3>Apartment For Rent</h3>
-                                            <!--item strips-->
-                                            <span></span>
-                                            <!--item description-->
-                                            <p>Oxyzen, Chattogram</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="deals_content">
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">Chattogram</a></div>
-                                        <div class="deals_item_price_a ml-auto"><del>৳ 7,500,000</del></div>
-                                    </div>
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_name">Oxyzen</div>
-                                        <div class="deals_item_price ml-auto" style="font-size: 18px">৳ 6,900,000</div>
-                                    </div>
-
-
-                                    <div class="DealsWeek row no-gutters align-items-center justify-content-start mt-1">
-                                        <span class="col-md-5">Apartment For Rent</span> <span class="col-md-7 mr-auto justify-content-start"><hr></span>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <div class="col-md-12 mb-2">39 No. Ananna Abasik, Oxyzen</div>
-                                        <div class="col-md-12">
-                                            <i class="fas fa-bed" title="Bed Room"> 3</i>|
-                                            <i class="fas fa-bath" title="Bath Room"> 2</i>|
-                                            <i class="fas fa-car" title="Parking"> 0</i>|
-                                            <i class="fas fa-home" title="Area"> 1,086 sqft.</i>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
-                                        <div class="deals_timer_title_container">
-                                            <div class="deals_timer_title">Hurry Up</div>
-                                            <div class="deals_timer_subtitle">Offer ends in:</div>
-                                        </div>
-                                        <div class="deals_timer_content ml-auto">
-                                            <div class="deals_timer_box clearfix" data-target-time="">
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer3_hr" class="deals_timer_hr"></div>
-                                                    <span>hours</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer3_min" class="deals_timer_min"></div>
-                                                    <span>mins</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer3_sec" class="deals_timer_sec"></div>
-                                                    <span>secs</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        @endforeach
 
                         </div>
 
@@ -250,17 +124,24 @@
                         <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i></div>
                     </div>
                 </div>
+    <!----------//-----//------ End of 'Deals of the Weak' -----------//-----------//-------->
 
 
 
-    <!----------------- Featured ------------------------------>
+
+<!-----------------------Start 'Featured' ------------------------------>
+@php
+    $featured=DB::table('user_properties')->join('cities','user_properties.city_id','cities.id')->join('subcities','user_properties.subcity_id','subcities.id')->select('user_properties.*','cities.city_name','subcities.subcity_name')->whereIn('status', [1,2])->orderBy('id','desc')->get();   //sob_property(available)
+@endphp
+
+    <!------ Featured ------>
                 <div class="featured">
                     <div class="tabbed_container">
                         <div class="tabs">
                             <ul class="clearfix">
-                                <li class="active">Featured</li>
-                                <li>On Sale</li>
-                                <li>Best Rated</li>
+                                <li class="active">@if(session()->get('lang') == 'bangla')ফিচারড @else Featured @endif</li>
+                                <li>@if(session()->get('lang') == 'bangla')বিক্রয়ের জন্য @else For Sale @endif</li>
+                                <li>@if(session()->get('lang') == 'bangla')ভাড়ার জন্য @else To Rent @endif</li>
                             </ul>
                             <div class="tabs_line"><span></span></div>
                         </div>
@@ -269,1940 +150,273 @@
                         <div class="product_panel panel active">
                             <div class="featured_slider slider">
 
+<!---------------------------------------------------------------->
+                            @foreach($featured as $row)
                                 <!-- Slider Item -->
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                         <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
+                                            {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
+                                            <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+
                                             <div class="portfolio-item-overlay" title="Click for more">
                                                 <div class="portfolio-item-details text-center">
                                                     <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
+                                                    <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
                                                     <!--item strips-->
                                                     <span></span>
                                                     <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
+                                                    <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
+                                            {{-- <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div> --}}
+                                            @if($row->discount_price == NULL)
+                                                <div class="product_price discount my-2"> ৳ {{ $row->price }}</div>
+                                            @else
+                                             <div class="product_price discount my-2"> ৳ {{ $row->discount_price }}<span><del><b> ৳ {{ $row->price }}</b></del></span></div>
+                                            @endif
                                                 {{-- <div class="row align-items-center justify-content-start">
                                                     <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                 </div> --}}
                                             <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
+                                                <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
                                                 <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
+                                                    <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
+                                                    <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
                                                     {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
+                                                    <i class="fas fa-home" title="Area"> {{$row->area}}</i>
                                                 </div>
                                             </div>
 
+    {{--------"Check Availability" (niche "Modal" er code ache)--------}}
                                             <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
+                                                <button class="product_cart_button">Check Availability</button>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+
+        <!------ 'Wishlist' using Toastr--------->
+                                        <a href="{{ URL::to('add/wishlist/'.$row->id) }}">
+                                            <div class="product_fav">
+                                                <i class="fa fa-heart text-danger"></i>
+                                            </div>
+                                        </a>
+
+        <!---------(Discount equation)-------->
                                         <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
+                                            @if($row->discount_price == NULL)
+                                            <li class="product_mark product_discount" style="background: #6868cc;">NEW</li>
+                                            @else
+                                            @php
+                                            $amount= $row->price - $row->discount_price;
+                                            $discount= $amount/$row->price * 100;
+                                            @endphp
+                                            <li class="product_mark product_discount">
+                                                {{ intval($discount) }}%
+                                            </li>
+                                            @endif
                                         </ul>
+
                                     </div>
                                 </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (4).jpg')}}" width="130px" height="125px" class="img-fluid">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            @endforeach
 
                             </div>
                             <div class="featured_slider_dots_cover"></div>
                         </div>
 
+<!-------------//--------------End Featured property-------------//-----------------//------------>
 
 
-                        <!-- Product Panel -->
 
-                        <div class="product_panel panel">
-                            <div class="featured_slider slider">
+<!---------------------------Start Sale(property)----------------------------------------------------------->
+@php
+    $sale=DB::table('user_properties')->join('cities','user_properties.city_id','cities.id')->join('subcities','user_properties.subcity_id','subcities.id')->select('user_properties.*','cities.city_name','subcities.subcity_name')->whereIn('status', [1,2])->where('purpose','Sell')->orderBy('id','desc')->get();   //Sale_property(available)
+@endphp
 
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+            <!-- Product Panel -->
 
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
+            <div class="product_panel panel">
+                <div class="featured_slider slider">
+
+                    <!-- Slider Item -->
+<!---------------------------------------------------------------->
+                        @foreach($sale as $row)
+                            <!-- Slider Item -->
+                            <div class="featured_slider_item">
+                                <div class="border_active"></div>
+                                <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+
+                                    <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
+                                        {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
+                                        <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+
+                                        <div class="portfolio-item-overlay" title="Click for more">
+                                            <div class="portfolio-item-details text-center">
+                                                <!--item logo-->
+                                                <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
+                                                <!--item strips-->
+                                                <span></span>
+                                                <!--item description-->
+                                                <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="product_content">
+                                        {{-- <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div> --}}
+                                        @if($row->discount_price == NULL)
+                                            <div class="product_price discount my-2"> ৳ {{ $row->price }}</div>
+                                        @else
+                                         <div class="product_price discount my-2"> ৳ {{ $row->discount_price }}<span><del><b> ৳ {{ $row->price }}</b></del></span></div>
+                                        @endif
+                                            {{-- <div class="row align-items-center justify-content-start">
+                                                <span class="col-md-12"><small>Apartment For Rent</small></span>
+                                            </div> --}}
+                                        <div class="row mb-0 pb-0">
+                                            <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                            <div class="col-md-12 py-1 text-muted">
+                                                <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
+                                                <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
+                                                {{-- <i class="fas fa-car">2</i>| --}}
+                                                <i class="fas fa-home" title="Area"> {{$row->area}}</i>
                                             </div>
                                         </div>
 
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
+	    {{--------"Check Availability"--------}}
+                                        <div class="product_extras">
+                                            <button class="product_cart_button">Check Availability</button>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
+                                    </div>
+
+    <!------ 'Wishlist' using Toastr--------->
+                                    <a href="{{ URL::to('add/wishlist/'.$row->id) }}">
+                                        <div class="product_fav">
+                                            <i class="fa fa-heart text-danger"></i>
+                                        </div>
+                                    </a>
+
+    <!---------(Discount equation)-------->
+                                    <ul class="product_marks">
+                                        @if($row->discount_price == NULL)
+                                        <li class="product_mark product_discount" style="background: #6868cc;">NEW</li>
+                                        @else
+                                        @php
+                                        $amount= $row->price - $row->discount_price;
+                                        $discount= $amount/$row->price * 100;
+                                        @endphp
+                                        <li class="product_mark product_discount">
+                                            {{ intval($discount) }}%
+                                        </li>
+                                        @endif
+                                    </ul>
+
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <div class="featured_slider_dots_cover"></div>
+                </div>
+<!----------//------------------End Sale(property)--------------//-------------//---------->
+
+
+
+<!------------------------Start Rent(property)-------------------------------------------------------------->
+@php
+    $rent=DB::table('user_properties')->join('cities','user_properties.city_id','cities.id')->join('subcities','user_properties.subcity_id','subcities.id')->select('user_properties.*','cities.city_name','subcities.subcity_name')->whereIn('status', [1,2])->where('purpose','Rent')->orderBy('id','desc')->get();   //Rent_property(available)
+@endphp
+            <!-- Product Panel -->
+
+            <div class="product_panel panel">
+                <div class="featured_slider slider">
+
+                    <!-- Slider Item -->
+<!---------------------------------------------------------------->
+                    @foreach($rent as $row)
+                        <!-- Slider Item -->
+                        <div class="featured_slider_item">
+                            <div class="border_active"></div>
+                            <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+
+                                <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
+                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
+                                    <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+
+                                    <div class="portfolio-item-overlay" title="Click for more">
+                                        <div class="portfolio-item-details text-center">
+                                            <!--item logo-->
+                                            <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
+                                            <!--item strips-->
+                                            <span></span>
+                                            <!--item description-->
+                                            <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
+                                <div class="product_content">
+                                    {{-- <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div> --}}
+                                    @if($row->discount_price == NULL)
+                                        <div class="product_price discount my-2"> ৳ {{ $row->price }}</div>
+                                    @else
+                                     <div class="product_price discount my-2"> ৳ {{ $row->discount_price }}<span><del><b> ৳ {{ $row->price }}</b></del></span></div>
+                                    @endif
+                                        {{-- <div class="row align-items-center justify-content-start">
+                                            <span class="col-md-12"><small>Apartment For Rent</small></span>
+                                        </div> --}}
+                                    <div class="row mb-0 pb-0">
+                                        <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                        <div class="col-md-12 py-1 text-muted">
+                                            <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
+                                            <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
+                                            {{-- <i class="fas fa-car">2</i>| --}}
+                                            <i class="fas fa-home" title="Area"> {{$row->area}}</i>
                                         </div>
+                                    </div>
 
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
+        <!--------"Check Availability"-------->
+                                    <div class="product_extras">
+                                        <button class="product_cart_button">Check Availability</button>
                                     </div>
                                 </div>
 
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
+        <!------ 'Wishlist' using Toastr--------->
+                                <a href="{{ URL::to('add/wishlist/'.$row->id) }}">
+                                    <div class="product_fav">
+                                        <i class="fa fa-heart text-danger"></i>
                                     </div>
-                                </div>
+                                </a>
 
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
+        <!---------(Discount equation)-------->
+                                <ul class="product_marks">
+                                    @if($row->discount_price == NULL)
+                                    <li class="product_mark product_discount" style="background: #6868cc;">NEW</li>
+                                    @else
+                                    @php
+                                    $amount= $row->price - $row->discount_price;
+                                    $discount= $amount/$row->price * 100;
+                                    @endphp
+                                    <li class="product_mark product_discount">
+                                        {{ intval($discount) }}%
+                                    </li>
+                                    @endif
+                                </ul>
 
                             </div>
-                            <div class="featured_slider_dots_cover"></div>
                         </div>
+                    @endforeach
 
-                        <!-- Product Panel -->
 
-                        <div class="product_panel panel">
-                            <div class="featured_slider slider">
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            <img src="{{asset('public/frontend/images/sample/bed (3).jpg')}}" width="130px" height="125px">
-                                            <div class="portfolio-item-overlay" title="Click for more">
-                                                <div class="portfolio-item-details text-center">
-                                                    <!--item logo-->
-                                                    <h3 style="font-size:10px">Flat For Rent</h3>
-                                                    <!--item strips-->
-                                                    <span></span>
-                                                    <!--item description-->
-                                                    <p style="font-size:12px">Moradpur, Chattogram</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_content">
-                                            <div class="product_price discount my-2">৳50,000<span><del>৳55,000</del></span></div>
-                                                {{-- <div class="row align-items-center justify-content-start">
-                                                    <span class="col-md-12"><small>Apartment For Rent</small></span>
-                                                </div> --}}
-                                            <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">Moradpur, Chattogram</div>
-                                                <div class="col-md-12 py-1 text-muted">
-                                                    <i class="fas fa-bed" title="Bed Room">4</i> |
-                                                    <i class="fas fa-bath" title="Bath Room">4</i> |
-                                                    {{-- <i class="fas fa-car">2</i>| --}}
-                                                    <i class="fas fa-home" title="Area">1,486 sqft.</i>
-                                                </div>
-                                            </div>
-
-                                            <div class="product_extras">
-                                                <button class="product_cart_button">Confirm Property</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_8.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225</div>
-                                            <div class="product_name"><div><a href="product.html">Huawei MediaPad...</a></div></div>
-                                            <div class="product_extras">
-                                                <div class="product_color">
-                                                    <input type="radio" checked name="product_color" style="background:#b19c83">
-                                                    <input type="radio" name="product_color" style="background:#000000">
-                                                    <input type="radio" name="product_color" style="background:#999999">
-                                                </div>
-                                                <button class="product_cart_button">Add to Cart</button>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount"></li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="featured_slider_dots_cover"></div>
-                        </div>
+                </div>
+                <div class="featured_slider_dots_cover"></div>
+            </div>
 
                     </div>
                 </div>
@@ -2210,7 +424,9 @@
             </div>
         </div>
     </div>
-</div>    <!--------------------------- End of "Deals of the Week" -------------------------------------->
+</div>      <!--------------- End of "Rent(property)" ------------------>
+
+<!--------------------------- End of "Deals of the Week" -------------------------------------->
 
 
 
@@ -6399,210 +4615,6 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
 
 
 
-
-
-
-
-
-
-
-
-
-<!--------------product "Cart_add" modal------------------>
-
-<!-- Modal -->
-{{-- <div class="modal fade " id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center" id="exampleModalLabel">Product Short Description</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-         <div class="row">
-            <div class="col-md-4">
-
-                <div class="card" style="width: 16rem;">
-                <img src="" class="card-img-top" id="pimage" style="height: 240px;">
-                <div class="card-body">
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 ml-auto">
-                <ul class="list-group">
-                    <li class="list-group-item"> <h4 class="card-title" id="pname"></h4></span></li>
-                    <li class="list-group-item">Product code: <span id="pcode"> </span></li>
-                    <li class="list-group-item">Category:  <span id="pcat"> </span></li>
-                    <li class="list-group-item">SubCategory:  <span id="psubcat"> </span></li>
-                    <li class="list-group-item">Brand: <span id="pbrand"> </span></li>
-                    <li class="list-group-item">Stock: <span class="badge " style="background: green; color:white;">Available</span></li>
-                </ul>
-            </div>
-            <div class="col-md-4 ">
-                <form action="" method="post">
-                  @csrf
-                  <input type="hidden" name="product_id" id="product_id">   <!---hidden//taking_ID--->
-                  <div class="form-group" id="colordiv">
-                    <label for="">Color</label>
-                    <select name="color" class="form-control">
-                    </select>
-                  </div>
-                   <div class="form-group" id="sizediv" >
-                    <label for="exampleInputEmail1">Size</label>
-                    <select name="size" class="form-control" id="size">
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Quantity</label>
-                    <input type="number" class="form-control" value="1" name="qty">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Add To Cart</button>
-                </form>
-             </div>
-           </div>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-
-  <!--modal end-->
-
-<!---Model er JS/ajax code-->
-  <script type="text/javascript">
-      function productview(id){     //--(productview(id)//-->from 'add to Cart' button div)
-            $.ajax({
-                // url: "{{  url('/cart/product/view/') }}/"+id,    //-----------------------//-------------//------
-                type:"GET",
-                dataType:"json",
-                success:function(data) {
-                    $('#pname').text(data.product.product_name);
-                    $('#pimage').attr('src',data.product.image_one);
-                    $('#pcat').text(data.product.category_name);
-                    $('#psubcat').text(data.product.subcategory_name);
-                    $('#pbrand').text(data.product.brand_name);
-                    $('#pcode').text(data.product.product_code);
-                    $('#product_id').val(data.product.id);
-
-                    var d =$('select[name="size"]').empty();
-                    $.each(data.size, function(key, value){
-                        $('select[name="size"]').append('<option value="'+ value +'">' + value + '</option>');
-                        if (data.size == "") {
-                                $('#sizediv').hide();
-                        }else{
-                                $('#sizediv').show();
-                        }
-                    });
-
-                    var d =$('select[name="color"]').empty();
-                    $.each(data.color, function(key, value){
-                        $('select[name="color"]').append('<option value="'+ value +'">' + value + '</option>');
-                            if (data.color == "") {
-                                $('#colordiv').hide();
-                        } else{
-                                $('#colordiv').show();
-                        }
-                    });
-               }
-        })
-      }
-  </script>
-
-
-{{----------- for applying ajax in wishlist --------------}}
-
-{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> --}}
-{{---   OR----////----
-    <script src="{{asset('public/frontend/js/jquery.min.js')}}"></script> --}}
-
-
-{{-- -----------------------for wishlist------------------------ --}}
-<script type="text/javascript">
-    $(document).ready(function() {
-          $('.addwishlist').on('click', function(){     //--from add to 'wishlist' button/name //-->(.addwishlist)
-            var id = $(this).data('id');
-            if(id) {
-               $.ajax({
-                   //url: "{{  url('/add/wishlist/') }}/"+id,   //------------------//----------------//---------
-                   type:"GET",
-                   dataType:"json",
-                   success:function(data) {
-                     const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000
-                      })
-
-                     if($.isEmptyObject(data.error)){
-                          Toast.fire({
-                            type: 'success',
-                            title: data.success
-                          })
-                     }else{
-                           Toast.fire({
-                              type: 'error',
-                              title: data.error
-                          })
-                     }
-                   },
-               });
-           } else {
-               alert('danger');
-           }
-            e.preventDefault();
-       });
-   });
-</script>
-
-
-<!--Nicher ajax er 'add to cart' er code ta main index.blade.php page e 'add to cart' e click korlei Ajax diye kono load charai 'Cart' e add hoye notification asto(mane auto load hoye jetho),sei bebostar jonno code ta likha hoyechilo,kinto pore frontend theke sob data(size,color) soho niye jaowar jonno 'modal' use kore kaj kora hoyeche,tai ora r lagteche na ekn--->
-
-{{-- //------------for addcart------------------- --}}
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-          $('.addcart').on('click', function(){
-            var id = $(this).data('id');
-            //alert(id) //comment  korte hobe porer line theke "e.preventDefault();" er aghe porjonto//
-            if(id) {
-               $.ajax({
-                   url: "{{  url('/add/to/cart/') }}/"+id,
-                   type:"GET",
-                   dataType:"json",
-                   success:function(data) {
-                     const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000
-                      })
-
-                     if($.isEmptyObject(data.error)){
-                          Toast.fire({
-                            type: 'success',
-                            title: data.success
-                          })
-                     }else{
-                           Toast.fire({
-                              type: 'error',
-                              title: data.error
-                          })
-                     }
-
-                   },
-
-               });
-           } else {
-               alert('danger');
-           }
-            e.preventDefault();
-       });
-   });
-
-</script> --}}
 
 
 

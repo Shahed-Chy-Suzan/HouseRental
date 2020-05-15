@@ -36,7 +36,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_responsive.css') }}">
     <!---for Stripe---->
-{{-- <script src="https://js.stripe.com/v3/"></script> --}}
+<script src="https://js.stripe.com/v3/"></script>
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/responsive.css')}}">
@@ -75,11 +75,11 @@
                             @php
                                 $language=session()->get('lang');
                             @endphp
-                            <li>
+                            <li class="">
                                 @if(session()->get('lang') == 'bangla')
-                                <a href="{{ route('language.english') }}">English<i class="fas fa-chevron-down"></i></a>
+                                <a href="{{ route('language.english') }}">English</a>
                                 @else
-                                <a href="{{ route('language.bangla') }}">Bangla<i class="fas fa-chevron-down"></i></a>
+                                <a href="{{ route('language.bangla') }}">Bangla</a>
                                 @endif
                             </li>
                         </ul>
@@ -169,16 +169,25 @@
                 </div>
             </div>
 
-            <!-- Wishlist -->
+    <!------------ Wishlist ------------------->
             <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                 <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                    @guest
+                    @else
+                        @php
+                        $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();
+                        @endphp
                     <div class="wishlist d-flex flex-row align-items-center justify-content-end" data-aos="fade-up-left">
-                        <div class="wishlist_icon"><img src="{{asset('public/frontend/images/heart.png')}}" alt=""></div>
+                        <a href="{{ route('user.wishlist') }}">
+                        <div class="wishlist_icon"><img src="{{asset('public/frontend/images/heart.png')}}"></div>
                         <div class="wishlist_content">
-                            <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                            <div class="wishlist_count">115</div>
+                        <div class="wishlist_text"><a href="{{ route('user.wishlist') }}">Wishlist</div>
+                            <div class="wishlist_count">{{ count($wishlist) }}</div>
+                        </a>
                         </div>
                     </div>
+                    @endguest
+
 
                     <!-- Cart -->
                     <div class="cart" data-aos="fade-up-left">
@@ -417,6 +426,8 @@
     </div>
     <!--footer Ends-->
 
+
+
 <!--------- Order Tracking Modal -------------->
 <!--
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -462,11 +473,8 @@
 <script src="{{asset('public/frontend/js/jquery.nicescroll.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/aos.js')}}"></script>
 
-{{-- <script src="{{ asset('public/frontend/js/product_custom.js') }}"></script> --}}
-{{-- <script src="{{asset('public/backend/js/sweetalert2.min.js')}}"></script> --}}
-
 <!-----------//for ajax //-------->
-{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>      <!--------for using in ajax ------> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>      <!------for using in ajax ------> --}}
 <script src="{{asset('public/frontend/js/sweetalert2@8.js')}}"></script>
 {{-- <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script> --}}
 <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
@@ -478,7 +486,7 @@
 
 
 {{---- sweet alert -----}}
-<script>
+{{-- <script>
     $(document).on("click", "#return", function(e){
         e.preventDefault();
         var link = $(this).attr("href");
@@ -497,7 +505,7 @@
              }
            });
        });
-</script>
+</script> --}}
 
 {{--------- Toastr ---------------}}
 <script>
@@ -543,19 +551,6 @@
         });
     </script>
     <!-- eta "AOS" er jquery code -->
-
-
-<!--==================================
-        ----stats----
-====================================--->
-<script>
-    $(function () {
-        $('.counter').counterUp({
-            delay: 10,
-            time: 1000
-        });
-    });
-    </script>
 
 
 <!--==================================

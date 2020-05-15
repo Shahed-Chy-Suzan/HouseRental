@@ -59,22 +59,22 @@
       <div class="form-row">
         <div class="col-md-4 mb-3 pr-4">
             <label for="bedromm">Bedroom :</label>
-            <input type="number" class="form-control" name="bedroom" placeholder="Choose No of Bedroom" id="bedromm" required>
+            <input type="number" min="0" class="form-control" name="bedroom" placeholder="Choose No of Bedroom" id="bedromm" required>
         </div>
         <div class="col-md-4 mb-3 pr-4">
             <label for="bathroom">Bathroom :</label>
-            <input type="number" class="form-control" name="bathroom" placeholder="Choose No of Bathroom" id="bathroom" required>
+            <input type="number" min="0" class="form-control" name="bathroom" placeholder="Choose No of Bathroom" id="bathroom" required>
         </div>
         <div class="col-md-4 mb-3 pr-4">
             <label for="parking">Parking Space :</label>
-            <input type="number" class="form-control" name="parking" placeholder="Choose No of parking" id="parking" required>
+            <input type="number" min="0" class="form-control" name="parking" placeholder="Choose No of parking" id="parking" required>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-md-4 mb-3 pr-4">
             <label for="kitchen">Kithchen :</label>
-            <input type="number" class="form-control" name="kitchen" placeholder="Choose No of Kitchen" id="kitchen" required>
+            <input type="number" min="0" class="form-control" name="kitchen" placeholder="Choose No of Kitchen" id="kitchen" required>
         </div>
         <div class="col-md-4 mb-3 pr-4">
             <label for="area">Area :</label>
