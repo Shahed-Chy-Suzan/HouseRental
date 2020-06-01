@@ -8,8 +8,12 @@
       </nav>
       <div class="sl-pagebody">
       	   <div class="card pd-20 pd-sm-40">
+          {{-- <p class="mg-b-20 mg-sm-b-30">View Property Details</p> --}}
+          {{-- <h6 class="card-body-title">Update Property</h6> --}}
 
-          <p class="mg-b-20 mg-sm-b-30">View Property Details</p>
+        <h6 class="card-body-title mg-b-20 mg-sm-b-35">View Property Details
+            <a href="{{ URL::to('edit/property/'.$property->id) }}" class="btn btn-sm btn-danger" style="float: right;" >Edit Property</a>
+        </h6>
 
          <div class="row">
          	<div class="col-md-6">

@@ -652,8 +652,8 @@
             <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                     <div class="product_extras product_cart_button">
                                                         {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                     </div>
                                                 </div>
 
@@ -754,8 +754,8 @@
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                 <div class="product_extras product_cart_button">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -854,8 +854,8 @@
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                 <div class="product_extras product_cart_button">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -1286,8 +1286,8 @@
             <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                     <div class="product_extras product_cart_button">
                                                         {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                     </div>
                                                 </div>
 
@@ -1388,8 +1388,8 @@
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                 <div class="product_extras product_cart_button">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -1488,8 +1488,8 @@
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                 <div class="product_extras product_cart_button">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
