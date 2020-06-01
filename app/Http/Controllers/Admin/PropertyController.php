@@ -227,6 +227,7 @@ class PropertyController extends Controller
         $data['trend']=$request->trend;
         $data['best_rated']=$request->best_rated;
         $data['hot_new']=$request->hot_new;
+        $data['service_charge']=$request->service_charge;
         // $data['added_by']=$request->added_by;
 
         $update=DB::table('user_properties')->where('id',$id)->update($data);

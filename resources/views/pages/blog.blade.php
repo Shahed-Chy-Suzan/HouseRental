@@ -56,7 +56,7 @@
 <!-- Blog -->
 
 <div class="blog">
-	<div class="container">
+	<div class="container" data-aos="fade-right">
 		<div class="row">
 			<div class="col">
 				<div class="blog_posts d-flex flex-row align-items-start justify-content-between">
@@ -86,6 +86,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
+    <!--------------------Pagination--------------------->
+            <div class="p-5" style="margin-left:600px; font-size: 20px;">
+                {{ $post->links() }}
+            </div>
 </div>
 @endsection

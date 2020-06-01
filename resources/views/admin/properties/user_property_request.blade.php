@@ -10,7 +10,7 @@
 
         <div class="card pd-20 pd-sm-40">
           {{-- <h6 class="card-body-title">User-Property-Added List </h6> --}}
-            <h6 class="card-body-title">
+            <h6 class="card-body-title text-primary">
                 @foreach($property as $row)
                     @if($row->status==0)
                         Pending properties for approval - Table : @break
@@ -56,7 +56,7 @@
                         <a href="{{ URL::to('edit/property/'.$row->id) }}" class="btn btn-sm btn-info" title="Edit"><i class="fa fa-edit"></i></a>
                         <a href="{{ URL::to('delete/property/'.$row->id) }}" class="btn btn-sm btn-danger" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
                         <a href="{{ URL::to('view/property/'.$row->id) }}" class="btn btn-sm btn-warning" title="View_Details"><i class="fa fa-eye"></i></a>
-                        <a href="{{ url('admin/property/cancel/'.$row->id) }}" class="btn btn-sm btn-danger" title="Cancel_Property"><i class="fa fa-times"></i></a>
+                        <a href="{{ url('admin/property/cancel/'.$row->id) }}" class="btn btn-sm btn-danger" title="Cancel_Property" id="cancel"><i class="fa fa-times"></i></a>
                     @elseif($row->status==3)
                         <a href="{{ URL::to('delete/property/'.$row->id) }}" class="btn btn-sm btn-danger" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
                         <a href="{{ URL::to('view/property/'.$row->id) }}" class="btn btn-sm btn-warning" title="View_Details"><i class="fa fa-eye"></i></a>

@@ -71,22 +71,18 @@ class ReportController extends Controller
 //==============================================================================
 
 
-    public function UserRole()
-    {
+    public function UserRole(){
         $user=DB::table('admins')->where('type',2)->get();
         return view('admin.role.all_role',compact('user'));
     }
 
 
-    public function UserCreate()
-    {
+    public function UserCreate(){
     	return view('admin.role.create');
     }
 
 
-
-    public function UserStore(Request $request)
-    {
+    public function UserStore(Request $request){
         $data=array();
         $data['name']=$request->name;
         $data['phone']=$request->phone;
@@ -95,8 +91,8 @@ class ReportController extends Controller
         $data['places']=$request->places;
         $data['coupon']=$request->coupon;
         $data['blogs']=$request->blogs;
-        $data['user_properties']=$request->user_properties;
-        $data['properties']=$request->properties;
+        $data['all_properties']=$request->all_properties;
+        // $data['properties']=$request->properties;
         $data['orders']=$request->orders;
         $data['reports']=$request->reports;
         $data['user_role']=$request->user_role;
@@ -115,9 +111,7 @@ class ReportController extends Controller
     }
 
 
-
-    public function UserDelete($id)
-    {
+    public function UserDelete($id){
         DB::table('admins')->where('id',$id)->delete();
         $notification=array(
                 'message'=>' Admin Deleted Successfully',
@@ -128,8 +122,7 @@ class ReportController extends Controller
 
 
 
-    public function UserEdit($id)
-    {
+    public function UserEdit($id){
         $user=DB::table('admins')->where('id',$id)->first();
         return view('admin.role.edit_role',compact('user'));
     }
@@ -146,8 +139,8 @@ class ReportController extends Controller
         $data['places']=$request->places;
         $data['coupon']=$request->coupon;
         $data['blogs']=$request->blogs;
-        $data['user_properties']=$request->user_properties;
-        $data['properties']=$request->properties;
+        $data['all_properties']=$request->all_properties;
+        // $data['properties']=$request->properties;
         $data['orders']=$request->orders;
         $data['reports']=$request->reports;
         $data['user_role']=$request->user_role;

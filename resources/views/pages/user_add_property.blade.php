@@ -22,16 +22,16 @@
         @csrf
     <div class="form-row mt-5">
       <div class="col-md-4 mb-3 pr-4">
-        <label for="validationDefat01">Name : </label>
-        <input type="text" class="form-control" name="name" id="validationDefat01" placeholder="Enter your name" required>
+        <label for="v01">Name : </label>
+        <input type="text" class="form-control" name="name" id="v01" placeholder="Enter your name" required>
       </div>
       <div class="col-md-4 mb-3 pr-4">
-        <label for="validationDefaut02">Email :</label>
-        <input type="email" class="form-control" name="email" id="validationDefaut02" placeholder="Enter your email" required>
+        <label for="v012">Email :</label>
+        <input type="email" class="form-control" name="email" id="v012" placeholder="Enter your email" required>
       </div>
       <div class="col-md-4 mb-3 pr-4">
-        <label for="validationDefault022">Phone No :</label>
-        <input type="text" class="form-control" name="phone" id="validationDefault022" placeholder="Enter your phone no" required>
+        <label for="v013">Phone No :</label>
+        <input type="text" class="form-control" name="phone" id="v013" placeholder="Enter your phone no" required>
       </div>
     </div>
 
@@ -122,7 +122,7 @@
             <label for="purpose">Purpose :</label><div class="ml-4" style="font-size: 15px">
             <div class="radio">
                 <label>
-                  <input type="radio" name="purpose" id="Rads1" value="Sell" required>&nbsp; Sell
+                  <input type="radio" name="purpose" id="Rads1" value="Sale" required>&nbsp; Sale
                 </label>
             </div>
             <div class="radio">
@@ -146,10 +146,16 @@
 
 
     <div class="form-row">
-        <div class="col-lg-12">
+        <div class="col-lg-8 pr-4">
             <div class="form-group">
             <label for="video" class="form-control-label">Video Link :</label>
                 <input class="form-control" placeholder="video link" name="video" id="video">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3 pr-4">
+            <div class="form-group">
+            <label for="floor">Floor Level :</label>
+                <input type="text" class="form-control" name="floor" placeholder="Enter floor level" id="floor">
             </div>
         </div>
     </div>

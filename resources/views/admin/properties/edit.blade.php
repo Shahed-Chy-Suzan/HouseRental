@@ -70,48 +70,57 @@
                     </select>
                 </div>
 
-                
-
             </div>
 
 
             <div class="form-row">
                 <div class="col-md-4 mb-3 pr-4">
                     <label for="bedromm">Bedroom :</label>
-                    <input type="number" class="form-control" name="bedroom" value="{{ $property->bedroom }}" id="bedromm" required>
+                    <input type="number" min="0" class="form-control" name="bedroom" value="{{ $property->bedroom }}" id="bedromm" required>
                 </div>
                 <div class="col-md-4 mb-3 pr-4">
                     <label for="bathroom">Bathroom :</label>
-                    <input type="number" class="form-control" name="bathroom" value="{{ $property->bathroom }}" id="bathroom" required>
+                    <input type="number" min="0" class="form-control" name="bathroom" value="{{ $property->bathroom }}" id="bathroom" required>
                 </div>
                 <div class="col-md-4 mb-3 pr-4">
                     <label for="kitchen">Kithchen :</label>
-                    <input type="number" class="form-control" name="kitchen" value="{{ $property->kitchen }}" id="kitchen" required>
+                    <input type="number" min="0" class="form-control" name="kitchen" value="{{ $property->kitchen }}" id="kitchen" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="col-md-3 mb-3 pr-4">
-                    <label for="parking">Parking Space :</label>
-                    <input type="number" class="form-control" name="parking" value="{{ $property->parking }}" id="parking" required>
-                </div>
-                <div class="col-md-3 mb-3 pr-4">
+                <div class="col-md-4 mb-3 pr-4">
                     <label for="area">Area :</label>
                     <input type="text" class="form-control" name="area" value="{{ $property->area }}" id="bedromm" required>
                 </div>
-                <div class="col-md-3 mb-3 pr-4">
+                <div class="col-md-4 mb-3 pr-4">
                     <label for="price">Price (৳) :</label>
                     <input type="text" class="form-control" name="price" value="{{ $property->price }}" id="price" required>
                 </div>
-                <div class="col-md-3 mb-3 pr-4">
-                    <label for="price1">Discount Price :</label>
+                <div class="col-md-4 mb-3 pr-4">
+                    <label for="price1">Discount Price (৳) :</label>
                     <input type="text" class="form-control" name="discount_price" value="{{ $property->discount_price }}" id="price1">
                 </div>
             </div>
 
-
             <div class="form-row">
-                <div class="col-md-4 mb-3 pr-3">
+                <div class="col-md-4 mb-3 pr-4">
+                    <label for="parking">Parking Space :</label>
+                    <input type="number" min="0" class="form-control" name="parking" value="{{ $property->parking }}" id="parking" required>
+                </div>
+                <div class="col-md-4 mb-3 pr-4">
+                    <label for="floor">Floor Level :</label>
+                    <input type="text" min="0" class="form-control" name="floor" value="{{ $property->floor }}" id="floor">
+                </div>
+                <div class="col-md-4 mb-3 pr-4">
+                    <label for="charge">Service Charge :</label>
+                    <input type="text" min="0" class="form-control" name="service_charge" value="{{ $property->service_charge }}" id="charge">
+                </div>
+            </div>
+
+
+            <div class="form-row my-3">
+                <div class="col-md-4 mb-3 px-3">
                     <label for="category">Category :</label><div class="ml-4" style="font-size: 15px">
                     <div class="radio">
                         <label>
@@ -156,9 +165,9 @@
                     <label for="purpose">Purpose :</label><div class="ml-4" style="font-size: 15px">
                     <div class="radio">
                         <label>
-                          <input type="radio" name="purpose" id="Rads1" value="Sell" required <?php if ("Sell" == $property->purpose) {
+                          <input type="radio" name="purpose" id="Rads1" value="Sale" required <?php if ("Sale" == $property->purpose) {
                             echo "checked";
-                        } ?> >&nbsp; Sell
+                        } ?> >&nbsp; Sale
                         </label>
                     </div>
                     <div class="radio">

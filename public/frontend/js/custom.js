@@ -785,12 +785,14 @@ $(document).ready(function()
 			var trendsSlider = $('.trends_slider');
 			trendsSlider.owlCarousel(
 			{
-				loop:false,
+				loop:true,
 				margin:30,
 				nav:false,
 				dots:false,
 				autoplayHoverPause:true,
-				autoplay:false,
+                // autoplay:false,
+                autoplay:true,
+				autoplayTimeout:3000,
 				responsive:
 				{
 					0:{items:1},

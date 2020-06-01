@@ -135,7 +135,9 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="" class="nav-link">New pending Properties</a></li>
+            <li class="nav-item"><a href="{{route('admin.add.order')}}" class="nav-link">Add New Order</a></li>
+            <li class="nav-item"><a href="{{route('admin.new.order')}}" class="nav-link">New Pending Orders</a></li>
+            <li class="nav-item"><a href="{{route('admin.all.order')}}" class="nav-link">All Orders</a></li>
         </ul>
         @else
         @endif
@@ -541,7 +543,7 @@
 
 
 
-{{---- sweet alert -----}}
+<!---- Sweet Alert(for DELETE button)----->
     <script>
       $(document).on("click","#delete",function(e){
         e.preventDefault();
@@ -563,6 +565,30 @@
               });
       });
   </script>
+
+
+<!---- Sweet Alert(for CANCEL button)----->
+<script>
+    $(document).on("click", "#cancel", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+           swal({
+             title: "Are you Want to Cancel?",
+             text: "Once Cancel,You will find it in 'Cancelled Properties' option!",
+             icon: "warning",
+             buttons: true,
+             dangerMode: true,
+           })
+           .then((willDelete) => {
+             if (willDelete) {
+                  window.location.href = link;
+             } else {
+               swal("Safe Property!");
+             }
+           });
+       });
+</script>
+
 
 
 {{--------- Toastr ---------------}}

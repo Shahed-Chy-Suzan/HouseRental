@@ -29,14 +29,14 @@
 
 <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
 
-<link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css')}}">
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css')}}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 
-    <!---for Product_details page---->
+    {{-- <!---for Product_details page---->
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_responsive.css') }}">
     <!---for Stripe---->
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"></script> --}}
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/responsive.css')}}">
@@ -63,8 +63,8 @@
             <div class="col d-flex flex-row">
                 <div class="top_bar_contact_item"><div class="top_bar_icon"><a href="{{ url('/') }}"> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="65px" height="65px"> <span class="text-primary h5" >{{ $setting->company_name }}<small style="font-size:12px">.com</small></span></a></div></div>
 
-                <div class="top_bar_contact_item mx-5"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/phone.png')}}" alt=""></div>{{ $setting->phone_one }}</div>
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{asset('public/frontend/images/mail.png')}}" alt=""></div><a href="mailto:{{ $setting->email_one }}">{{$setting->email_one}}</a></div>
+                <div class="top_bar_contact_item mx-5"><i class="fa fa-phone pr-1"></i><a href="tel:{{ $setting->phone_one }}" style="color:black"> {{ $setting->phone_one }} </a></div>
+                <div class="top_bar_contact_item"><i class="far fa-envelope pr-1"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></div>
 
 
 
@@ -213,93 +213,15 @@
             <!-- Main Navigation -->
 
 
+
     @yield('content')
 
 
-            <!--------------------------- Start Footer ------------------------------>
-	<!-- Footer -->
-
-	<!--<footer class="footer">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3 footer_col">
-					<div class="footer_column footer_contact">
-						<div class="logo_container">
-                            {{-- <div class="logo"><a href="#" class="text-primary">BariWala</a></div> --}}
-                            {{-- <div class="top_bar_contact_item"><div class="top_bar_icon"><a href=""> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="80px" height="80px"> <span class="text-primary h4">BariWala</span></a></div></div> --}}
-						</div>
-						<div class="footer_title">Got Question? Call Us 24/7</div>
-						<div class="footer_phone">+38 068 005 3570</div>
-						<div class="footer_contact_text">
-							<p>17 Princess Road, London</p>
-							<p>Grester London NW18JR, UK</p>
-						</div>
-						<div class="footer_social">
-							<ul>
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fab fa-google"></i></a></li>
-								<li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-2 offset-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Find it Fast</div>
-						<ul class="footer_list">
-							<li><a href="#">Computers & Laptops</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Smartphones & Tablets</a></li>
-							<li><a href="#">TV & Audio</a></li>
-						</ul>
-						<div class="footer_subtitle">Gadgets</div>
-						<ul class="footer_list">
-							<li><a href="#">Car Electronics</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<ul class="footer_list footer_list_2">
-							<li><a href="#">Video Games & Consoles</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Cameras & Photos</a></li>
-							<li><a href="#">Hardware</a></li>
-							<li><a href="#">Computers & Laptops</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-2">
-					<div class="footer_column">
-						<div class="footer_title">Customer Care</div>
-						<ul class="footer_list">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">Order Tracking</a></li>
-							<li><a href="#">Wish List</a></li>
-							<li><a href="#">Customer Services</a></li>
-							<li><a href="#">Returns / Exchange</a></li>
-							<li><a href="#">FAQs</a></li>
-							<li><a href="#">Product Support</a></li>
-						</ul>
-					</div>
-				</div>
-
-			</div>
-		</div>
-    </footer>   -->
-      <!---------------------defult footer end----------------------->
 
 
 
 
-    <!---------------------contact----------------------->
+    <!--------------------- Contact/Get in Touch ----------------------->
     <section id="contact">
         <div class="container-box-md">
             <div class="container">
@@ -320,7 +242,7 @@
                                         <div class="branch">
                                             <h4 style="color: blue">Chittagong</h4>
                                             <ul class="brance-details">
-                                                <li><i class="fa fa-mobile"></i>{{ $setting->phone_one }}</li>
+                                                <li><i class="fa fa-phone"></i><a href="tel:{{ $setting->phone_one }}" style="color:black"> {{ $setting->phone_one }} </a></li>
                                                 <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_one }}" style="color:black"> {{ $setting->email_one }} </a></li>
                                                 <li><i class="fa fa-map-marker"></i>{{ $setting->address_one }}</li>
                                             </ul>
@@ -330,8 +252,8 @@
                                         <div class="branch">
                                             <h4 style="color: blue">Dhaka</h4>
                                             <ul class="brance-details">
-                                                <li><i class="fa fa-mobile"></i>{{ $setting->phone_two }}</li>
-                                                <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></li></li>
+                                                <li><i class="fa fa-phone"></i><a href="tel:{{ $setting->phone_two }}" style="color:black"> {{ $setting->phone_two }} </a></li>
+                                                <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></li>
                                                 <li><i class="fa fa-map-marker"></i>{{ $setting->address_two }}</li>
                                             </ul>
                                         </div>
@@ -402,7 +324,7 @@
             </div>
         </div>
     </section>
-<!---------------------------------contact Ends-------------------------------->
+<!---------------------------------Ends_Contact-------------------------------->
 
 
 
@@ -428,36 +350,127 @@
 
 
 
-<!--------- Order Tracking Modal -------------->
-<!--
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Your Status Code</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
 
-            <div class="modal-body">
-                <form method="post" action="{{-- {{ route('order.tracking') }}--}}">
-                    {{-- @csrf --}}
+<!---------//-----------//------------//------------//--------------//------------//--------------//----------//-------->
 
-                    <div class="form-row">
-                        <label>Status Code</label>
-                        <input type="text" name="code" required="" class="form-control" placeholder="Enter order status code">
-                    </div><br>
-                    <button class="btn btn-danger" type="submit">Track Now</button>
-                </form>
-            </div>
+
+
+
+<!----------- for applying ajax in wishlist -------------->
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+    <!---   OR----////------>
+    <script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>
+
+
+<!--=====================================================
+        *------Featured_Modal_(Call & Email)-------*
+======================================================--->
+@php
+    $featured=DB::table('user_properties')->select('user_properties.property_code','user_properties.id')->whereIn('status', [1,2])->orderBy('id','desc')->get();   //sob_property(available)
+@endphp
+
+<!------------------Start_Modal_(Call)---------------------->
+@foreach ($featured as $row)
+<div class="modal fade" id="call{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle">Contact Agent</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pb-4">
+          <div class="text-center" style="font-size: 18px">BariWala Listings</div>
+          <a style="font-size: 18px; margin-left:110px" roll="button" href="tel:{{ $setting->phone_one }}"><i class="fas fa-phone-volume p-4"></i> {{ $setting->phone_one }} </a>
+          <p class="text-center mt-3 mb-0 pb-0">Please quote property reference when calling us.</p>
+          <span style="font-size: 15px;margin-left:185px;margin-top:0px;" class="text-primary">{{$row->property_code}}</span>
+        </div>
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div> --}}
+      </div>
+    </div>
+</div>
+@endforeach
+<!------------------End_Modal_(Call)---------------------->
+
+
+<!------------------Start_Modal_(Email)---------------------->
+@foreach ($featured as $row)
+<div class="modal fade" id="email{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLongTitle">Contact Agent</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{route('store.modal.email')}}" method="post">
+            @csrf
+                <div class="container">
+                    @php
+                        $userid=Auth::id();
+                        $userr=DB::table('users')->where('id',$userid)->first();
+                    @endphp
+
+                @if (Auth::check())
+                    <div class="form-group">
+                        <label for="name">Name :</label>
+                        <input type="text" class="form-control is-invalid" name="name" id="name" placeholder="Enter Your Name" value="{{$userr->name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email :</label>
+                        <input type="email" class="form-control is-invalid" name="email" id="Email" placeholder="Enter Your Email" value="{{$userr->email}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone :</label>
+                        <input type="text" class="form-control is-invalid" name="phone" id="phone" placeholder="Enter Your Phone" value="{{$userr->phone}}" required>
+                    </div>
+                @else
+                    <div class="form-group">
+                        <label for="name">Name :</label>
+                        <input type="text" class="form-control is-invalid" name="name" id="name" placeholder="Enter Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email :</label>
+                        <input type="email" class="form-control is-invalid" name="email" id="Email" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone :</label>
+                        <input type="text" class="form-control is-invalid" name="phone" id="phone" placeholder="Enter Your Phone" required>
+                    </div>
+                @endif
+
+                <div class="form-group">
+                    <label for="message">Message :</label>
+                    <textarea class="form-control" name="message" id="message" rows="3">I would like to inquire about your property {{$row->property_code}}. Please contact me at your earliest convenience.</textarea>
+                </div>
+
+                <input type="hidden" name="property_code"  value="{{$row->property_code}}">
+
+                <button type="submit" class="btn btn-block btn-danger text-white">Send Email</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <span class="text-muted" style="font-size: 10px;">You agree to Bariwala's Terms of Use & Privacy Policy By choosing to contact a property, Property managers may call,text or email you about any inquiries you submit through our services, which may involve use of automated means and prerecorded/artificial voices. You don't need to consent as a condition of renting any property, or buying any other goods or services. Message/data rates may apply.</span>
         </div>
         </div>
-    </div>-->
+      </div>
+    </div>
+</div>
+@endforeach
+<!------------------End_Modal_(Email)_Featured---------------------->
 
 
 
 
+
+
+<!-------------------------------------JS files--------------------------------------------------->
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('public/frontend/styles/bootstrap4/popper.js')}}"></script>
 <script src="{{asset('public/frontend/styles/bootstrap4/bootstrap.min.js')}}"></script>
@@ -485,29 +498,49 @@
 
 
 
-{{---- sweet alert -----}}
-{{-- <script>
-    $(document).on("click", "#return", function(e){
-        e.preventDefault();
-        var link = $(this).attr("href");
-           swal({
-             title: "Are you Want to Return?",
-             text: "Once Return,You will get return your money!",
-             icon: "warning",
-             buttons: true,
-             dangerMode: true,
-           })
-           .then((willDelete) => {
-             if (willDelete) {
-                  window.location.href = link;
-             } else {
-               swal("Cancel");
-             }
-           });
-       });
-</script> --}}
 
-{{--------- Toastr ---------------}}
+<!-------------------------JS for Wishlist_(ajax)-------------------------->
+<script type="text/javascript">
+    $(document).ready(function() {
+          $('.addwishlist').on('click', function(){     //--from add_to_'wishlist' button/name //-->(.addwishlist)
+            var id = $(this).data('id');
+            if(id) {
+               $.ajax({
+                   url: "{{  url('/add/wishlist/') }}/"+id,
+                   type:"GET",
+                   dataType:"json",
+                   success:function(data) {
+                     const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+
+                     if($.isEmptyObject(data.error)){
+                          Toast.fire({
+                            type: 'success',
+                            title: data.success
+                          })
+                     }else{
+                           Toast.fire({
+                              type: 'error',
+                              title: data.error
+                          })
+                     }
+                   },
+               });
+           } else {
+               alert('danger');
+           }
+            e.preventDefault();
+       });
+   });
+</script>
+
+
+
+<!--------------------- Toastr --------------------->
 <script>
     @if(Session::has('message'))
     var type="{{Session::get('alert-type','info')}}"
@@ -547,7 +580,7 @@
 ====================================--->
     <script>
         AOS.init({
-            duration: 2000
+            duration: 1300
         });
     </script>
     <!-- eta "AOS" er jquery code -->
