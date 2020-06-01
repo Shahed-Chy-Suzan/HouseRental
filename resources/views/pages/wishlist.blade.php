@@ -1,87 +1,101 @@
 @extends('layouts.app')
 @section('content')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/cart_styles.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/cart_responsive.css') }}">
 
-	<!-- Cart -->
-
-	<div class="cart_section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 ">
-					<div class="cart_container">
-						<div class="cart_title">Your Wishlist</div>
-						<div class="cart_items">
-							<ul class="cart_list">
-                                @foreach($property as $row)
-                                <li class="cart_item clearfix cart_list">
-                                    {{-- {{ url('property/details/'.$row->id.'/'.$row->property_name) }} --}}
-                                    <div class="cart_item_image"><a href=""><img src="{{ asset( $row->image_one) }}" style="height: 100px;"></a></div>
-                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                        <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title">Name</div>
-                                            <div class="cart_item_text">{{ $row->city_name }}</div>
-                                        </div>
-
-                                        <div class="cart_item_color cart_info_col">
-                                            <div class="cart_item_title">Color</div>
-                                            <div class="cart_item_text">
-                                                    {{ $row->subcity_name }}
-                                            </div>
-                                        </div>
+@php
+    $setting=DB::table('sitesetting')->first();
+    $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();   //for count-wishlist
+    $property1=DB::table('user_properties')->where('user_id',Auth::id())->get();
+@endphp
 
 
-                                        <div class="cart_item_color cart_info_col">
-                                            <div class="cart_item_title">Size</div>
-                                            <div class="cart_item_text">
-                                                    {{ $row->purpose }}
-                                            </div>
-                                        </div>
+<div style="background: #F5F5FA; padding-bottom:80px" data-aos="fade-right">
 
 
-                                        <div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title">Action</div><br><br>
-                                            <button  class="btn btn-sm btn-danger addcart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-							</ul>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-    </div>
-
-
-
-{{-- ------------------------------------- --}}
-
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="py-4">
+        <div class="container">
+            <h3 style="font-size: 30px" class="text-primary mb-0"><a href="{{ route('user.wishlist') }}">Your Wishlists : </a></h3>
+            <p style="font-size: 17px; margin-top:0px"> {{ count($wishlist) }} Saved Property.</p>
         </div>
-      </div>
     </div>
-  </div>
 
 
+<!-- Page Content -->
+    <div class="container">
+
+    <!-- Project One -->
+@foreach($property as $row)
+    <div class="row bg-white mb-4 border border-primary rounded ww">
+    <div class="col-md-5 ml-0 pl-0">
+        <div id="{{$row->property_code}}" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#{{$row->property_code}}" data-slide-to="0" class="active"></li>
+                <li data-target="#{{$row->property_code}}" data-slide-to="1"></li>
+                <li data-target="#{{$row->property_code}}" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner" style="height: 300px">
+                <div class="carousel-item active">
+                    <a href="#"><img style="height: 300px; width: 700px" src="{{asset($row->image_one)}}" /></a>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img style="height: 300px; width: 700px" src="{{asset($row->image_two)}}" /></a>
+                </div>
+                <div class="carousel-item">
+                    <a href="#"><img style="height: 300px; width: 700px" src="{{asset($row->image_three)}}" /></a>
+                </div>
+            </div>
+
+            <a href="#{{$row->property_code}}" class="carousel-control-prev" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a href="#{{$row->property_code}}" class="carousel-control-next" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+            </div>
+    </div>
+
+    <div class="col-md-7">
+    @if($row->purpose=='Sale')
+        <h3 class="pt-3 text-primary font-weight-normal">{{$row->area}} Furnished {{$row->type}} Ready For {{$row->purpose}} at {{$row->city_name}}</h3>
+    @elseif($row->purpose=='Rent')
+        <h3 class="pt-3 text-primary font-weight-normal">A Furnished {{$row->area}} {{$row->type}} Ready To {{$row->purpose}} at {{$row->city_name}}</h3>
+    @endif
+        <p style="font-size: 15px" class="text-dark mb-0 pb-0">{{$row->address}}, {{$row->subcity_name}}, {{$row->city_name}}.</p>
+        <p style="font-size: 16px" class="text-primary mt-0 pt-1">Property Code: {{$row->property_code}}</p>
 
 
+    @if($row->discount_price == NULL)
+        <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->price}}</div>
+    @else
+        <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}}<span style="font-size: 17px"><del><b> BDT {{$row->price}}</b></del></span></div>
+    @endif
+
+        <div class="col-md-12 ml-0 pl-1" style="font-size: 20px">
+            <i class="fas fa-bed pr-4" title="Bed Room"> {{$row->bedroom}} </i> |
+            <i class="fas fa-bath p-4" title="Bath Room"> {{$row->bathroom}} </i> |
+            <i class="fas fa-car p-4" title="Parking"> {{$row->parking}} </i> |
+            <i class="fas fa-home p-4" title="Area"> {{$row->area}} </i> |
+            <i class="fas fa-building p-4" title="Floor Level"> {{$row->floor}} </i> |
+        </div>
+        <a class="btn btn-primary py-2 px-4 mr-3 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->property_id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-primary py-2 px-4 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->property_id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+
+    </div>
+    </div>
+
+@endforeach
+    <!-- /.row -->
 
 
+    <!--------------------Pagination--------------------->
+        <div class="p-5" style="margin-left:400px; font-size: 20px;">
+            {{ $property->links() }}
+        </div>
 
-<script src="{{ asset('public/frontend/js/cart_custom.js') }}"></script>
+    </div><!-- /.container -->
+</div> <!--bg-color--->
+
+
 
 @endsection

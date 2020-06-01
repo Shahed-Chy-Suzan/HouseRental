@@ -25,7 +25,7 @@ class CreateUserPropertiesTable extends Migration
             $table->string('subcity')->nullable();
             $table->integer('bedroom');
             $table->integer('bathroom');
-            $table->integer('parking');
+            $table->integer('parking')->nullable();
             $table->string('type');
             $table->integer('kitchen');
             $table->string('area');
@@ -50,6 +50,7 @@ class CreateUserPropertiesTable extends Migration
             $table->integer('trend')->nullable();
             $table->integer('best_rated')->nullable();
             $table->integer('hot_new')->nullable();
+            $table->string('service_charge')->nullable();
             $table->string('added_by')->nullable();
             $table->timestamps();
         });

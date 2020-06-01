@@ -64,16 +64,16 @@
             	</div>
             	<div class="col-lg-4">
             		<label class="ckbox">
-					  <input type="checkbox" name="user_properties" value="1">
-					  <span>User Properties</span>
+					  <input type="checkbox" name="all_properties" value="1">
+					  <span>All Properties</span>
 					</label>
             	</div>
-            	<div class="col-lg-4">
+            	{{-- <div class="col-lg-4">
             		<label class="ckbox">
 					  <input type="checkbox" name="properties" value="1">
-					  <span>Properties</span>
+					  <span>Orders</span>
 					</label>
-            	</div>
+            	</div> --}}
             	<div class="col-lg-4">
             		<label class="ckbox">
       					<input type="checkbox" name="orders" value="1">

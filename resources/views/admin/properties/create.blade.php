@@ -69,39 +69,47 @@
                 </div> --}}
             </div>
 
-            <div class="form-row">
-                <div class="col-md-4 mb-3 pr-4">
+            <div class="form-row mt-1">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="bedromm">Bedroom :</label>
                     <input type="number" min="0" class="form-control" name="bedroom" id="bedromm" placeholder="Choose No of Bedroom" required>
                 </div>
-                <div class="col-md-4 mb-3 pr-4">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="bathroom">Bathroom :</label>
                     <input type="number" min="0" class="form-control" name="bathroom" id="bathroom" placeholder="Choose No of Bathroom" required>
                 </div>
-                <div class="col-md-4 mb-3 pr-4">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="kitchen">Kithchen :</label>
                     <input type="number" min="0" class="form-control" name="kitchen" id="kitchen" placeholder="Choose No of Kitchen" required>
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="col-md-4 mb-3 pr-4">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="parking">Parking Space :</label>
                     <input type="number" min="0" class="form-control" name="parking" id="parking" placeholder="Choose No of Parking" required>
                 </div>
-                <div class="col-md-4 mb-3 pr-4">
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="area">Area :</label>
                     <input type="text" class="form-control" name="area" id="bedromm" placeholder="Enter Area (sqft.)" required>
                 </div>
-                <div class="col-md-4 mb-3 pr-4">
+                <div class="col-md-3 mb-3 pr-4">
                     <label for="price">Price (৳) :</label>
                     <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price (৳)" required>
+                </div>
+                <div class="col-md-3 mb-3 pr-4">
+                    <label for="floor">Floor Level :</label>
+		            <input type="text" class="form-control" name="floor" placeholder="Enter Floor Level" id="floor">
+                </div>
+                <div class="col-md-3 mb-3 pr-4">
+                    <label for="service_charge">Service Charge :</label>
+		            <input type="text" class="form-control" name="service_charge" placeholder="Enter Service Charge" id="floor">
                 </div>
             </div>
 
 
-            <div class="form-row">
-                <div class="col-md-4 mb-3 pr-3">
+            <div class="form-row my-3">
+                <div class="col-md-4 mb-3 px-3">
                     <label for="category">Category :</label><div class="ml-4" style="font-size: 15px">
                     <div class="radio">
                         <label>
@@ -136,7 +144,7 @@
                     <label for="purpose">Purpose :</label><div class="ml-4" style="font-size: 15px">
                     <div class="radio">
                         <label>
-                          <input type="radio" name="purpose" id="Rads1" value="Sell" required>&nbsp; Sell
+                          <input type="radio" name="purpose" id="Rads1" value="Sale" required>&nbsp; Sale
                         </label>
                     </div>
                     <div class="radio">
@@ -246,7 +254,7 @@
         </form>
     </div><!-- card -->
 </div><!-- sl-pagebody -->
-
+</div>
 
 
 <!---------------------------------------------------------------------------------------------------------------------------->

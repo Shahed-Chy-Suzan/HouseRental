@@ -65,18 +65,10 @@
             	</div>
             	<div class="col-lg-4">
             		<label class="ckbox">
-					  <input type="checkbox" name="user_properties" value="1"  <?php  if ($user->user_properties == 1) {
+					  <input type="checkbox" name="all_properties" value="1"  <?php  if ($user->all_properties == 1) {
 					        	echo "checked";
 					  }  ?>>
-					  <span>User Properties</span>
-					</label>
-            	</div>
-            	<div class="col-lg-4">
-            		<label class="ckbox">
-					  <input type="checkbox" name="properties" value="1"  <?php  if ($user->properties == 1) {
-					        	echo "checked";
-					  }  ?>>
-					  <span>Properties</span>
+					  <span>All Properties</span>
 					</label>
             	</div>
             	<div class="col-lg-4">

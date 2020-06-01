@@ -12,7 +12,7 @@ class BlogController extends Controller
         $post=DB::table('posts')
             ->join('post_category','posts.category_id','post_category.id')
             ->select('posts.*','post_category.category_name_en','post_category.category_name_bn')
-            ->get();
+            ->paginate(6);
         return view('pages.blog',compact('post'));
     }
 

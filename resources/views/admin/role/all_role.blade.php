@@ -30,62 +30,62 @@
                   <td>{{ $row->phone }}</td>
                   <td>
                     @if($row->places == 1)
-                        <span class="badge badge-danger">Places</span>
+                        <span class="badge badge-danger p-1">Places</span>
                     @else
                     @endif
 
                     @if($row->coupon == 1)
-                        <span class="badge badge-success">Coupon</span>
+                        <span class="badge badge-success p-1">Coupon</span>
                     @else
                     @endif
 
                     @if($row->blogs == 1)
-                        <span class="badge badge-info">Blogs</span>
+                        <span class="badge badge-info p-1">Blogs</span>
                     @else
                     @endif
 
-                    @if($row->user_properties == 1)
-                        <span class="badge badge-warning">User Properties</span>
+                    @if($row->all_properties == 1)
+                        <span class="badge badge-warning p-1">All Properties</span>
                     @else
                     @endif
 
-                    @if($row->properties == 1)
+                    {{-- @if($row->properties == 1)
                         <span class="badge badge-primary">Properties</span>
                     @else
-                    @endif
+                    @endif --}}
 
                     @if($row->orders == 1)
-                        <span class="badge badge-danger">Orders</span>
+                        <span class="badge badge-danger p-1">Orders</span>
                     @else
                     @endif
 
                     @if($row->reports == 1)
-                        <span class="badge badge-success">Reports</span>
+                        <span class="badge badge-success p-1">Reports</span>
                     @else
                     @endif
 
                     @if($row->user_role == 1)
-                        <span class="badge badge-danger">User Role</span>
+                        <span class="badge badge-danger p-1">User Role</span>
                     @else
                     @endif
 
                     @if($row->newsletter == 1)
-                        <span class="badge badge-info">Newsletter</span>
+                        <span class="badge badge-info p-1">Newsletter</span>
                     @else
                     @endif
 
                     @if($row->contact_messages == 1)
-                        <span class="badge badge-warning">Contact Messages</span>
+                        <span class="badge badge-warning p-1">Contact Messages</span>
                     @else
                     @endif
 
                     @if($row->site_setting == 1)
-                        <span class="badge badge-primary">Site Setting</span>
+                        <span class="badge badge-primary p-1">Site Setting</span>
                     @else
                     @endif
 
                     @if($row->database_backup == 1)
-                        <span class="badge badge-danger">Database Backup</span>
+                        <span class="badge badge-danger p-1">Database Backup</span>
                     @else
                     @endif
 

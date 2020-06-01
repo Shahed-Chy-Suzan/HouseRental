@@ -37,13 +37,13 @@
                     @endif
                   </td>
                   <td>
-                    <a href="{{ URL::to('view/contact/'.$row->id) }}" class="btn btn-sm btn-warning" title="View Details"><i class="fa fa-eye"></i></a>
+                    <a href="{{ URL::to('view/contact/'.$row->id) }}" class="btn btn-sm btn-info" title="View Details"><i class="fa fa-eye"></i></a>
                     <a href="{{ URL::to('delete/contact/'.$row->id) }}" class="btn btn-sm btn-danger" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
 
                     @if($row->status == 0)
                         <a href="{{ URL::to('mark/read/contact/'.$row->id) }}" class="btn btn-sm btn-success" title="Mark as Read"><i class="fa fa-check"></i></a>
                     @else
-                        <a href="{{ URL::to('mark/unread/contact/'.$row->id) }}" class="btn btn-sm btn-danger" title="Mark as Unread"><i class="fa fa-thumbs-down"></i></a>
+                        <a href="{{ URL::to('mark/unread/contact/'.$row->id) }}" class="btn btn-sm btn-warning" title="Mark as Unread"><i class="fa fa-thumbs-down"></i></a>
                     @endif
 
                 </td>

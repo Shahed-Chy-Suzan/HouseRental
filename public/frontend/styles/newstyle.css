@@ -62,31 +62,45 @@
 
 
 
-/* -------------Main-Slider--------- */
+/* ---------------------Main-Slider(Nav-Carousal)------------- */
 .carousel-item {
     height: 600px;
   }
 
   .carousel-img-1 {
-    background: url("../images/Cover/4.jpg");
+    background: url("../images/Cover/1.jpg");
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
   }
 
   .carousel-img-2 {
-    background: url("../images/Cover/3.jpg");
+    background: url("../images/Cover/8.jpg");
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
   }
 
   .carousel-img-3 {
-    background: url("../images/Cover/1.jpg");
+    background: url("../images/Cover/3.jpg");
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
   }
+
+  /*------------------------(Not Working for Dynamic)-Main Slider----------------*/
+  /* .carousel-item {
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .carousel-item img{
+      width: 1600px;
+      height: 650px;
+  } */
 
 /* -------------Main-Slider text--------- */
 div.shadow-lg{
@@ -267,7 +281,7 @@ div.shadow-lg:hover{
             Popular Categories
 =========================================*/
 .popular {
-    background: url(../images/Cover/cameron-venti-0YWaDPylkYA-unsplash.jpg) no-repeat fixed center;
+    background: url(../images/Cover/8.jpg) no-repeat fixed center;
     background-size: cover;
 }
 
@@ -382,9 +396,9 @@ div.shadow-lg:hover{
 /*==================================
             Trends 2020
 ====================================*/
-
+/* --------------------------------------- */
 .trends .trends_background {
-    background: url(../images/Cover/4.jpg) no-repeat fixed center;
+    background: url(../images/Cover/2.jpg) no-repeat fixed center;
     background-size: cover;
 }
 
@@ -395,7 +409,7 @@ div.shadow-lg:hover{
 {
 	line-height: 36px;
 	color: white;
-	font-size: 18px;
+	font-size: 24px;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -403,15 +417,16 @@ div.shadow-lg:hover{
     transition: all 200ms ease;
 }
 .trends_nav{
-    background-color: rgb(123, 123, 224);
-    box-shadow: 1px 1px 2px white;
+    background-color: rgb(122, 85, 255);
+    box-shadow: 2px 2px 1px rgb(2, 2, 2);
+
 }
 .trends_nav:hover i
 {
-    color: blue;
+    color: rgb(61, 65, 255);
 }
 .trends_nav:hover{
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 2px blue;
 }
 .trends_item
@@ -756,3 +771,45 @@ form.rounded:hover{
 #stats .container-box-md {
     background: rgba(0, 0, 0, 0.8);
 } */
+
+
+
+/*==========================================
+          ----- Wishlist -----
+============================================*/
+div .ww{
+    /* box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2); */
+    box-shadow: 4px 4px 6px rgba(32, 31, 31,.9);
+}
+div .ww:hover{
+    box-shadow: 10px 10px 10px 4px rgba(60, 61, 65, 0.9);
+}
+
+
+
+/*==========================================
+          ----- Modal-(call) -----
+============================================*/
+
+.modal-content {
+    width:100%;
+}
+
+.modal-dialog-centered {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+    min-height:calc(100% - (.5rem * 2));
+}
+.modal-title{
+    margin-left: 160px;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-centered {
+        min-height:calc(100% - (1.75rem * 2));
+}
+}

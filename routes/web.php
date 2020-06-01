@@ -9,9 +9,7 @@ Route::get('blog/post','BlogController@blog')->name('blog.post');
 Route::get('language/bangla','BlogController@Bangla')->name('language.bangla');
 Route::get('language/english','BlogController@English')->name('language.english');
 Route::get('blog/description/{id}','BlogController@description');
-        //-------------Wishlists-------------
-Route::get('add/wishlist/{id}','WishlistController@AddWishlist');
-Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist');  //--nav--
+
 
 
 //----------------------------------------------------------------------------------------------------------------
@@ -119,7 +117,13 @@ Route::get('admin/delivery/progress', 'Admin\PropertyController@delivery_Progres
 Route::get('admin/delivery/done/{id}', 'Admin\PropertyController@DeliveryDone');
 Route::get('admin/delivered/property', 'Admin\PropertyController@successfully_Delivered')->name('admin.delivered.property'); //-nav
 Route::get('admin/cancelled/property', 'Admin\PropertyController@cancelledProperty')->name('admin.cancelled.property');  //-nav
-
+        //-----------------Add New Order-----------------
+Route::get('admin/add/order','Admin\OrderController@addOrder')->name('admin.add.order');  //-nav
+Route::get('admin/new/order','Admin\OrderController@newOrder')->name('admin.new.order');  //-nav
+Route::get('admin/all/order','Admin\OrderController@allOrder')->name('admin.all.order');  //-nav
+Route::get('delete/order/{id}','Admin\OrderController@deleteOrder');
+Route::get('mark/read/order/{id}','Admin\OrderController@markAsRead');
+Route::get('mark/unread/order/{id}','Admin\OrderController@markAsUnRead');
 
 
 
@@ -140,6 +144,12 @@ Route::post('store/user/property','FrontController@storeUserProperty')->name('st
 Route::post('store/newsletters','FrontController@storeNewsletter')->name('store.newsletters');
         //----------Contact/Get_in_Touch-------------
 Route::post('store/contact','FrontController@storeContact')->name('store.contact');
+        //-------------Wishlists-------------
+Route::get('add/wishlist/{id}','WishlistController@AddWishlist');   //using ajax
+Route::get('add/wishlist/tostr/{id}','WishlistController@AddWishlistTostr');   //using Tostr
+Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist');  //--nav--
+        //----------Modal_Email-------------
+Route::post('store/modal/email','WishlistController@storeModal')->name('store.modal.email'); //using Tostr
 
 
         //for subcategory productShowing

@@ -55,7 +55,7 @@ class SettingController extends Controller
                 return Redirect()->back()->with($notification);
         }else{
             $notification=array(
-                'message'=>'Nothing To Updated',
+                'message'=>'Nothing To Update',
                 'alert-type'=>'success'
             );
                 return Redirect()->back()->with($notification);

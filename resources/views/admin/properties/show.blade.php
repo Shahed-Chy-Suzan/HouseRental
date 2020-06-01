@@ -42,7 +42,19 @@
          	    		 	<th>Subcity/Thana : </th>
          	    		 	<th>{{ $property->subcity_name }}</th>
          	    		 </tr>
-                          <tr>
+                        <tr>
+                            <th>Month :</th>
+                            <th>{{ $property->month }}</th>
+                        </tr>
+                        <tr>
+                            <th>Date :</th>
+                            <th>{{ $property->date }}</th>
+                        </tr>
+                        <tr>
+                            <th>Year :</th>
+                            <th>{{ $property->year }}</th>
+                        </tr>
+                        <tr>
                             <th>Status : </th>
                             <th style="font-size: 16px">
                               @if($property->status == 0)
@@ -61,18 +73,6 @@
                         <tr>
                             <th>Property Code :</th>
                             <th>{{ $property->property_code }}</th>
-                        </tr>
-                        <tr>
-                            <th>Month :</th>
-                            <th>{{ $property->month }}</th>
-                        </tr>
-                        <tr>
-                            <th>Date :</th>
-                            <th>{{ $property->date }}</th>
-                        </tr>
-                        <tr>
-                            <th>Year :</th>
-                            <th>{{ $property->year }}</th>
                         </tr>
                         <tr>
                             <th>Added By :</th>
@@ -124,11 +124,11 @@
                         </tr>
                         <tr>
                             <th>Price :</th>
-                            <th>{{ $property->price }}</th>
+                            <th>৳ {{ $property->price }}</th>
                         </tr>
                         <tr>
                             <th>Discount Price :</th>
-                            <th>{{ $property->discount_price }}</th>
+                            <th>৳ {{ $property->discount_price }}</th>
                         </tr>
                         <tr>
                             <th>Categoty :</th>
@@ -137,6 +137,14 @@
                         <tr>
                             <th>Purpose :</th>
                             <th>{{ $property->purpose }}</th>
+                        </tr>
+                        <tr>
+                            <th>Floor Level :</th>
+                            <th>{{ $property->floor }}</th>
+                        </tr>
+                        <tr>
+                            <th>Service Charge :</th>
+                            <th>{{ $property->service_charge }}</th>
                         </tr>
 
          	    	</table>
@@ -243,7 +251,7 @@
         <strong> ** If everything is OK & all of these above info is valid, Please click 'Upload Property' to upload it.</strong>
         <a href="{{ url('admin/property/accept/'.$property->id) }}" class="btn btn-info"><i class="fa fa-check-square"></i>&nbsp; Upload Property</a>
         <strong> ** If something went wrong about this property, Please click 'Cancel Property'.</strong>
-        <a href="{{ url('admin/property/cancel/'.$property->id) }}" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; Cancel Property</a>
+        <a href="{{ url('admin/property/cancel/'.$property->id) }}" class="btn btn-danger" id="cancel"><i class="fa fa-times"></i>&nbsp; Cancel Property</a>
 
     @elseif($property->status == 1)
         <strong>* This property is already uploaded, Now send it to delivery progress if any rental proposal has come for this property.</strong>
@@ -260,7 +268,7 @@
     @elseif($property->status == 4)
         <strong class="text-danger text-center" style="font-size: 22px"><i class="fa fa-times"></i>&nbsp; This Property is not valid, So its Cancelled !!!</strong> <br> <br>
         <strong> ** If you want to recheck/edit this property again, Please sent it back to Pending stage.</strong>
-        <a href="{{ url('admin/property/pending/'.$property->id) }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp; Send Back to Pending</a>
+        <a href="{{ url('admin/property/pending/'.$property->id) }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp; Send Back to Pending stage</a>
 
     @else
         <strong class="text-success text-center" style="font-size: 26px"><i class="fa fa-check-square"></i>&nbsp; This Property Is Successfully Delivered !!!</strong>
