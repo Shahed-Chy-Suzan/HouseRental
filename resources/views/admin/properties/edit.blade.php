@@ -15,7 +15,11 @@
     </nav>
     <div class="sl-pagebody">
         <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">Update Property</h6>
+
+        <h6 class="card-body-title">Update Property
+            <a href="{{ URL::to('view/property/'.$property->id) }}" class="btn btn-sm btn-info" style="float: right;" >View Property</a>
+        </h6>
+
 
         <form action="{{ url('update/property/withoutphoto/'.$property->id) }}" method="post">
             @csrf
