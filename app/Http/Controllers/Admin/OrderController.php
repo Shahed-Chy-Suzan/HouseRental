@@ -37,6 +37,18 @@ class OrderController extends Controller
         return view('admin.order.orders',compact('order'));
     }
 
+
+//------------View-------------
+public function ViewProperty($property_code){
+    $property=DB::table('user_properties')
+            ->join('cities','user_properties.city_id','cities.id')
+            ->join('subcities','user_properties.subcity_id','subcities.id')
+            ->select('user_properties.*','cities.city_name','subcities.subcity_name')
+            ->where('user_properties.property_code',$property_code)
+            ->first();
+    return view('admin.properties.show',compact('property'));
+}
+
 //-----------------Delete----------------------
     public function deleteOrder($id){
         DB::table('interested_properties')->where('id',$id)->delete();
@@ -52,7 +64,7 @@ class OrderController extends Controller
     public function markAsRead($id){
         DB::table('interested_properties')->where('id',$id)->update(['status'=> 1]);
         $notification=array(
-                    'message'=>'Successfully order marked as read',
+                    'message'=>'Successfully Order Marked as Responded',
                     'alert-type'=>'success'
                 );
         return Redirect()->back()->with($notification);
@@ -62,7 +74,7 @@ class OrderController extends Controller
     public function markAsUnRead($id){
         DB::table('interested_properties')->where('id',$id)->update(['status'=> 0]);
         $notification=array(
-                    'message'=>'Order marked as Unread',
+                    'message'=>'Successfully Order Marked as New Order',
                     'alert-type'=>'success'
                 );
         return Redirect()->back()->with($notification);

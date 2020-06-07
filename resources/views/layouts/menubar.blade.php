@@ -17,19 +17,19 @@
                         </div>
 
 {{---------- here ---------}}
-@php
-$city=DB::table('cities')->get();
-@endphp
+    @php
+    $city=DB::table('cities')->get();
+    @endphp
                     <ul class="cat_menu">
                         @foreach( $city as $cat)
                             <li class="hassubs">
-                                <a href="#">{{ $cat->city_name }}<i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="{{url('city/properties/'.$cat->id) }}">{{ $cat->city_name }}<i class="fas fa-arrow-circle-right"></i></a>
                                 <ul>
                                     @php
                                         $subcity=DB::table('subcities')->where('city_id',$cat->id)->get();
                                     @endphp
                                     @foreach($subcity as $row)
-                                    <li><a href="{{ url('products/'.$row->id) }}">{{  $row->subcity_name }}<i class="fas fa-arrow-circle-right z-index-100"></i></a></li>
+                                    <li><a href="{{ url('properties/'.$row->id) }}">{{  $row->subcity_name }}<i class="fas fa-arrow-circle-right z-index-100"></i></a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -171,28 +171,7 @@ $city=DB::table('cities')->get();
 </header>
 
 
-
-<!-- Banner -->
-
-{{-- <div class="banner" style="z-index: -1;">
-    <div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
-    <div class="container fill_height">
-        <div class="row fill_height">
-            <div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
-            <div class="col-lg-5 offset-lg-4 fill_height">
-                <div class="banner_content">
-                    <h1 class="banner_text">new era of smartphones</h1>
-                    <div class="banner_price"><span>$530</span>$460</div>
-                    <div class="banner_product_name">Apple Iphone 6s</div>
-                    <div class="button banner_button"><a href="#">Shop Now</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-
- <!---------------------------(Not Working for Dynamic) Main Slider-Carousal-(Nav) --------------------------->
+ <!---------------------------Main Slider-Carousal-(Nav) --------------------------->
 
 <section id="showcase">
     <div id="slider" class="carousel slide" data-ride="carousel"> <!--.carousel-fade-->
@@ -238,6 +217,8 @@ $city=DB::table('cities')->get();
           </a>
       </div>
   </section>
+
+
 
 
 

@@ -1258,9 +1258,9 @@ select option
 
 .shop
 {
-	background: #FFFFFF;
-	padding-top: 80px;
-	padding-bottom: 139px;
+    /*background: #FFFFFF; */
+	/* 	padding-top: 0px; */
+	padding-bottom: 70px;
 }
 .shop_content
 {

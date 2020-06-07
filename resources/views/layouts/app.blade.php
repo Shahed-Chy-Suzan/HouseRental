@@ -29,15 +29,6 @@
 
 <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
 
-{{-- <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css')}}"> --}}
-{{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
-
-    {{-- <!---for Product_details page---->
-<link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_styles.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/product_responsive.css') }}">
-    <!---for Stripe---->
-<script src="https://js.stripe.com/v3/"></script> --}}
-
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/responsive.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/styles/newstyle.css')}}">
@@ -119,7 +110,7 @@
 
 <!-- Header Main -->
 
-<div class="header_main" style="">
+<div class="header_main" style="height: 128px;">
     <div class="container">
         <div class="row">
 
@@ -147,7 +138,7 @@
 <!-------------- Search ----------------->
             <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
                 <div class="header_search">
-                    <div class="header_search_content">
+                    <div class="header_search_content" style="left: 81px;">
                         <div class="header_search_form_container">
                             <form action="#" class="header_search_form clearfix">
                                 <input type="search" required="required" class="header_search_input" placeholder="Search by city or state...">
@@ -157,7 +148,7 @@
                                         <i class="fas fa-chevron-down"></i>
                                         <ul class="custom_list clc">
                                             @foreach($city as $row)
-                                                <li><a class="clc" href="#">{{ $row->city_name }}</a></li>
+                                                <li><a class="clc" href="{{url('city/properties/'.$row->id) }}">{{ $row->city_name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -178,11 +169,11 @@
                         $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();
                         @endphp
                     <div class="wishlist d-flex flex-row align-items-center justify-content-end" data-aos="fade-up-left">
-                        <a href="{{ route('user.wishlist') }}">
+                        <a href="http://localhost/HouseRental/user/wishlist" style="width: 28px;">
                         <div class="wishlist_icon"><img src="{{asset('public/frontend/images/heart.png')}}"></div>
                         <div class="wishlist_content">
                         <div class="wishlist_text"><a href="{{ route('user.wishlist') }}">Wishlist</div>
-                            <div class="wishlist_count">{{ count($wishlist) }}</div>
+                            <div class="wishlist_count text-primary">{{ count($wishlist) }}</div>
                         </a>
                         </div>
                     </div>

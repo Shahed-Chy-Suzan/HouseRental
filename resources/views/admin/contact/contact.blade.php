@@ -8,10 +8,22 @@
         </div><!-- sl-page-title -->
 
         <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">User Message List
-            <a href="{{route('admin.all.contact')}}" class="btn btn-sm btn-warning" style="float: right;" >All Responded Message</a>
-          </h6>
+            <h6 class="card-body-title">
+                @foreach($contact as $row)
+                    @if ($row->status==0)
+                        User's New Message List
+                        <a href="{{route('admin.all.contact')}}" class="btn btn-sm btn-info" style="float: right;" >All Responded Message</a> @break
+                        </div>
+                    @else
+                        User's All Responded Message List
+                        <a href="{{route('admin.new.contact')}}" class="btn btn-sm btn-info" style="float: right;" >New Messages</a> @break
+                        </div>
+                    @endif
+                @endforeach
+            </h6>
+
           <br>
+
           <div class="table-wrapper">
             <table id="datatable1" class="table display responsive nowrap">
               <thead>

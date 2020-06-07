@@ -513,7 +513,7 @@ section
 }
 .logo_container
 {
-	height: 175px;
+	height: 128px;
 }
 .logo
 {
@@ -526,13 +526,13 @@ section
 }
 .logo a
 {
-	font-size: 36px;
+	font-size: 22px;
 	font-weight: 500;
 	color: #0e8ce4;
 }
 .header_search
 {
-	height: 175px;
+	height: 128px;
 }
 .header_search_content
 {
@@ -546,7 +546,7 @@ section
 .header_search_form_container
 {
 	width: 100%;
-	height: 50px;
+	height: 43px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
 }
@@ -744,7 +744,7 @@ select option
 }
 .wishlist_cart
 {
-	height: 175px;
+	height: 128px;
 }
 .wishlist
 {
@@ -1191,11 +1191,12 @@ select option
 	transform: translateY(-2px);
 }
 
+
 /*********************************
 4. Banner
 *********************************/
 
-.banner
+/* .banner
 {
 	width: 100%;
 	padding-top: 68px;
@@ -1271,12 +1272,14 @@ select option
 	top: -5px;
 	right: -52px;
 	z-index: 0;
-}
+} */
+
+
 
 /*********************************
 5. Characteristics
 *********************************/
-
+/*
 .characteristics
 {
 	padding-top: 70px;
@@ -1310,7 +1313,9 @@ select option
 	font-weight: 400;
 	color: rgba(0,0,0,0.5);
 	margin-top: 3px;
-}
+} */
+
+
 
 /*********************************
 6. Deals of the week
@@ -2073,11 +2078,12 @@ select option
 	text-align: center;
 } */
 
+
 /*********************************
 8. Banner 2
 *********************************/
 
-.banner_2
+/* .banner_2
 {
 	width: 100%;
 }
@@ -2200,7 +2206,8 @@ select option
 {
 	background: #0e8ce4;
 	box-shadow: none;
-}
+} */
+
 
 /*********************************
 9. Hot New Arrivals
@@ -2508,10 +2515,11 @@ select option
 	color: red;
 }
 
+
 /*********************************
 10. Hot Best Sellers
 *********************************/
-
+/*
 .best_sellers
 {
 	padding-top: 56px;
@@ -2733,12 +2741,14 @@ select option
 .bestsellers_slider .slick-dots li button
 {
 	display: none;
-}
+} */
+
+
 
 /*********************************
 11. Adverts
 *********************************/
-
+/*
 .adverts
 {
 	width: 100%;
@@ -2796,7 +2806,9 @@ select option
 {
 	display: block;
 	max-width: 100%;
-}
+} */
+
+
 
 /*********************************
 12. Trends
@@ -3026,6 +3038,8 @@ select option
 	background: #0e8ce4;
 }
 
+
+
 /*********************************
 13. Latest Reviews
 *********************************/
@@ -3149,10 +3163,11 @@ select option
 	box-shadow: none;
 }
 
+
 /*********************************
 14. Recently Viewed
 *********************************/
-
+/*
 .viewed
 {
 	padding-top: 51px;
@@ -3307,13 +3322,14 @@ select option
 .viewed_item.is_new .item_new
 {
 	display: inline-block;
-}
+} */
+
+
 
 /*********************************
 15. Brands
 *********************************/
-
-.brands
+/* .brands
 {
 	width: 100%;
 	padding-top: 90px;
@@ -3371,7 +3387,9 @@ select option
 .brands_next
 {
 	right: 40px;
-}
+} */
+
+
 
 /*********************************
 16. Newsletter
@@ -3511,10 +3529,11 @@ select option
 	color: #0d82d3;
 }
 
+
 /*********************************
 17. Footer
 *********************************/
-
+/*
 .footer
 {
 	padding-top: 52px;
@@ -3658,4 +3677,4 @@ select option
 .logos_list li:last-child
 {
 	margin-right: 0px;
-}
+} */
