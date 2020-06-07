@@ -40,9 +40,8 @@
                             <div class="owl-item deals_item">
 
                                 <div class="deals_image portfolio-item" title="Click for details">
-                                    {{-- <a href="{{ url('product/details/'.$ht->id.'/'.$ht->product_name) }}"><img src="{{ asset($ht->image_one) }}" style="width: 300px;"></a> --}}
-                                    <a href=""><img src="{{ asset($ht->image_one) }}" style="width: 310px;"></a>
-                                    <div class="portfolio-item-overlay">
+                                    <img src="{{ asset($ht->image_one) }}" style="width: 330px; height: 255px;">
+                                    <a href="{{ url('property/details/'.$ht->id) }}" class="portfolio-item-overlay">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
                                             <h3>{{ $ht->type }} for {{ $ht->purpose }}</h3>
@@ -51,12 +50,16 @@
                                             <!--item description-->
                                             <p>{{$ht->subcity_name}}, {{$ht->city_name}}</p>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 <div class="deals_content">
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">{{$ht->city_name}}</a></div>
+                                        <div class="deals_item_category">
+                                            <a href="{{ url('property/details/'.$ht->id) }}" title="Click for details">
+                                                {{$ht->city_name}}
+                                            </a>
+                                        </div>
                                         @if($ht->discount_price == NULL)
                                         @else
                                           <div class="deals_item_price_a ml-auto"><del>৳ {{ $ht->price }}</del></div>
@@ -64,7 +67,11 @@
                                     </div>
 
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_name">{{ $ht->subcity_name }}</div>
+                                        <div class="deals_item_name">
+                                            <a href="{{ url('property/details/'.$ht->id) }}" title="Click for details">
+                                                {{ $ht->subcity_name }}
+                                            </a>
+                                        </div>
 
                                         @if($ht->discount_price == NULL)
                                           <div class="deals_item_price ml-auto" style="font-size: 18px">৳ {{ $ht->price }}</div>
@@ -159,11 +166,10 @@
                                     <div class="border_active"></div>
                                     <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
-                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                            {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                            <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+                                        <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center" >
+                                            <img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;">
 
-                                            <div class="portfolio-item-overlay" title="Click for more">
+                                            <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                 <div class="portfolio-item-details text-center">
                                                     <!--item logo-->
                                                     <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -172,7 +178,7 @@
                                                     <!--item description-->
                                                     <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
 
                                         <div class="product_content">
@@ -186,7 +192,11 @@
                                                     <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                 </div> --}}
                                             <div class="row mb-0 pb-0">
-                                                <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                <div class="col-md-12 text-primary">
+                                                    <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                        {{$row->subcity_name}}, {{$row->city_name}}
+                                                    </a>
+                                                </div>
                                                 <div class="col-md-12 py-1 text-muted">
                                                     <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
                                                     <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
@@ -204,13 +214,13 @@
                                         </div>
 
         <!-------'Wishlist' using Toastr--------->
-                                        {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
+                                        {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="add to wishlist">
                                             <div class="product_fav">
                                                 <i class="fa fa-heart text-danger"></i>
                                             </div>
                                         </a> --}}
         <!--------'wishlist' using ajax (niche JS ache)-------->
-                                <button class="addwishlist" data-id="{{ $row->id }}">
+                                <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                     <div class="product_fav">
                                     <i class="fa fa-heart text-danger"></i>
                                     </div>
@@ -225,7 +235,7 @@
                                             $amount= $row->price - $row->discount_price;
                                             $discount= $amount/$row->price * 100;
                                             @endphp
-                                            <li class="product_mark product_discount">
+                                            <li class="product_mark product_discount" title="Discount Available">
                                                 {{ intval($discount) }}%
                                             </li>
                                             @endif
@@ -262,10 +272,9 @@
                                 <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                     <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                        {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                        <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+                                        <img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;">
 
-                                        <div class="portfolio-item-overlay" title="Click for more">
+                                        <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                             <div class="portfolio-item-details text-center">
                                                 <!--item logo-->
                                                 <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -274,7 +283,7 @@
                                                 <!--item description-->
                                                 <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
 
                                     <div class="product_content">
@@ -288,7 +297,11 @@
                                                 <span class="col-md-12"><small>Apartment For Rent</small></span>
                                             </div> --}}
                                         <div class="row mb-0 pb-0">
-                                            <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                            <div class="col-md-12 text-primary">
+                                                <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                    {{$row->subcity_name}}, {{$row->city_name}}
+                                                </a>
+                                            </div>
                                             <div class="col-md-12 py-1 text-muted">
                                                 <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
                                                 <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
@@ -305,7 +318,7 @@
                                     </div>
 
         <!------'Wishlist' using Toastr--------->
-                                    <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
+                                    <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
                                         <div class="product_fav">
                                             <i class="fa fa-heart text-danger"></i>
                                         </div>
@@ -320,7 +333,7 @@
                                         $amount= $row->price - $row->discount_price;
                                         $discount= $amount/$row->price * 100;
                                         @endphp
-                                        <li class="product_mark product_discount">
+                                        <li class="product_mark product_discount" title="Discount Percentage">
                                             {{ intval($discount) }}%
                                         </li>
                                         @endif
@@ -355,10 +368,9 @@
                             <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                 <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                    <a href=""><img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;"></a>
+                                    <img src="{{ asset($row->image_one) }}" style="height: 140px; width: 150px;">
 
-                                    <div class="portfolio-item-overlay" title="Click for more">
+                                    <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
                                             <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -367,7 +379,7 @@
                                             <!--item description-->
                                             <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 <div class="product_content">
@@ -381,7 +393,11 @@
                                             <span class="col-md-12"><small>Apartment For Rent</small></span>
                                         </div> --}}
                                     <div class="row mb-0 pb-0">
-                                        <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                        <div class="col-md-12 text-primary">
+                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                {{$row->subcity_name}}, {{$row->city_name}}
+                                            </a>
+                                        </div>
                                         <div class="col-md-12 py-1 text-muted">
                                             <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}}</i> |
                                             <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}}</i> |
@@ -398,7 +414,7 @@
                                 </div>
 
         <!------ 'Wishlist' using Toastr--------->
-                                <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
+                                <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
                                     <div class="product_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                     </div>
@@ -413,7 +429,7 @@
                                     $amount= $row->price - $row->discount_price;
                                     $discount= $amount/$row->price * 100;
                                     @endphp
-                                    <li class="product_mark product_discount">
+                                    <li class="product_mark product_discount" title="Discount Percentage">
                                         {{ intval($discount) }}%
                                     </li>
                                     @endif
@@ -460,10 +476,10 @@
             <div class="col-lg-3">
                 <div class="trends_container">
                     <h2 class="trends_title text-light">Best Rated Properties</h2>
-                    <div class="trends_text"><p style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p></div>
+                    <div class="trends_text"><p style="color: white">Find Best Rated stylish properties all under a single roof...</p></div>
                     <div class="trends_slider_nav">
-                        <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                        <div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                        <div class="trends_prev trends_nav" title="Previous"><i class="fas fa-angle-left ml-auto"></i></div>
+                        <div class="trends_next trends_nav" title="Next"><i class="fas fa-angle-right ml-auto"></i></div>
                     </div>
                 </div>
             </div>
@@ -482,9 +498,8 @@
                             <div class="trends_item is_new mb-0 pb-0">
 
                                 <div class="trends_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="width: 300px;"></a> --}}
-                                    <a href=""><img src="{{ asset($row->image_one) }}"></a>
-                                    <div class="portfolio-item-overlay" title="Click for more">
+                                    <img src="{{ asset($row->image_one) }}" style="width: 200px; height: 200px">
+                                    <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
                                             <h3 style="font-size:12px">{{ $row->type }} For {{ $row->purpose }}</h3>
@@ -493,12 +508,16 @@
                                             <!--item description-->
                                             <p style="font-size:13px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 <div class="trends_content" style="margin-top: 5px">
                                     <div class="trends_info clearfix">
-                                        <span class="trends_category"><a href="#">{{$row->city_name}}</a></span>
+                                        <span class="trends_category">
+                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                {{$row->city_name}}
+                                            </a>
+                                        </span>
                                         @if($row->discount_price == NULL)
                                         @else
                                             <span class="trends_price ml-auto" style="font-size: 15px"><del>৳ {{ $row->price }}</del></span>
@@ -506,7 +525,11 @@
                                     </div>
 
                                     <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="#">{{ $row->subcity_name }}</a></div>
+                                        <div class="trends_name">
+                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                {{ $row->subcity_name }}
+                                            </a>
+                                        </div>
                                         @if($row->discount_price == NULL)
                                             <div class="trends_price ml-auto text-danger" style="font-size: 18px">৳ {{ $row->price }}</div>
                                         @else
@@ -533,7 +556,7 @@
                                 </div>
 
         <!--------'wishlist' using ajax (niche JS ache)-------->
-                                <button class="addwishlist invisible" data-id="{{ $row->id }}">
+                                <button class="addwishlist invisible" data-id="{{ $row->id }}" title="Add to wishlist">
                                     <div class="trends_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                     </div>
@@ -548,7 +571,7 @@
                                     $amount= $row->price - $row->discount_price;
                                     $discount= $amount/$row->price * 100;
                                     @endphp
-                                    <li class="trends_mark trends_new bg-danger">
+                                    <li class="trends_mark trends_new bg-danger" title="Discount Percentage">
                                         {{ intval($discount) }}%
                                     </li>
                                     @endif
@@ -614,10 +637,9 @@
                                             <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                                 <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                    <a href=""><img src="{{ asset($row->image_one) }}" style="height: 150px; width: 200px;"></a>
+                                                    <img src="{{ asset($row->image_one) }}" style="height: 150px; width: 200px;">
 
-                                                    <div class="portfolio-item-overlay" title="Click for more">
+                                                    <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                         <div class="portfolio-item-details text-center">
                                                             <!--item logo-->
                                                             <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -626,7 +648,7 @@
                                                             <!--item description-->
                                                             <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
 
                                                 <div class="product_content">
@@ -640,7 +662,11 @@
                                                             <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                         </div> --}}
                                                     <div class="row mb-0 pb-0">
-                                                        <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                        <div class="col-md-12 text-primary">
+                                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                                {{$row->subcity_name}}, {{$row->city_name}}
+                                                            </a>
+                                                        </div>
                                                         <div class="col-md-12 py-1 text-muted">
                                                             <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                             <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -652,19 +678,19 @@
             <!--------"Check Availability" (niche "Modal" er code ache)-------->
                                                     <div class="product_extras product_cart_button">
                                                         {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+    <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+    <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                     </div>
                                                 </div>
 
                 <!-------'Wishlist' using Toastr--------->
-                                                {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
-                                                    <div class="product_fav">
-                                                        <i class="fa fa-heart text-danger"></i>
-                                                    </div>
-                                                </a> --}}
+                                        {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
+                                            <div class="product_fav">
+                                                <i class="fa fa-heart text-danger"></i>
+                                            </div>
+                                        </a> --}}
                 <!--------'wishlist' using ajax (niche JS ache)-------->
-                                        <button class="addwishlist" data-id="{{ $row->id }}">
+                                        <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                             <div class="product_fav">
                                             <i class="fa fa-heart text-danger"></i>
                                             </div>
@@ -679,7 +705,7 @@
                                                     $amount= $row->price - $row->discount_price;
                                                     $discount= $amount/$row->price * 100;
                                                     @endphp
-                                                    <li class="product_mark product_discount">
+                                                    <li class="product_mark product_discount" title="Discount Percentage">
                                                         {{ intval($discount) }}%
                                                     </li>
                                                     @endif
@@ -716,10 +742,9 @@
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                             <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                <a href=""><img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;"></a>
+                                                <img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;">
 
-                                                <div class="portfolio-item-overlay" title="Click for more">
+                                                <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                     <div class="portfolio-item-details text-center">
                                                         <!--item logo-->
                                                         <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -728,7 +753,7 @@
                                                         <!--item description-->
                                                         <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                             <div class="product_content">
@@ -742,7 +767,11 @@
                                                         <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                     </div> --}}
                                                 <div class="row mb-0 pb-0">
-                                                    <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                    <div class="col-md-12 text-primary">
+                                                        <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                            {{$row->subcity_name}}, {{$row->city_name}}
+                                                        </a>
+                                                    </div>
                                                     <div class="col-md-12 py-1 text-muted">
                                                         <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                         <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -760,13 +789,13 @@
                                             </div>
 
             <!-------'Wishlist' using Toastr--------->
-                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
+                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
                                                 <div class="product_fav">
                                                     <i class="fa fa-heart text-danger"></i>
                                                 </div>
                                             </a>
             <!--------'wishlist' using ajax (niche JS ache)-------->
-                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}">
+                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                         <div class="product_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                         </div>
@@ -781,7 +810,7 @@
                                                 $amount= $row->price - $row->discount_price;
                                                 $discount= $amount/$row->price * 100;
                                                 @endphp
-                                                <li class="product_mark product_discount">
+                                                <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
                                                 </li>
                                                 @endif
@@ -816,10 +845,9 @@
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                             <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                <a href=""><img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;"></a>
+                                                <img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;">
 
-                                                <div class="portfolio-item-overlay" title="Click for more">
+                                                <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                     <div class="portfolio-item-details text-center">
                                                         <!--item logo-->
                                                         <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -828,7 +856,7 @@
                                                         <!--item description-->
                                                         <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                             <div class="product_content">
@@ -842,7 +870,9 @@
                                                         <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                     </div> --}}
                                                 <div class="row mb-0 pb-0">
-                                                    <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                    <div class="col-md-12 text-primary"><a href="{{ url('property/details/'.$row->id) }}" title="Click for details">{{$row->subcity_name}}, {{$row->city_name}}
+                                                    </a>
+                                                </div>
                                                     <div class="col-md-12 py-1 text-muted">
                                                         <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                         <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -860,13 +890,13 @@
                                             </div>
 
             <!-------'Wishlist' using Toastr--------->
-                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
-                                                <div class="product_fav">
-                                                    <i class="fa fa-heart text-danger"></i>
-                                                </div>
-                                            </a>
+                                        <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
+                                            <div class="product_fav">
+                                                <i class="fa fa-heart text-danger"></i>
+                                            </div>
+                                        </a>
             <!--------'wishlist' using ajax (niche JS ache)-------->
-                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}">
+                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                         <div class="product_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                         </div>
@@ -881,7 +911,7 @@
                                                 $amount= $row->price - $row->discount_price;
                                                 $discount= $amount/$row->price * 100;
                                                 @endphp
-                                                <li class="product_mark product_discount">
+                                                <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
                                                 </li>
                                                 @endif
@@ -1006,11 +1036,11 @@
             <!-- Trends Content -->
             <div class="col-lg-3">
                 <div class="trends_container">
-                    <h2 class="trends_title text-light">Trends 2020</h2>
-                    <div class="trends_text"><p style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p></div>
+                    <h2 class="trends_title text-light">Trends 2020...</h2>
+                    <div class="trends_text"><p style="color: white">Find all Trending stylish properties under a single roof</p></div>
                     <div class="trends_slider_nav">
-                        <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                        <div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                        <div class="trends_prev trends_nav" title="Previous"><i class="fas fa-angle-left ml-auto"></i></div>
+                        <div class="trends_next trends_nav" title="Next"><i class="fas fa-angle-right ml-auto"></i></div>
                     </div>
                 </div>
             </div>
@@ -1029,9 +1059,9 @@
                             <div class="trends_item is_new mb-0 pb-0">
 
                                 <div class="trends_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="width: 300px;"></a> --}}
-                                    <a href=""><img src="{{ asset($row->image_one) }}"></a>
-                                    <div class="portfolio-item-overlay" title="Click for more">
+                                    <img src="{{ asset($row->image_one) }}" style="width: 200px; height: 200px">
+
+                                    <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
                                             <h3 style="font-size:12px">{{ $row->type }} For {{ $row->purpose }}</h3>
@@ -1040,12 +1070,16 @@
                                             <!--item description-->
                                             <p style="font-size:13px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                                 <div class="trends_content" style="margin-top: 5px">
                                     <div class="trends_info clearfix">
-                                        <span class="trends_category"><a href="#">{{$row->city_name}}</a></span>
+                                        <span class="trends_category">
+                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                {{$row->city_name}}
+                                            </a>
+                                        </span>
                                         @if($row->discount_price == NULL)
                                         @else
                                             <span class="trends_price ml-auto" style="font-size: 15px"><del>৳ {{ $row->price }}</del></span>
@@ -1053,7 +1087,11 @@
                                     </div>
 
                                     <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="#">{{ $row->subcity_name }}</a></div>
+                                        <div class="trends_name">
+                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                {{ $row->subcity_name }}
+                                            </a>
+                                        </div>
                                         @if($row->discount_price == NULL)
                                             <div class="trends_price ml-auto text-danger" style="font-size: 18px">৳ {{ $row->price }}</div>
                                         @else
@@ -1080,7 +1118,7 @@
                                 </div>
 
         <!--------'wishlist' using ajax (niche JS ache)-------->
-                                <button class="addwishlist invisible" data-id="{{ $row->id }}">
+                                <button class="addwishlist invisible" data-id="{{ $row->id }}" title="Add to wishlist">
                                     <div class="trends_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                     </div>
@@ -1095,7 +1133,7 @@
                                     $amount= $row->price - $row->discount_price;
                                     $discount= $amount/$row->price * 100;
                                     @endphp
-                                    <li class="trends_mark trends_new bg-danger">
+                                    <li class="trends_mark trends_new bg-danger" title="Discount Percentage">
                                         {{ intval($discount) }}%
                                     </li>
                                     @endif
@@ -1151,7 +1189,7 @@
 
                                 <div class="trends_image portfolio-item d-flex flex-column align-items-center justify-content-center">
                                     <img src="{{asset('public/frontend/images/sample/int (1).jpg')}}">
-                                    <div class="portfolio-item-overlay" title="Click for more">
+                                    <div class="portfolio-item-overlay" title="Click for details">
                                         <div class="portfolio-item-details text-center">
                                             <!--item logo-->
                                             <h3 style="font-size:12px">Apartment For Rent</h3>
@@ -1248,10 +1286,9 @@
                                             <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                                 <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                    {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                    <a href=""><img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;"></a>
+                                                    <img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;">
 
-                                                    <div class="portfolio-item-overlay" title="Click for more">
+                                                    <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                         <div class="portfolio-item-details text-center">
                                                             <!--item logo-->
                                                             <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -1260,7 +1297,7 @@
                                                             <!--item description-->
                                                             <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
 
                                                 <div class="product_content">
@@ -1274,7 +1311,11 @@
                                                             <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                         </div> --}}
                                                     <div class="row mb-0 pb-0">
-                                                        <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                        <div class="col-md-12 text-primary">
+                                                            <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                                {{$row->subcity_name}}, {{$row->city_name}}
+                                                            </a>
+                                                        </div>
                                                         <div class="col-md-12 py-1 text-muted">
                                                             <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                             <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -1292,13 +1333,13 @@
                                                 </div>
 
                 <!-------'Wishlist' using Toastr--------->
-                                                {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
-                                                    <div class="product_fav">
-                                                        <i class="fa fa-heart text-danger"></i>
-                                                    </div>
-                                                </a> --}}
+                                        {{-- <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
+                                            <div class="product_fav">
+                                                <i class="fa fa-heart text-danger"></i>
+                                            </div>
+                                        </a> --}}
                 <!--------'wishlist' using ajax (niche JS ache)-------->
-                                        <button class="addwishlist" data-id="{{ $row->id }}">
+                                        <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                             <div class="product_fav">
                                             <i class="fa fa-heart text-danger"></i>
                                             </div>
@@ -1313,7 +1354,7 @@
                                                     $amount= $row->price - $row->discount_price;
                                                     $discount= $amount/$row->price * 100;
                                                     @endphp
-                                                    <li class="product_mark product_discount">
+                                                    <li class="product_mark product_discount" title="Discount Percentage">
                                                         {{ intval($discount) }}%
                                                     </li>
                                                     @endif
@@ -1350,10 +1391,9 @@
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                             <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                <a href=""><img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;"></a>
+                                                <img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;">
 
-                                                <div class="portfolio-item-overlay" title="Click for more">
+                                                <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                     <div class="portfolio-item-details text-center">
                                                         <!--item logo-->
                                                         <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -1362,7 +1402,7 @@
                                                         <!--item description-->
                                                         <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                             <div class="product_content">
@@ -1376,7 +1416,11 @@
                                                         <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                     </div> --}}
                                                 <div class="row mb-0 pb-0">
-                                                    <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                    <div class="col-md-12 text-primary">
+                                                        <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                            {{$row->subcity_name}}, {{$row->city_name}}
+                                                        </a>
+                                                    </div>
                                                     <div class="col-md-12 py-1 text-muted">
                                                         <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                         <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -1394,13 +1438,13 @@
                                             </div>
 
             <!-------'Wishlist' using Toastr--------->
-                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
+                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist">
                                                 <div class="product_fav">
                                                     <i class="fa fa-heart text-danger"></i>
                                                 </div>
                                             </a>
             <!--------'wishlist' using ajax (niche JS ache)-------->
-                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}">
+                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                         <div class="product_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                         </div>
@@ -1415,7 +1459,7 @@
                                                 $amount= $row->price - $row->discount_price;
                                                 $discount= $amount/$row->price * 100;
                                                 @endphp
-                                                <li class="product_mark product_discount">
+                                                <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
                                                 </li>
                                                 @endif
@@ -1450,10 +1494,9 @@
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
 
                                             <div class="product_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                                {{-- <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}"><img src="{{ asset($row->image_one) }}" style="height: 130px; width: 125px;"></a> --}}
-                                                <a href=""><img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;"></a>
+                                                <img src="{{ asset($row->image_one) }}" style="height: 180px; width: 200px;">
 
-                                                <div class="portfolio-item-overlay" title="Click for more">
+                                                <a href="{{ url('property/details/'.$row->id) }}" class="portfolio-item-overlay" title="Click for details">
                                                     <div class="portfolio-item-details text-center">
                                                         <!--item logo-->
                                                         <h3 style="font-size:10px">{{ $row->type }} for {{ $row->purpose }}</h3>
@@ -1462,7 +1505,7 @@
                                                         <!--item description-->
                                                         <p style="font-size:12px">{{$row->subcity_name}}, {{$row->city_name}}</p>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                             <div class="product_content">
@@ -1476,7 +1519,11 @@
                                                         <span class="col-md-12"><small>Apartment For Rent</small></span>
                                                     </div> --}}
                                                 <div class="row mb-0 pb-0">
-                                                    <div class="col-md-12 text-primary">{{$row->subcity_name}}, {{$row->city_name}}	</div>
+                                                    <div class="col-md-12 text-primary">
+                                                        <a href="{{ url('property/details/'.$row->id) }}" title="Click for details">
+                                                            {{$row->subcity_name}}, {{$row->city_name}}
+                                                        </a>
+                                                    </div>
                                                     <div class="col-md-12 py-1 text-muted">
                                                         <i class="fas fa-bed" title="Bed Room"> {{$row->bedroom}} </i> |&nbsp;
                                                         <i class="fas fa-bath" title="Bath Room"> {{$row->bathroom}} </i> |&nbsp;
@@ -1494,13 +1541,13 @@
                                             </div>
 
             <!-------'Wishlist' using Toastr--------->
-                                            <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}">
-                                                <div class="product_fav">
-                                                    <i class="fa fa-heart text-danger"></i>
-                                                </div>
-                                            </a>
+                                        <a href="{{ URL::to('add/wishlist/tostr/'.$row->id) }}" title="Add to wishlist"">
+                                            <div class="product_fav">
+                                                <i class="fa fa-heart text-danger"></i>
+                                            </div>
+                                        </a>
             <!--------'wishlist' using ajax (niche JS ache)-------->
-                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}">
+                                    {{-- <button class="addwishlist" data-id="{{ $row->id }}" title="Add to wishlist">
                                         <div class="product_fav">
                                         <i class="fa fa-heart text-danger"></i>
                                         </div>
@@ -1515,7 +1562,7 @@
                                                 $amount= $row->price - $row->discount_price;
                                                 $discount= $amount/$row->price * 100;
                                                 @endphp
-                                                <li class="product_mark product_discount">
+                                                <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
                                                 </li>
                                                 @endif
@@ -1785,15 +1832,7 @@
         </div>
     </div>
 </section>
-<!------------------clients Ends----------------------->
-
-
-
-
-
-
-
-
+<!--------//-----------//----------Clients_Ends---------//-----------//-------------//----------//------------>
 
 
 
@@ -1918,45 +1957,7 @@
 
 
 
-
-<!-- Brands -->
-
-{{-- <div class="brands">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="brands_slider_container">
-
-                    <!-- Brands Slider -->
-
-                    <div class="owl-carousel owl-theme brands_slider">
-
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{asset('public/frontend/images/sample/bed (2).jpg')}}" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="public/frontend/images/sample/bed (3).jpg')}}" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_6.jpg" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_7.jpg" alt=""></div></div>
-                        <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_8.jpg" alt=""></div></div>
-
-                    </div>
-
-                    <!-- Brands Slider Navigation -->
-                    <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                    <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-
-
-
-<!-- Newsletter -->
-
+<!-------------------------------------- Newsletter ------------------------------------------->
 <div class="newsletter">
     <div class="container">
         <div class="row">
@@ -1979,14 +1980,15 @@
             </div>
         </div>
     </div>
-</div>      <!------------End Newsletter -------------->
+</div>
+<!-----------//-------------//-----------//-----End Newsletter-----------//------------//-------------//------------>
 
 
 
 
 
 
-<!----------------------------------- FAQ ------------------------------------->
+<!----------------------------------------- FAQ ---------------------------------------------------->
 <div id="accordion" role="tablist" class="bg-dark py-5 text-light text-center ">
     <div class="container py-4">
         <div class="row text-center">
@@ -2064,15 +2066,24 @@
 
         </div>
     </div>
-</div>      <!-------------------End FAQ ------------------>
+</div>
+<!------------//-------------//----------//-------End_FAQ-----------//----------//-----------//------------->
 
 
 
+
+
+
+<!--------//-----------//------------//----------//-------------//-----------//------------//-----------//----------->
+                                <!----------------- END ---------------->
 <!--------//-----------//------------//----------//-------------//-----------//------------//-----------//----------->
 
 
 
 
+
+
+<!--------------------------(JS Code)--------------------------------------->
 
 {{--/*==================================
             clients

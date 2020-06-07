@@ -114,7 +114,7 @@ div.shadow-lg:hover{
 /*-------- company_name ---------*/
 .header_main div.logo_container a{
     text-shadow: 2px 1px 2px rgb(71, 71, 71);
-    font-size:40px;
+    font-size:36px;
 }
 
 .header_main div.logo_container a:hover{
@@ -379,9 +379,9 @@ div.shadow-lg:hover{
 
 
 
-/*==================================
-            Hot new arrival
-====================================*/
+/*==============================================================
+            Hot new arrival(Chittagong/Dhaka_Area)
+================================================================*/
 
 .hot_arrivals {
     background: url(../images/Cover/skill-bg.jpg) no-repeat scroll center center;
@@ -786,6 +786,117 @@ div .ww:hover{
 }
 
 
+div .ww .product_fav
+{
+	position: absolute;
+	top: 33px;
+	right: 12px;
+	width: 36px;
+	height: 36px;
+	background: #FFFFFF;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+	border-radius: 50%;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+div .ww .product_fav:hover
+{
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+}
+div .ww .product_item:hover .product_fav
+{
+	top: 18px;
+}
+div .ww .product_fav i
+{
+	display: block;
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	color: #cccccc;
+	line-height: 36px;
+	pointer-events: none;
+	z-index: 0;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+div .ww .product_fav.active i
+{
+	color: red;
+}
+div .ww .product_item:hover .product_fav
+{
+	visibility: visible;
+	opacity: 1;
+}
+div .ww .product_marks
+{
+	display: none;
+	position: absolute;
+	top: 13px;
+	left: 08px;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+div .ww .slick-active .product_marks
+{
+	display: block;
+}
+div .ww .product_item:hover .product_marks
+{
+	top: 18px;
+	left: 18px;
+}
+div .ww .product_mark
+{
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 36px;
+	font-size: 12px;
+}
+div .ww .product_new
+{
+	display: none;
+	background: #0e8ce4;
+	visibility: hidden;
+	opacity: 0;
+}
+div .ww .product_discount
+{
+	display: none;
+	background: #df3b3b;
+	visibility: hidden;
+	opacity: 0;
+}
+div .ww .product_item.is_new .product_new,
+.product_item.discount .product_discount
+{
+	display: inline-block;
+	visibility: visible;
+	opacity: 1;
+}
+
+
+
 
 /*==========================================
           ----- Modal-(call) -----
@@ -813,3 +924,19 @@ div .ww:hover{
         min-height:calc(100% - (1.75rem * 2));
 }
 }
+
+
+
+
+/*=====================================================
+          -----Property_Details_Slider -----
+=======================================================*/
+.details .carousel-item {
+    height: 65vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }

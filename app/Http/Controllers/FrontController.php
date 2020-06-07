@@ -29,7 +29,7 @@ class FrontController extends Controller
 
 
 
-//----------------User Contact Message//Get_in_Touch--------------------------
+//--------------User Contact Message//Get_in_Touch--------------------------
     public function storeContact(Request $request){
         $data= array();
         $data['name']=$request->name;
@@ -99,15 +99,15 @@ class FrontController extends Controller
 
     if($image_one && $image_two && $image_three){
             $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-                Image::make($image_one)->resize(600,467)->save('public/media/user_property/'.$image_one_name);
+                Image::make($image_one)->resize(1140,702)->save('public/media/user_property/'.$image_one_name);
                 $data['image_one']='public/media/user_property/'.$image_one_name;
 
             $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-                Image::make($image_two)->resize(600,467)->save('public/media/user_property/'.$image_two_name);
+                Image::make($image_two)->resize(1140,702)->save('public/media/user_property/'.$image_two_name);
                 $data['image_two']='public/media/user_property/'.$image_two_name;
 
             $image_three_name= hexdec(uniqid()).'.'.$image_three->getClientOriginalExtension();
-                Image::make($image_three)->resize(600,467)->save('public/media/user_property/'.$image_three_name);
+                Image::make($image_three)->resize(1140,702)->save('public/media/user_property/'.$image_three_name);
                 $data['image_three']='public/media/user_property/'.$image_three_name;
 
                 $userProperty=DB::table('user_properties')->insert($data);
@@ -119,11 +119,6 @@ class FrontController extends Controller
                 return Redirect()->back()->with($notification);
         }
     }
-
-//----------------------------------------------------------------------------------------------------------
-
-
-
 
 
 }

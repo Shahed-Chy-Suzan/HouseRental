@@ -39,7 +39,11 @@ Route::post('/admin/password/update', 'AdminController@Update_pass')->name('admi
 Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');		//--d--
 
 
-                        //--------Admin Section-------------
+
+
+//============================================================================================
+                //---------Admin Section-----------
+//============================================================================================
 
         //--------Cities-------------------
 Route::get('admin/city', 'Admin\City\CityController@cities')->name('city');
@@ -124,6 +128,7 @@ Route::get('admin/all/order','Admin\OrderController@allOrder')->name('admin.all.
 Route::get('delete/order/{id}','Admin\OrderController@deleteOrder');
 Route::get('mark/read/order/{id}','Admin\OrderController@markAsRead');
 Route::get('mark/unread/order/{id}','Admin\OrderController@markAsUnRead');
+Route::get('view/property/order/{property_code}','Admin\OrderController@ViewProperty');
 
 
 
@@ -131,15 +136,17 @@ Route::get('mark/unread/order/{id}','Admin\OrderController@markAsUnRead');
 
 
 //============================================================================================
+                //---------Frontend All Routes are here:-----------
 //============================================================================================
-
-
-        //---------Frontend All Routes are here:---------------
 
         //--------User_Property_Add-------------
 Route::get('user/add/property','FrontController@userProperty')->name('add.property.user');
 Route::post('store/user/property','FrontController@storeUserProperty')->name('store.user.property');  //(user+admin) insert property)
-
+        //-----for All_Property_View/showing-----------
+Route::get('properties/{id}', 'PropertyController@subcityPropertyView');   //All_subcity_property
+Route::get('city/properties/{id}', 'PropertyController@cityPropertyView'); //All_city_property
+        //---------Showing_Individual_Property_deatails----------------
+Route::get('property/details/{id}','PropertyController@PropertyDetails');
         //----------Newsletter-------------
 Route::post('store/newsletters','FrontController@storeNewsletter')->name('store.newsletters');
         //----------Contact/Get_in_Touch-------------
@@ -152,8 +159,6 @@ Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist'
 Route::post('store/modal/email','WishlistController@storeModal')->name('store.modal.email'); //using Tostr
 
 
-        //for subcategory productShowing
-// Route::get('/products/{id}', 'ProductController@productsView');
         //---------Order Tracking----------
 
         //---------UserOrderView-----------

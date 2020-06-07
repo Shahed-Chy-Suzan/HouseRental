@@ -4,15 +4,17 @@
     <div class="sl-mainpanel">
       <div class="sl-pagebody">
         <div class="sl-page-title">
-          <h5>New Pending Orders Table</h5>
+          <h5>New Orders Table</h5>
         </div><!-- sl-page-title -->
 
         <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">New Pending Orders List
+          <h6 class="card-body-title">
             @foreach($order as $row)
                 @if ($row->status == 0)
+                    New Orders List For Property
                     <a href="{{route('admin.all.order')}}" class="btn btn-sm btn-info" style="float: right;" >All Orders</a> @break
                 @else
+                    All Orders List For Property
                     <a href="{{route('admin.new.order')}}" class="btn btn-sm btn-info" style="float: right;" >New Orders</a> @break
                 @endif
             @endforeach
@@ -37,12 +39,14 @@
                   <td>{{ $row->phone }}</td>
                   <td>{{ $row->email }}</td>
                   <td>
+                    <a href="{{ URL::to('view/property/order/'.$row->property_code) }}" class="btn btn-sm btn-primary" title="View_Property_Details"><i class="fa fa-eye"></i></a>
+
                     <a href="{{ URL::to('delete/order/'.$row->id) }}" class="btn btn-sm btn-danger" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
 
                     @if($row->status == 0)
-                        <a href="{{ URL::to('mark/read/order/'.$row->id) }}" class="btn btn-sm btn-success" title="Mark as Read"><i class="fa fa-check"></i></a>
+                        <a href="{{ URL::to('mark/read/order/'.$row->id) }}" class="btn btn-sm btn-success" title="Mark as Responded"><i class="fa fa-check"></i></a>
                     @else
-                        <a href="{{ URL::to('mark/unread/order/'.$row->id) }}" class="btn btn-sm btn-warning" title="Mark as Unread"><i class="fa fa-thumbs-down"></i></a>
+                        <a href="{{ URL::to('mark/unread/order/'.$row->id) }}" class="btn btn-sm btn-warning" title="Mark as New Order"><i class="fa fa-thumbs-down"></i></a>
                     @endif
 
                 </td>

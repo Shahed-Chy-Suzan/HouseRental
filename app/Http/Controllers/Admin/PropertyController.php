@@ -262,7 +262,7 @@ class PropertyController extends Controller
         if($image_one) {  //$request->has('image_one')
         unlink($old_one);
         $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-        Image::make($image_one)->resize(600,467)->save('public/media/user_property/'.$image_one_name);
+        Image::make($image_one)->resize(1140,702)->save('public/media/user_property/'.$image_one_name);
         $data['image_one']='public/media/user_property/'.$image_one_name;
         DB::table('user_properties')->where('id',$id)->update($data);
             $notification=array(
@@ -275,7 +275,7 @@ class PropertyController extends Controller
         }if($image_two) {   ////$request->has('image_two')
         unlink($old_two);
         $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-        Image::make($image_two)->resize(600,467)->save('public/media/user_property/'.$image_two_name);
+        Image::make($image_two)->resize(1140,702)->save('public/media/user_property/'.$image_two_name);
         $data['image_two']='public/media/user_property/'.$image_two_name;
         DB::table('user_properties')->where('id',$id)->update($data);
             $notification=array(
@@ -287,7 +287,7 @@ class PropertyController extends Controller
         }if($image_three) {     //$request->has('image_three')
         unlink($old_three);
         $image_three_name= hexdec(uniqid()).'.'.$image_three->getClientOriginalExtension();
-        Image::make($image_three)->resize(600,467)->save('public/media/user_property/'.$image_three_name);
+        Image::make($image_three)->resize(1140,702)->save('public/media/user_property/'.$image_three_name);
         $data['image_three']='public/media/user_property/'.$image_three_name;
         DB::table('user_properties')->where('id',$id)->update($data);
             $notification=array(
@@ -296,17 +296,17 @@ class PropertyController extends Controller
                     );
             return Redirect()->back()->with($notification);
 
-    //-----Not working from here---------
+    //-----Not working from here---------//
         }if($image_one && $image_two){      //$request->has('image_one') && $request->has('image_two')
 
         unlink($old_one);
         $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-        Image::make($image_one)->resize(600,467)->save('public/media/user_property/'.$image_one_name);
+        Image::make($image_one)->resize(1140,702)->save('public/media/user_property/'.$image_one_name);
         $data['image_one']='public/media/user_property/'.$image_one_name;
 
         unlink($old_two);
         $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-        Image::make($image_two)->resize(600,467)->save('public/media/user_property/'.$image_two_name);
+        Image::make($image_two)->resize(1140,702)->save('public/media/user_property/'.$image_two_name);
         $data['image_two']='public/media/user_property/'.$image_two_name;
 
         DB::table('user_properties')->where('id',$id)->update($data);
@@ -323,15 +323,15 @@ class PropertyController extends Controller
         unlink($old_two);
         unlink($old_three);
         $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-        Image::make($image_one)->resize(600,467)->save('public/media/user_property/'.$image_one_name);
+        Image::make($image_one)->resize(1140,702)->save('public/media/user_property/'.$image_one_name);
         $data['image_one']='public/media/user_property/'.$image_one_name;
 
         $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-        Image::make($image_two)->resize(600,467)->save('public/media/user_property/'.$image_two_name);
+        Image::make($image_two)->resize(1140,702)->save('public/media/user_property/'.$image_two_name);
         $data['image_two']='public/media/user_property/'.$image_two_name;
 
         $image_three_name= hexdec(uniqid()).'.'.$image_three->getClientOriginalExtension();
-        Image::make($image_three)->resize(600,467)->save('public/media/user_property/'.$image_three_name);
+        Image::make($image_three)->resize(1140,702)->save('public/media/user_property/'.$image_three_name);
         $data['image_three']='public/media/user_property/'.$image_three_name;
 
         DB::table('user_properties')->where('id',$id)->update($data);
