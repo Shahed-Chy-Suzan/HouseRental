@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use DB;
 use Image;
 use Auth;
+use Mail;
+use App\Mail\invoiceMail;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -59,6 +61,10 @@ class FrontController extends Controller
 
 //----------------Store_User_added_Property----------------------------
     public function storeUserProperty(Request $request){
+
+        $email= $request->email;     //-------Taking user email for Sending Email-----------
+        //$email=Auth::user()->email;   //--Taking user email for Sending Email---
+
         $data=array();
         $data['user_id']=Auth::id();
         $data['city_id']=$request->city_id;
@@ -76,6 +82,7 @@ class FrontController extends Controller
     	$data['area']=$request->area;
         $data['price']=$request->price;
         $data['discount_price']=$request->discount_price;
+        $data['total_price']= $request->total_price;
         $data['category']=$request->category;
         $data['floor']=$request->floor;
     	$data['details']=$request->details;
@@ -112,12 +119,72 @@ class FrontController extends Controller
 
                 $userProperty=DB::table('user_properties')->insert($data);
 
+                Mail::to($email)->send(new invoiceMail($data));    //-------For mail send to user-----------
+
                 $notification=array(
                     'message'=>'Successfully Property Inserted',
                     'alert-type'=>'success'
                 );
                 return Redirect()->back()->with($notification);
         }
+    }
+
+//----------------//--------------//--------------//----------------//----------------//----------------//----
+
+
+
+//----------------Search (frontend)--------------------------
+    public function ProductSearch(Request $request){
+
+        $item=$request->search;
+
+        $property1=DB::table('user_properties')
+                ->join('cities','user_properties.city_id','cities.id')
+                ->select('user_properties.*','cities.city_name')
+                ->where([ ['status','1'],['subcity','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','1'],['city_name','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','1'],['address','LIKE', "%{$item}%"] ]);
+
+        $property=DB::table('user_properties')
+                ->join('cities','user_properties.city_id','cities.id')
+                ->select('user_properties.*','cities.city_name')
+                ->where([ ['status','2'],['subcity','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','2'],['city_name','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','2'],['address','LIKE', "%{$item}%"] ])
+                ->union($property1)
+                ->paginate(4);
+
+        // dd($property);
+         return view('pages.search',compact('property','item'));
+    }
+
+
+
+//----------------//--------------//--------------//----------------//----------------//----------------//----
+
+
+
+//----------------Home/User_Profile_Edit (frontend)--------------------------
+    public function editProfile(){
+        $profile=DB::table('users')->where('id',Auth::id())->first();
+        return view('pages.edit_profile',compact('profile'));
+    }
+
+//---------------User_profile_Update----------------------------
+    public function updateProfile(Request $request,$id){
+
+        $data=array();
+        $data['name']= $request->name;
+        $data['phone']= $request->phone;
+        $data['email']= $request->email;
+
+        $profile= DB::table('users')->where('id',$id)->update($data);
+
+        $notification = array(
+            'message'=>'Successfully Profile Updated',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('home')->with($notification);
     }
 
 

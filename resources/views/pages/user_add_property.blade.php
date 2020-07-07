@@ -18,7 +18,7 @@
     </div>
 
 
-<form action="{{ route('store.user.property') }}" method="post" enctype="multipart/form-data" class="border border-secondary bg-success text-light rounded  p-5" >
+<form action="{{ route('store.user.property') }}" method="post" enctype="multipart/form-data" class="border border-secondary bg-success text-light rounded p-5" style="font-size: 16px;" >
         @csrf
     <div class="form-row mt-5">
       <div class="col-md-4 mb-3 pr-4">

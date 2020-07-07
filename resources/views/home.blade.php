@@ -1,77 +1,53 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- @php
-  $order=DB::table('orders')->where('user_id',Auth::id())->orderBy('id','DESC')->limit(10)->get();
-@endphp --}}
+@php
+  $profile=DB::table('users')->where('id',Auth::id())->first();
+@endphp
 
     <div class="contact_form py-5" style="background: #F5F5FA">
-        <div class="container  py-3">
+        <div class="container py-3">
             <div class="row">
-               <div class="col-9 card">
-                 <table class="table table-response table-hover ">
-                   <thead>
-                     <tr>
-                       <th scope="col">PaymentType</th>
-                       <th scope="col">Payment ID</th>
-                       <th scope="col">Amount</th>
-                       <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Status Code</th>
-                        <th scope="col">Action</th>
-                        <th></th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                    {{-- @foreach($order as $row) --}}
-                     <tr>
-                       <td>Dump</td>
-                       <td>Dump</td>
-                       <td>Dump $</td>
-                       <td>Dump</td>
-                       <td>
-                       	{{-- @if($row->status == 0)
-                       	 <span class="badge badge-warning">Pending</span>
-                       	@elseif($row->status == 1)
-                       	<span class="badge badge-info">Payment Accept</span>
-                       	@elseif($row->status == 2)
-                       	 <span class="badge badge-info">Progress </span>
-                       	 @elseif($row->status == 3)
-                       	 <span class="badge badge-success">Delevered </span>
-                       	 @else
-                       	 <span class="badge badge-danger">Cancel </span>
-                       	 @endif --}}<span class="badge badge-danger">Cancel </span>
-                       </td>
-                       <td>Dump</td>
-                       <td>
-                        <a href="" class="btn btn-sm btn-info">View</a>
-                       </td>
-                     </tr>
-                    {{-- @endforeach --}}
-                   </tbody>
-                 </table>
-               </div>
 
+        <div class="col-md-7 mt-5 mr-5 ml-5" data-aos="fade-right">
+            <h3 class="bg-white p-2 mt-2 text-success" style="background-color: #e1f1e9e5; font-size:29px;">Profile Info :</h3>
+            <div class="bg-white">
+                <table class="table table-hover" style="font-size: 16px;">
+                    <tr>
+                        <td class="border-0">Name :</td>                   <!--class="border-0"-->
+                        <td class="border-0">{{ $profile->name }}</td>    <!--class="border-0"-->
+                    </tr>
+                    <tr>
+                        <td>Email :</td>
+                        <td>{{ $profile->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone :</td>
+                        <td>{{ $profile->phone }}</td>
+                    </tr>
+                </table>
+            </div> <!---end col-md-5--->
+        </div>
 
 
 <!------User-Profile----------------------->
-            <div class="col-3">
+            <div class="col-4" data-aos="fade-left">
                 <div class="card" style="width: 18rem;">
 
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top rounded-circle mt-3" style="height: 90px; width: 90px; margin-left: 34%;" >
+                    <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top rounded-circle mt-3" style="height: 90px; width: 90px; margin-left: 34%;">
                 </a>
-                <div class="card-body">
-                    <a href="{{ route('home') }}"> <h5 class="card-title text-center">{{ Auth::user()->name }}</h5></a>
+                <div class="card-body more moreApp" style="margin-left: 80px;">
+                    <a href="{{ route('home') }}" class="button-pipaluk button--inverted text-primary px-4 pt-1"> <h4 class="text-center">{{ Auth::user()->name }}</h4></a>
                 </div>
 
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="{{ route('password.change') }}"> Password Change </a></li>
-                <li class="list-group-item"><a href="{{ route('password.change') }}"> Edit Profile </a></li>
-                <li class="list-group-item"><a href="{{ route('add.property.user')}}"> Add My Property </a></li>
+                <ul class="list-group list-group-flush ml-4">
+                <li class="list-group-item more moreS py-1"><a href="{{ route('password.change') }}" class="button-pipaluk button--inverted px-4 py-2 text-primary ml-4"> Change Password </a></li>
+                <li class="list-group-item more moreS py-1"><a href="{{ route('edit.user.profile') }}" class="button-pipaluk button--inverted px-5 py-2 text-primary ml-4"> Edit Profile </a></li>
+                <li class="list-group-item more moreS py-1"><a href="{{ route('add.property.user')}}" class="button-pipaluk button--inverted pl-4 py-2 text-primary ml-4" style="padding-right:35px;">Add My Property</a></li>
                 </ul>
-                <div class="card-body">
-                <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
+                <div class="card-body more more2 p-1">
+                <a href="{{ route('user.logout') }}" class="btn bg-transparent text-white button-pipaluk button--inverted btn-block btn-sm py-1" style="font-size:15px;">Logout</a>
                 </div>
             </div>
             </div>

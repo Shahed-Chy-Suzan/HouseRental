@@ -54,12 +54,23 @@
     line-height: 80px;
     margin: 0;
 }
-/*----------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------*/
 
 
-
-
-
+/* -------------------LogIn-Register Form------------- */
+.logreg{
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 4px 4px 12px rgba(31, 31, 32, 0.9);
+    border-radius: 5px;
+    background-color:white;
+    font-size: 15px;
+    border: 1px solid #285cc4;
+    padding: 20px;
+}
+.logreg:hover{
+	box-shadow: 7px 15px 25px rgba(0,0,0,0.9);
+}
 
 
 /* ---------------------Main-Slider(Nav-Carousal)------------- */
@@ -719,7 +730,8 @@ div.formHeader{
     box-shadow: 8px 8px 12px rgba(32, 31, 31,.9);
 }
 div.formHeader:hover{
-    box-shadow: -7px -7px 10px rgba(32, 31, 31,.6);
+    /* box-shadow: -7px -7px 10px rgba(32, 31, 31,.6); */
+    box-shadow: 8px 8px 12px rgba(32, 31, 31,.9);
     background-color: #ff3b3b;
 }
 
@@ -940,3 +952,137 @@ div .ww .product_item.is_new .product_new,
     -o-background-size: cover;
     background-size: cover;
   }
+
+
+
+/*===============================================================
+            -----------Button Style-----------
+=================================================================*/
+
+/*-------Wishlist--Property--Property_details Page (Call-Email)button------*/
+.more a,
+.more button {
+    font-size: 1em;
+    color: #745EC5;     /*---Button-Text-color---*/
+    padding: 33.8em -15.5em;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    /* font-family: 'Abel-Regular'; */
+    text-decoration: none;
+    display: inline-block;
+}
+/* Pipaluk */
+
+.button-pipaluk::before,
+.button-pipaluk::after {
+	content: '';
+	border-radius: 5px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	-webkit-transition: -webkit-transform 0.5s, background-color 0.5s;
+	transition: transform 0.5s, background-color 0.5s;
+	-moz-transition: transform 0.5s, background-color 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+	-moz-transition-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+}
+.button-pipaluk::before {
+	border: 2px solid #3a8ce4;  /*---outline-border-color---*/
+}
+.button-pipaluk.button--inverted::after {
+	background: #3a8ce4;    /*---Button-color---*/
+}
+.button-pipaluk:hover::before {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	-moz-transform: scale3d(1, 1, 1);
+	-o-transform: scale3d(1, 1, 1);
+	-ms-transform: scale3d(1, 1, 1);
+}
+.button-pipaluk::before,
+.button-pipaluk:hover::after {
+	-webkit-transform: scale3d(0.7, 0.6, 1);
+	transform: scale3d(0.7, 0.6, 1);
+	-moz-transform: scale3d(0.7, 0.6, 1);
+	-o-transform: scale3d(0.7, 0.6, 1);
+	-ms-transform: scale3d(0.7, 0.6, 1);
+}
+
+/*---------------------Modal Email (button)//Socialite(google)------------------------*/
+.more.more2 button,
+.more.more2 span{
+    color: #f34949;   /*---Button-Text-color---*/
+}
+.more.more2 .button-pipaluk.button--inverted::after {
+	background: #f34949;   /*---Button-color---*/
+}
+.more.more2 .button-pipaluk::before {
+	border-color: #f34949;   /*--outline-border-color--*/
+}
+
+/*----------------------Navbar(City-Subcity)-Dropdown-------------------*/
+.more.moreNav a {
+    color: #131212;  /*--Button-Text-color--*/
+    padding: 0;
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 200;
+}
+.more.moreNav .button-pipaluk.button--inverted::after {
+	background: #f3f3f3;  /*--Button-color--*/
+}
+.more.moreNav .button-pipaluk::before {
+    /* border-color: #f7f7f7; */
+    border-color: #9abdf1;  /*--outline-border-color--*/
+}
+
+/*---------------------Top Navbar(App)-------------------*/
+.more.moreApp a,
+.more.moreApp li a{
+    color: #5f5f5f; /*--Button-Text-color--*/
+    padding: 0;
+    margin: 0;
+}
+.more.moreApp .button-pipaluk.button--inverted::after {
+	background: #f4f4f4;  /*---Button-color---*/
+}
+.more.moreApp .button-pipaluk::before {
+	border-color: #c5d9f8; /*---outline-border-color---*/
+}
+
+/*---------------------Freatured(button)-(FrontEnd)------------------------*/
+.more.moreFront a {
+    color: #ffffff;   /*---Button-Text-color---*/
+}
+.more.moreFront .button-pipaluk.button--inverted::after {
+	background: #3792d3;   /*---Button-color---*/
+}
+.more.moreFront .button-pipaluk::before {
+	border-color: #cfd6fc;   /*--outline-border-color--*/
+}
+
+/*------------------Profile(dropdown-slide)-(FrontEnd)-------------------*/
+.more.moreS a {
+    color: #000000;   /*---Button-Text-color---*/
+}
+.more.moreS{            /*---additional/optional---*/
+    margin-bottom: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.more.moreS .button-pipaluk.button--inverted::after {
+	background: rgb(248, 248, 248);   /*---Button-color---*/
+}
+.more.moreS .button-pipaluk::before {
+	border-color: #cfd6fc;   /*--outline-border-color--*/
+}
+
+
+/*------------------------------------------------------------------------------------------------ */

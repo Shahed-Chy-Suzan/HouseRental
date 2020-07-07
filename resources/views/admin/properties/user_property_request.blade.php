@@ -50,7 +50,12 @@
                   <td>{{ $row->city_name }}</td>
                   <td>{{ $row->subcity }}</td>
                   <td><img src="{{ URL::to($row->image_one) }}" height="40px;" width="45px;"></td>
-                  <td>{{ $row->price }}</td>
+                  {{-- <td>{{ $row->price }}</td> --}}
+                    @if (isset($row->discount_price))
+                        <td>৳ {{ $row->discount_price }} (D)</td>
+                    @else
+                        <td>৳ {{ $row->price }}</td>
+                    @endif
                   <td>
                     @if($row->status==0 || $row->status==1 || $row->status==2)
                         <a href="{{ URL::to('edit/property/'.$row->id) }}" class="btn btn-sm btn-info" title="Edit"><i class="fa fa-edit"></i></a>

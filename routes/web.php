@@ -94,6 +94,14 @@ Route::post('admin/store/admin', 'Admin\ReportController@UserStore')->name('stor
 Route::get('delete/admin/{id}', 'Admin\ReportController@UserDelete');
 Route::get('edit/admin/{id}', 'Admin\ReportController@UserEdit');
 Route::post('admin/update/admin', 'Admin\ReportController@UserUpdate')->name('update.admin');
+        //---------Reports routes-------------
+Route::get('admin/today/order', 'Admin\ReportController@TodayOrder')->name('today.order');
+Route::get('admin/today/deleverd', 'Admin\ReportController@TodayDelevered')->name('today.delevered');
+Route::get('admin/this/month', 'Admin\ReportController@ThisMonth')->name('this.month');
+Route::get('admin/search/report', 'Admin\ReportController@search')->name('search.report');
+Route::post('admin/search/byyear', 'Admin\ReportController@searchByYear')->name('search.by.year');
+Route::post('admin/search/bymonth', 'Admin\ReportController@searchByMonth')->name('search.by.month');
+Route::post('admin/search/bydate', 'Admin\ReportController@searchByDate')->name('search.by.date');
         //-----------site-setting----------------
 Route::get('admin/site/setting', 'Admin\SettingController@SiteSetting')->name('admin.site.setting');
 Route::post('admin/update/sitesetting', 'Admin\SettingController@UpdateSetting')->name('update.sitesetting');
@@ -135,6 +143,7 @@ Route::get('view/property/order/{property_code}','Admin\OrderController@ViewProp
 
 
 
+
 //============================================================================================
                 //---------Frontend All Routes are here:-----------
 //============================================================================================
@@ -157,11 +166,15 @@ Route::get('add/wishlist/tostr/{id}','WishlistController@AddWishlistTostr');   /
 Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist');  //--nav--
         //----------Modal_Email-------------
 Route::post('store/modal/email','WishlistController@storeModal')->name('store.modal.email'); //using Tostr
-
+        //----------Search-----------
+Route::get('product/search','FrontController@ProductSearch')->name('product.search');
+        //-----------Edit_Profile----------------
+Route::get('edit/user/profile','FrontController@editProfile')->name('edit.user.profile');
+Route::post('update/user/profile/{id}','FrontController@updateProfile');
 
         //---------Order Tracking----------
 
         //---------UserOrderView-----------
 
-        //----------Search-----------
-// Route::post('product/search', 'FrontController@ProductSearch')->name('product.search');
+
+

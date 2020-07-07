@@ -2,6 +2,10 @@
 
 @section('content')
 
+
+
+<div style="background-image: linear-gradient(to top, rgba(254, 254, 254,.3) , #F5F5FA);">
+
                 <!---------------User Log-in & Register Form --------------->
 
 <!--------------- Log-in Form --------------->
@@ -10,9 +14,9 @@
     <div class="contact_form">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 offset-lg-1"  style="border: 1px solid grey; padding: 20px;">
+                <div class="col-lg-5 offset-lg-1 logreg">
                     <div class="contact_form_container">
-                        <div class="contact_form_title text-center">Sign In</div>
+                        <div class="contact_form_title text-center text-primary">Sign In</div>
 
                         <form action="{{ route('login') }}" id="contact_form" method="post">
                             @csrf
@@ -34,24 +38,24 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="contact_form_button">
-                                <button type="submit" class="btn btn-success">Login</button>
+                            <div class="contact_form_button more more2">
+                                <button type="submit" class="btn bg-transparent text-white button-pipaluk button--inverted px-4 py-2" style="font-size:16px;">Login</button>
                             </div>
                         </form><br>
                         <a href="{{ route('password.request') }}">I Forgot My Password.</a>
                         <br><br>
 {{-------Socialite-----------}}
-                        <button type="submit" class="btn btn-primary btn-block"><i class="fab fa-facebook-square"></i>  Login With Facebook</button>
-                        <a href="{{ url('/auth/redirect/google') }}" class="btn btn-danger btn-block"><i class="fab fa-google-plus-square"></i>  Login With Google</a>
+                        <span class="more"><button type="submit" class="btn btn-block text-white bg-transparent button-pipaluk button--inverted" style="font-size: 15px; padding:8px; margin-top:1px"><i class="fab fa-facebook-square"></i>  Login With Facebook</button></span>
+                        <span class="more more2"><a href="{{ url('/auth/redirect/google') }}" class="btn btn-block text-white bg-transparent button-pipaluk button--inverted" style="font-size: 15px; padding:8px; margin-top:1px"><i class="fab fa-google-plus-square"></i>  Login With Google</a></span>
 
                     </div>
                 </div>
 
 
 <!--------------- Register Form --------------->
-                 <div class="col-lg-5 offset-lg-1" style="border: 1px solid grey; padding: 20px;">
+                 <div class="col-lg-5 offset-lg-1 logreg">
                     <div class="contact_form_container">
-                        <div class="contact_form_title text-center">Sign Up</div>
+                        <div class="contact_form_title text-center text-primary">Sign Up</div>
 
                         <form action="{{ route('register') }}" id="contact_form" method="post">
                             @csrf
@@ -75,8 +79,8 @@
                                 <label for="exampleInputEmail1">Confirm Password</label>
                                 <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Re-type Password" name="password_confirmation" required="">
                             </div>
-                            <div class="contact_form_button">
-                                <button type="submit" class="btn btn-info">SignUp</button>
+                            <div class="contact_form_button more">
+                                <button type="submit" class="btn bg-transparent text-white button-pipaluk button--inverted px-4 py-2" style="font-size:16px;">Sign Up</button>
                             </div>
                         </form>
 
@@ -86,5 +90,8 @@
         </div>
         <div class="panel"></div>
     </div>
+
+
+</div>
 
 @endsection

@@ -346,7 +346,7 @@ section
 {
 	display: inline-block;
     position: relative;
-    height: 48px;
+    height: 42px;
 	/* height: 56px; */
 }
 .standard_dropdown li li
@@ -377,7 +377,7 @@ section
 	font-size: 16px;
 	font-weight: 300;
 	color: #000000;
-	line-height: 56px;
+	line-height: 41px;
 	white-space: nowrap;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -477,7 +477,7 @@ section
 {
 	font-size: 16px;
 	font-weight: 300;
-	line-height: 56px;
+	line-height: -4px;
 	color: #000;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -614,7 +614,7 @@ section
 {
 	display: block;
 	position: absolute;
-	top: 50%;
+	top: 42%;
 	-webkit-transform: translateY(-50%);
 	-moz-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
@@ -644,7 +644,7 @@ section
 	font-size: 16px;
 	font-weight: 300;
 	color: #a3a3a3;
-	line-height: 48px;
+	line-height: 42px;
 	cursor: pointer;
 }
 .custom_dropdown_placeholder i
@@ -932,7 +932,7 @@ select option
 {
 	display: block;
 	position: relative;
-	width: auto;
+	width: 285px;
 	height: 46px;
 	border-bottom: solid 1px #f2f2f2;
 	padding-left: 35px;

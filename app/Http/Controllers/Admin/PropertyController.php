@@ -82,7 +82,7 @@ class PropertyController extends Controller
 
 //--------------------------------------------------------------------------------------------------------------------
 
-//--------------Upload(button)------------------
+//--------------Upload_property(button)------------------
     public function uploadProperty($id){
         DB::table('user_properties')->where('id',$id)->update(['status'=>1]);
         $notification=array(
@@ -92,7 +92,7 @@ class PropertyController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-//---------------Cancell(button)-------------------
+//---------------Cancel_property(button)-------------------
     public function cancelProperty($id){
         DB::table('user_properties')->where('id',$id)->update(['status'=>4]);
         $notification=array(
@@ -102,7 +102,7 @@ class PropertyController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-//---------------DeliveryProgress(button)-------------------
+//---------------Delivery_Progress-property(button)-------------------
     public function DeliveryProgress($id){
         DB::table('user_properties')->where('id',$id)->update(['status'=>2]);
         $notification=array(
@@ -112,7 +112,7 @@ class PropertyController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-//---------------Delivery_Progress(button)-------------------
+//---------------Pendin_Stage-property(button)-------------------
     public function pendingProperty($id){
         DB::table('user_properties')->where('id',$id)->update(['status'=>0]);
         $notification=array(
@@ -122,9 +122,10 @@ class PropertyController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-//---------------Delivery_Done(button)-------------------
+//---------------Delivery_Done-property(button)-------------------
     public function DeliveryDone($id){
-        DB::table('user_properties')->where('id',$id)->update(['status'=>3]);
+
+        DB::table('user_properties')->where('id',$id)->update(['status'=>3,'date'=>date('d-m-y'),'month'=>date('F'),'year'=>date('Y')]);
         $notification=array(
                 'message'=>'Property Delivered Successfully',
                 'alert-type'=>'success'
@@ -179,6 +180,7 @@ class PropertyController extends Controller
 
 //---------------------------------------------------------------------------------------------------------------------------
 
+
 //-----------------Edit---------------------
     public function EditProperty($id){
         $property=DB::table('user_properties')->where('id',$id)->first();
@@ -186,15 +188,25 @@ class PropertyController extends Controller
         return view('admin.properties.edit',compact('property'));
     }
 
+
 //---------------Update-----------------------
     public function UpdatePropertyWithoutPhoto(Request $request,$id){
+
+        if($request->discount_price == NULL){
+            $price= implode(explode(',',$request->price));
+            $total= $price + $request->service_charge;
+        }
+        else{
+            $discount_price= implode(explode(',',$request->discount_price));
+            $total= $discount_price + $request->service_charge;
+        }
 
         $subCity=$request->subcity_id;
         $separate= explode('|',$subCity);
         // $subcit_id=$separate[0];
         // $subcit_name=$separate[1];
         // $data['subcity_id']=$subcit_id;
-        // $data['subcity_id']=$subcit_name;
+        // $data['subcity']=$subcit_name;
 
         $data=array();
         // $data['user_id']=Auth::id();
@@ -213,6 +225,7 @@ class PropertyController extends Controller
     	$data['area']=$request->area;
         $data['price']=$request->price;
         $data['discount_price']=$request->discount_price;
+        $data['total_price']=$total;
         $data['category']=$request->category;
         $data['floor']=$request->floor;
     	$data['details']=$request->details;

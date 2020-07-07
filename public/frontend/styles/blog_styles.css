@@ -363,7 +363,7 @@ section
 {
 	display: inline-block;
 	position: relative;
-	height: 56px;
+	height: 42px;
 }
 .standard_dropdown li li
 {
@@ -393,7 +393,7 @@ section
 	font-size: 16px;
 	font-weight: 300;
 	color: #000000;
-	line-height: 56px;
+	line-height: 41px;
 	white-space: nowrap;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -492,7 +492,7 @@ section
 {
 	font-size: 16px;
 	font-weight: 300;
-	line-height: 56px;
+	line-height: 25px;
 	color: #000;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -528,7 +528,7 @@ section
 }
 .logo_container
 {
-	height: 175px;
+	height: 128px;
 }
 .logo
 {
@@ -547,7 +547,7 @@ section
 }
 .header_search
 {
-	height: 175px;
+	height: 128px;
 }
 .header_search_content
 {
@@ -561,7 +561,7 @@ section
 .header_search_form_container
 {
 	width: 100%;
-	height: 50px;
+	height: 43px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
 }
@@ -621,7 +621,7 @@ section
 .custom_dropdown
 {
 	width: calc((100% - 50px) * 0.399);
-	height: 50px;
+	height: 40px;
 	float: left;
 	padding-left: 26px;
 }
@@ -659,7 +659,7 @@ section
 	font-size: 16px;
 	font-weight: 300;
 	color: #a3a3a3;
-	line-height: 48px;
+	line-height: 41px;
 	cursor: pointer;
 }
 .custom_dropdown_placeholder i
@@ -759,7 +759,7 @@ select option
 }
 .wishlist_cart
 {
-	height: 175px;
+	height: 128px;
 }
 .wishlist
 {

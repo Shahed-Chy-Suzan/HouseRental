@@ -3,6 +3,7 @@
 @section('content')
 
 <div style="background: #F5F5FA; padding:80px">
+
 <div class="container">
     <div class="row ">
         <div class="col-md-8">
@@ -12,7 +13,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('update.password') }}" aria-label="{{ __('Reset Password') }}">
                         @csrf
-
 
                         <div class="form-group row">
                             <label for="oldpass" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
@@ -68,19 +68,20 @@
                  <div class="card" style="width: 18rem;">
 
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top mt-3" style="height: 90px; width: 90px; margin-left: 34%;" >
+                        <img src="{{ asset('public/avatar.jpg') }}" class="card-img-top mt-3" style="height: 90px; width: 90px; margin-left: 34%;">
                     </a>
-                    <div class="card-body">
-                        <a href="{{ route('home') }}"> <h5 class="card-title text-center">{{ Auth::user()->name }}</h5></a>
+                    <div class="card-body more moreApp" style="margin-left: 80px;">
+                        <a href="{{ route('home') }}" class="button-pipaluk button--inverted text-primary px-4 pt-1"> <h4 class="text-center">{{ Auth::user()->name }}</h4></a>
                     </div>
 
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{{ route('password.change') }}"> Password Change </a></li>
-                    <li class="list-group-item"><a href=""> Add My Property </a></li>
-                  </ul>
-                  <div class="card-body">
-                    <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
-                  </div>
+                    <ul class="list-group list-group-flush ml-4">
+                        <li class="list-group-item more moreS py-1"><a href="{{ route('home') }}" class="button-pipaluk button--inverted px-5 py-2 text-primary ml-4">My Profile </a></li>
+                        <li class="list-group-item more moreS py-1"><a href="{{ route('edit.user.profile') }}" class="button-pipaluk button--inverted px-5 py-2 text-primary ml-4"> Edit Profile </a></li>
+                        <li class="list-group-item more moreS py-1"><a href="{{ route('add.property.user')}}" class="button-pipaluk button--inverted pl-4 py-2 text-primary ml-4" style="padding-right:35px;">Add My Property</a></li>
+                    </ul>
+                    <div class="card-body more more2 p-1">
+                        <a href="{{ route('user.logout') }}" class="btn bg-transparent text-white button-pipaluk button--inverted btn-block btn-sm py-1" style="font-size:15px;">Logout</a>
+                    </div>
                 </div>
                </div>
         </div>

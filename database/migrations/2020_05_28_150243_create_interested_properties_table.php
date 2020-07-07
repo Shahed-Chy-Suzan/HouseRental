@@ -20,6 +20,7 @@ class CreateInterestedPropertiesTable extends Migration
             $table->string('phone');
             $table->string('property_code');
             $table->string('status')->default(0);
+            $table->string('date')->nullable();
             $table->string('message')->nullable();
             $table->timestamps();
         });

@@ -58,11 +58,11 @@
 
          <div class="row">
          	<div class="card pd-20 pd-sm-40 col-lg-12">
-         	  <h6 class="card-body-title">User Message : </h6>
+         	  <h6 class="card-body-title p-3"style="background-color: #E9ECEF"><strong>User Message :</strong> </h6>
          	  <br>
                <div class="col-lg-12">
                 <div class="form-group" style="border:1px solid grey;padding:10px; ">
-                <p >{!! $view->message !!}</p>
+                <p class="text-dark">{!! $view->message !!}</p>
               </div>
             </div>
          	</div><!-- card -->

@@ -26,13 +26,14 @@ class CreateUserPropertiesTable extends Migration
             $table->integer('bedroom');
             $table->integer('bathroom');
             $table->integer('parking')->nullable();
-            $table->string('type');
+            $table->text('type');
             $table->integer('kitchen');
             $table->string('area');
             // $table->double('price', 8, 2);
             // $table->double('discount_price', 8, 2)->nullable();
             $table->string('price');
             $table->string('discount_price')->nullable();
+            $table->string('total_price')->nullable();
             $table->string('category');
             $table->string('floor')->nullable();
             $table->string('details');

@@ -55,7 +55,7 @@
 
 <!-- Blog -->
 
-<div class="blog">
+<div class="blog" style="background-color: #F5F5FA;">
 	<div class="container" data-aos="fade-right">
 		<div class="row">
 			<div class="col">
@@ -63,7 +63,7 @@
 
 					@foreach($post as $row)
 					<!-- Blog post -->
-					<div class="blog_post"><a class="text-dark" href="{{url('blog/description/'.$row->id)}}">
+					<div class="blog_post bg-white"><a class="text-dark" href="{{url('blog/description/'.$row->id)}}">
 						<div class="blog_image" style="background-image:url({{ asset($row->post_image) }})"></div>
 						<div class="blog_text">
                                 @if(session()->get('lang') == 'bangla')
@@ -91,5 +91,5 @@
             <div class="p-5" style="margin-left:600px; font-size: 20px;">
                 {{ $post->links() }}
             </div>
-</div>
+
 @endsection

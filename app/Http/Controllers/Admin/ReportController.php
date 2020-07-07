@@ -14,68 +14,73 @@ class ReportController extends Controller
         $this->middleware('auth:admin');
     }
 
-    // public function TodayOrder()
-    // {
-    //     $today=date('d-m-y');
-    //     $order=DB::table('orders')->where('status',0)->where('date',$today)->get();
-    //     return view('admin.report.today_order',compact('order'));
-    // }
+    public function TodayOrder()
+    {
+        $today=date('d-m-y');
+        $order=DB::table('interested_properties')->whereIn('status',[0,1])->where('date',$today)->get();
+        return view('admin.report.today_order',compact('order'));
+    }
 
-    // public function TodayDelevered()
-    // {
-    //     $today=date('d-m-y');
-    //     $order=DB::table('orders')->where('status',3)->where('date',$today)->get();
-    //     return view('admin.report.today_order',compact('order'));
-    // }
+    public function TodayDelevered()
+    {
+        $today=date('d-m-y');
+        $total=DB::table('user_properties')->where('status',3)->where('date',$today)->sum('total_price');
+        $order=DB::table('user_properties')->where('status',3)->where('date',$today)->get();
+        return view('admin.report.search_report',compact('order','total'));
+    }
 
-    // public function ThisMonth()
-    // {
-    //     $month=date('F');
-    //     $order=DB::table('orders')->where('status',3)->where('month',$month)->get();
-    //     return view('admin.report.today_order',compact('order'));
-    // }
+    public function ThisMonth()
+    {
+        $month=date('F');
+        $total=DB::table('user_properties')->where('status',3)->where('month',$month)->sum('total_price');
+        $order=DB::table('user_properties')->where('status',3)->where('month',$month)->get();
+        return view('admin.report.search_report',compact('order','total'));
+    }
 
-    // public function search()
-    // {
-    //     return view('admin.report.search');
-    // }
+    public function search()
+    {
+        return view('admin.report.search');
+    }
 
-    // public function searchByYear(Request $request)
-    // {
-    //     $year=$request->year;
-    //     $total=DB::table('orders')->where('status',3)->where('year',$year)->sum('total');
-    //     $order=DB::table('orders')->where('status',3)->where('year',$year)->get();
-    //     return view('admin.report.search_report',compact('order','total'));
-    // }
+    public function searchByYear(Request $request)
+    {
+        $year=$request->year;
+        $total=DB::table('user_properties')->where('status',3)->where('year',$year)->sum('total_price');
+        $order=DB::table('user_properties')->where('status',3)->where('year',$year)->get();
+        return view('admin.report.search_report',compact('order','total'));
+    }
 
-    // public function searchByMonth(Request $request)
-    // {
-    //     $month=$request->month;
-    //     $total=DB::table('orders')->where('status',3)->where('month',$month)->sum('total');
-    //     $order=DB::table('orders')->where('status',3)->where('month',$month)->get();
-    //     return view('admin.report.search_report',compact('order','total'));
-    // }
+    public function searchByMonth(Request $request)
+    {
+        $month=$request->month;
+        $total=DB::table('user_properties')->where('status',3)->where('month',$month)->sum('total_price');
+        $order=DB::table('user_properties')->where('status',3)->where('month',$month)->get();
+        return view('admin.report.search_report',compact('order','total'));
+    }
 
-    // public function searchByDate(Request $request)
-    // {
-    //     $date=$request->date;
-    //     $newdate = date("d-m-y", strtotime($date));
-    //     $total=DB::table('orders')->where('status',3)->where('date',$newdate)->sum('total');
-    //     $order=DB::table('orders')->where('status',3)->where('date',$newdate)->get();
-    //     return view('admin.report.search_report',compact('order','total'));
-    // }
+    public function searchByDate(Request $request)
+    {
+        $date=$request->date;
+        $newdate = date("d-m-y", strtotime($date)); //date ta k Database er formate(d-m-y) e ana hoyeche,
+        $total=DB::table('user_properties')->where('status',3)->where('date',$newdate)->sum('total_price');
+        $order=DB::table('user_properties')->where('status',3)->where('date',$newdate)->get();
+        return view('admin.report.search_report',compact('order','total'));
+    }
+
+
+
+//--------------//----------------//----------------//-----------------//----------------//----------------//-------
+
 
 
 //==============================================================================
         //------------ User_Role --//-- Admin_Add --------------------
 //==============================================================================
 
-
     public function UserRole(){
         $user=DB::table('admins')->where('type',2)->get();
         return view('admin.role.all_role',compact('user'));
     }
-
 
     public function UserCreate(){
     	return view('admin.role.create');
@@ -110,7 +115,6 @@ class ReportController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-
     public function UserDelete($id){
         DB::table('admins')->where('id',$id)->delete();
         $notification=array(
@@ -120,14 +124,10 @@ class ReportController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-
-
     public function UserEdit($id){
         $user=DB::table('admins')->where('id',$id)->first();
         return view('admin.role.edit_role',compact('user'));
     }
-
-
 
     public function UserUpdate(Request $request)
     {
