@@ -80,9 +80,24 @@ class WishlistController extends Controller
                     ->join('users','wishlists.user_id','users.id')
                     ->select('user_properties.*','wishlists.*','cities.city_name','subcities.subcity_name','users.*')
                     ->where('wishlists.user_id',$userid)
+                    ->whereIn('status', [1,2])
                     ->paginate(4);
-            return view('pages.wishlist',compact('property'));
+
+        $wishlistCount=DB::table('wishlists')
+                    ->join('user_properties','wishlists.property_id','user_properties.id')
+                    ->join('cities','user_properties.city_id','cities.id')
+                    ->join('subcities','user_properties.subcity_id','subcities.id')
+                    ->join('users','wishlists.user_id','users.id')
+                    ->select('user_properties.*','wishlists.*','cities.city_name','subcities.subcity_name','users.*')
+                    ->where('wishlists.user_id',$userid)
+                    ->whereIn('status', [1,2])
+                    ->get();
+        return view('pages.wishlist',compact('property','wishlistCount'));
     }
+
+
+//---------------//----------------//---------------//---------------//-----------------//--------////--//-----
+
 
 
 //---------------------Store_Email_Modal---------------------------------
@@ -94,6 +109,7 @@ class WishlistController extends Controller
         $data['property_code']=$request->property_code;
         $data['status']=0;
         $data['message']=$request->message;
+        $data['date']= date('d-m-y');
 
         $modal= DB::table('interested_properties')->insert($data);
         // return response()->json(['success' => 'Your property order request has been recorded.']);

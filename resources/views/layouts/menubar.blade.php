@@ -20,16 +20,18 @@
     @php
     $city=DB::table('cities')->get();
     @endphp
-                    <ul class="cat_menu">
+                    <ul class="cat_menu pb-2 pt-2">
                         @foreach( $city as $cat)
-                            <li class="hassubs">
-                                <a href="{{url('city/properties/'.$cat->id) }}">{{ $cat->city_name }}<i class="fas fa-arrow-circle-right"></i></a>
-                                <ul>
+                            <li class="hassubs more moreNav">
+                                <a href="{{url('city/properties/'.$cat->id) }}" class="button-pipaluk button--inverted pl-5">{{ $cat->city_name }}<i class="fas fa-arrow-circle-right pr-3"></i></a> <!--button-pipaluk button--inverted px-5 my-1-->
+                                <ul class="py-1">
                                     @php
                                         $subcity=DB::table('subcities')->where('city_id',$cat->id)->get();
                                     @endphp
                                     @foreach($subcity as $row)
-                                    <li><a href="{{ url('properties/'.$row->id) }}">{{  $row->subcity_name }}<i class="fas fa-arrow-circle-right z-index-100"></i></a></li>
+                                    <li class="more moreNav">
+                                        <a href="{{ url('properties/'.$row->id) }}" class="button-pipaluk button--inverted" style="padding-left:70px;">{{  $row->subcity_name }}<i class="fas fa-arrow-circle-right z-index-100"></i></a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -217,59 +219,3 @@
           </a>
       </div>
   </section>
-
-
-
-
-
-  <!-------------------------------(Not Working for Dynamic)-Main Slider-------------------------------->
-
-{{-- <section class="pt-0 mt-0">
-    <div id="carousel-example" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example" data-slide-to="1"></li>
-          <li data-target="#carousel-example" data-slide-to="2"></li>
-        </ol>
-
-        <div class="carousel-inner" style="height: 650px">
-          <div class="carousel-item active">
-            <img src="public/frontend/images/Cover/1.jpg"/>
-            <div class="container row">
-                <div class="col-lg-8 offset-lg-4 pt-5" data-aos="flip-right">
-                    <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8">
-                        <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif </h1>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="public/frontend/images/Cover/7.jpg"/>
-            <div class="container">
-                <div class="col-lg-8 offset-lg-4 pt-5" data-aos="flip-right">
-                    <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8">
-                        <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif </h1>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="public/frontend/images/Cover/3.jpg"/>
-            <div class="container">
-                <div class="col-lg-8 offset-lg-4 pt-5" data-aos="flip-right">
-                    <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8">
-                        <h1 class="text-light p-3" style="">@if(session()->get('lang') == 'bangla')বাংলাদেশে বিক্রয় এবং ভাড়ার জন্য প্রপার্টি খুঁজে দেখুন @else Search properties for sale and rent in Bangladesh @endif </h1>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <a href="#carousel-example" class="carousel-control-prev" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </a>
-          <a href="#carousel-example" class="carousel-control-next" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-          </a>
-      </div>
-</section> --}}

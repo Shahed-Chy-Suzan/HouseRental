@@ -70,7 +70,7 @@
                               @elseif($property->status == 3)
                                   <span class="badge badge-success p-1">Delivered </span>
                               @else
-                                  <span class="badge badge-danger p-1">Cancel </span>
+                                  <span class="badge badge-danger p-1">Canceled </span>
                               @endif
                             </th>
                         </tr>
@@ -88,6 +88,7 @@
                                 @endif
                             </th>
                         </tr>
+                        {{-- <tr><th></th><th></th></tr> --}}
 
          	    	</table>
 
@@ -127,14 +128,6 @@
                             <th>{{ $property->area }}</th>
                         </tr>
                         <tr>
-                            <th>Price :</th>
-                            <th>৳ {{ $property->price }}</th>
-                        </tr>
-                        <tr>
-                            <th>Discount Price :</th>
-                            <th>৳ {{ $property->discount_price }}</th>
-                        </tr>
-                        <tr>
                             <th>Categoty :</th>
                             <th>{{ $property->category }}</th>
                         </tr>
@@ -147,8 +140,20 @@
                             <th>{{ $property->floor }}</th>
                         </tr>
                         <tr>
+                            <th>Price :</th>
+                            <th>৳ {{ $property->price }}</th>
+                        </tr>
+                        <tr>
+                            <th>Discount Price :</th>
+                            <th>৳ {{ $property->discount_price }}</th>
+                        </tr>
+                        <tr>
                             <th>Service Charge :</th>
-                            <th>{{ $property->service_charge }}</th>
+                            <th>৳ {{ $property->service_charge }}</th>
+                        </tr>
+                        <tr>
+                            <th class="text-primary">Total Price :</th>
+                            <th class="text-primary">৳ {{ number_format($property->total_price) }}</th>
                         </tr>
 
          	    	</table>

@@ -24,10 +24,11 @@
                         <ul class="ml-4" style="font-size: 16px;">
                             @foreach($subcity as $row)
                                 <li class="fas fa-arrow-right" style="font-size: 10px;"></li>
-                                <li class="list-inline-item"><a href="{{url('properties/'.$row->id) }}" style="color:blue;">{{ $row->subcity_name}}</a></li> <br>
+                                <li class="list-inline-item "><a href="{{url('properties/'.$row->id) }}" style="color:blue;">{{ $row->subcity_name}}</a></li> <br>
                             @endforeach
                         </ul>
                     </div>
+
     <!-------------City list--------------->
                     <div class="my-4 py-2 pr-0 mr-0">
                         <h3 style="color:#39af39; font-size:20px; padding-bottom:9px;">Available Cities :</h3>
@@ -95,8 +96,10 @@
                     <li style="font-size: 13px; padding-top:9px; height:39px; width: 39px; border-radius:50%;">New</li>
                     @else
                     @php
-                    $amount= $row->price - $row->discount_price;
-                    $discount= $amount/$row->price * 100;
+                        $price= implode(explode(',',$row->price));
+                        $discount_price= implode(explode(',',$row->discount_price));
+                        $amount= $price - $discount_price;
+                        $discount= $amount/$price * 100;
                     @endphp
                     <li style="font-size: 13px; padding-top:9px; height:39px; width: 39px; border-radius:50%;" title="Discount Available">
                         {{ intval($discount) }}%
@@ -141,15 +144,28 @@
             </a>
         </h3>
     @endif
-        <p style="font-size: 15px" class="text-dark mb-0 pb-0">{{$row->address}}, {{$row->subcity}}, {{$row->city_name}}.</p>
+        <p style="font-size: 15px" class="text-dark mb-0 pb-0" title="Place"><i class="fas fa-map-marker-alt mr-2 p-0" style="font-size:13px;"></i>{{$row->address}}, {{$row->subcity}}, {{$row->city_name}}.</p>
         <p style="font-size: 16px" class="text-primary mt-0 pt-1">Property Code: {{$row->property_code}}</p>
 
 
-    @if($row->discount_price == NULL)
+    @if($row->purpose=='Sale')
+        @if($row->discount_price == NULL)
+            <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->price}}</div>
+        @else
+            <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}}<span style="font-size: 17px"><del><b>BDT {{$row->price}}</b></del></span></div>
+        @endif
+    @else
+        @if($row->discount_price == NULL)
+            <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->price}} / month</div>
+        @else
+            <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}} / month<span style="font-size: 17px"><del><b>BDT {{$row->price}}</b></del></span></div>
+        @endif
+    @endif
+    {{-- @if($row->discount_price == NULL)
         <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->price}}</div>
     @else
         <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}}<span style="font-size: 17px"><del><b>BDT {{$row->price}}</b></del></span></div>
-    @endif
+    @endif --}}
 
         <div class="col-md-12 ml-0 pl-1" style="font-size: 20px">
             <i class="fas fa-bed pr-4" title="Bed Room"> {{$row->bedroom}} </i> |
@@ -158,16 +174,25 @@
             <i class="fas fa-home p-4" title="Area"> {{$row->area}} </i> |
             <i class="fas fa-building p-4" title="Floor Level"> {{$row->floor}} </i> |
         </div>
-        <a class="btn btn-primary py-2 px-4 mr-3 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-primary py-2 px-4 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
 
+        <div class="more">
+            <a class="btn btn-white py-2 px-4 mr-3 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+            <a class="btn py-2 px-4 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        </div>  <!--div class="more" extra added, & In <a> removed 'btn-primary',added button-pipaluk button--inverted-->
     </div>
     </div>
 
 @endforeach
     <!-- /.row -->
 
-                </div>
+
+    <!--If all property are sold under e subcategory then it will show this-->
+        @if (count($count)== 0)
+            <h2 class="text-danger text-center mt-5"><i class="fa fa-times pr-2 text-danger"></i> Sorry! No property available at this moment.</h2>
+        @endif
+
+
+    </div>
 
         <!--------------------Pagination--------------------->
                 <div class="p-5" style="margin-left:400px; font-size: 20px;">

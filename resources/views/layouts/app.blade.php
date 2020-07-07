@@ -52,34 +52,32 @@
     <div class="container">
         <div class="row">
             <div class="col d-flex flex-row">
-                <div class="top_bar_contact_item"><div class="top_bar_icon"><a href="{{ url('/') }}"> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="65px" height="65px"> <span class="text-primary h5" >{{ $setting->company_name }}<small style="font-size:12px">.com</small></span></a></div></div>
+                <!--class=top_bar_contact_item(rm)-->
+                <div class="more moreApp mt-2 "><div class="top_bar_icon"><a href="{{ url('/') }}" class="button-pipaluk button--inverted px-2"> <img src="{{asset('public/frontend/logo/logo3.jpg')}}" class="img-fluid rounded-circle" width="65px" height="65px"> <span class="text-primary h5" >{{ $setting->company_name }}<small style="font-size:12px">.com</small></span></a></div></div>
 
-                <div class="top_bar_contact_item mx-5"><i class="fa fa-phone pr-1"></i><a href="tel:{{ $setting->phone_one }}" style="color:black"> {{ $setting->phone_one }} </a></div>
-                <div class="top_bar_contact_item"><i class="far fa-envelope pr-1"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></div>
+                <div class="top_bar_contact_item mx-5" title="Call Us"><i class="fa fa-phone pr-1"></i><a href="tel:{{ $setting->phone_one }}" style="color:black"> {{ $setting->phone_one }} </a></div>
+
+                <div class="top_bar_contact_item" title="Send Us Email"><i class="far fa-envelope pr-1"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></div>
 
 
 
                 <div class="top_bar_content ml-auto">
-                    <div class="top_bar_menu">
-                        <ul class="standard_dropdown top_bar_dropdown">
+                    <div class="top_bar_menu more moreApp" title="Change Language" style="font-size:16px; font-family: Arial, Helvetica, sans-serif;">
     <!------Languaga(bangla/english)------->
-                            @php
-                                $language=session()->get('lang');
-                            @endphp
-                            <li class="">
-                                @if(session()->get('lang') == 'bangla')
-                                <a href="{{ route('language.english') }}">English</a>
-                                @else
-                                <a href="{{ route('language.bangla') }}">Bangla</a>
-                                @endif
-                            </li>
-                        </ul>
+                    @php
+                        $language=session()->get('lang');
+                    @endphp
+                        @if(session()->get('lang') == 'bangla')
+                        <a href="{{ route('language.english') }}" class="button-pipaluk button--inverted px-3 py-2 mt-2">English</a>
+                        @else
+                        <a href="{{ route('language.bangla') }}" class="button-pipaluk button--inverted px-3 py-2 mt-2">Bangla</a> <!--বাংলা-->
+                        @endif
                     </div>
 
 <!----User login/Register----->
                     <div class="top_bar_user">
                         @guest
-                            <div><a href="{{ route('login') }}">
+                            <div class="more moreApp"><a href="{{ route('login') }}" class="button-pipaluk button--inverted px-4 py-2" style="font-size:16px; color:black;">
                                 <div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
                                 @if(session()->get('lang') == 'bangla')
                                     রেজিস্টার/লগইন
@@ -89,13 +87,18 @@
                                 </a>
                             </div>
                         @else
-                            <ul class="standard_dropdown top_bar_dropdown">
-                                <li> <a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
-                                    Profile<i class="fas fa-chevron-down"></i></a>
-                                    <ul>
-                                        <li><a href="{{ route('home') }}">Profile<i class="fas fa-chevron-down"></i></a></li>
-                                        <li><a href="{{ route('add.property.user')}}">Add My Property</a></li>
-                                        <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                            <ul class="standard_dropdown top_bar_dropdown ">
+                                <li class="more moreApp"> <a href="{{ route('home') }}" class="button-pipaluk button--inverted px-4" style="font-size:16px; color:black; font-family: Arial, Helvetica, sans-serif;"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
+                                    @if(session()->get('lang') == 'bangla')
+                                        প্রোপাইল
+                                    @else
+                                        Profile
+                                    @endif
+                                </a>
+                                    <ul style="padding-top:2px; padding-bottom:1px;">
+                                        <li class="more moreS"><a href="{{ route('home') }}" class="button-pipaluk button--inverted pl-5">Profile</a></li>
+                                        <li class="more moreS"><a href="{{ route('add.property.user')}}" class="button-pipaluk button--inverted px-4">Add Property</a></li>
+                                        <li class="more moreS"><a href="{{ route('user.logout') }}" class="button-pipaluk button--inverted px-5">Logout</a></li>
                                     </ul>
                                 </li>
 
@@ -136,29 +139,31 @@
 @endphp
 
 <!-------------- Search ----------------->
-            <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-                <div class="header_search">
-                    <div class="header_search_content" style="left: 81px;">
-                        <div class="header_search_form_container">
-                            <form action="#" class="header_search_form clearfix">
-                                <input type="search" required="required" class="header_search_input" placeholder="Search by city or state...">
-                                <div class="custom_dropdown">
-                                    <div class="custom_dropdown_list">
-                                        <span class="custom_dropdown_placeholder clc">All Cities</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                        <ul class="custom_list clc">
-                                            @foreach($city as $row)
-                                                <li><a class="clc" href="{{url('city/properties/'.$row->id) }}">{{ $row->city_name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{asset('public/frontend/images/search.png')}}" alt=""></button>
-                            </form>
+    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+        <div class="header_search">
+            <div class="header_search_content" style="left: 81px;">
+                <div class="header_search_form_container">
+                    <form action="{{ route('product.search') }}" class="header_search_form clearfix" method="GET">
+                        @csrf
+                        <input type="search" required="required" class="header_search_input" placeholder="Search by city or state..." name="search">
+                        <div class="custom_dropdown">
+                            <div class="custom_dropdown_list">
+                                <span class="custom_dropdown_placeholder clc">All Cities</span>
+                                <i class="fas fa-chevron-down"></i>
+                                <ul class="custom_list clc">
+                                    @foreach($city as $row)
+                                        <li><a class="clc" href="{{url('city/properties/'.$row->id) }}">{{ $row->city_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('public/frontend/images/search.png') }}" alt=""></button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+
 
     <!------------ Wishlist ------------------->
             <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
@@ -235,7 +240,7 @@
                                             <ul class="brance-details">
                                                 <li><i class="fa fa-phone"></i><a href="tel:{{ $setting->phone_one }}" style="color:black"> {{ $setting->phone_one }} </a></li>
                                                 <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_one }}" style="color:black"> {{ $setting->email_one }} </a></li>
-                                                <li><i class="fa fa-map-marker"></i>{{ $setting->address_one }}</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>{{ $setting->address_one }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -245,7 +250,7 @@
                                             <ul class="brance-details">
                                                 <li><i class="fa fa-phone"></i><a href="tel:{{ $setting->phone_two }}" style="color:black"> {{ $setting->phone_two }} </a></li>
                                                 <li><i class="far fa-envelope"></i><a href="mailto:{{ $setting->email_two }}" style="color:black"> {{ $setting->email_two }} </a></li>
-                                                <li><i class="fa fa-map-marker"></i>{{ $setting->address_two }}</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>{{ $setting->address_two }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -303,8 +308,8 @@
                 <textarea class="form-control" rows="3" cols="4" name="message" placeholder="Your Message Will Go Here" required></textarea>
             </div>
 
-            <div id="submit-btn">
-                <button class="btn btn-info btn-block text-light" title="submit" role="button">Submit</button>
+            <div id="submit-btn" class="more">
+                <button class="btn bg-transparent btn-block text-light button-pipaluk button--inverted" style="font-size: 17px; padding:8px;" role="button">Submit</button>
             </div>
 
         </form>
@@ -352,6 +357,7 @@
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
     <!---   OR----////------>
     <script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>
+
 
 
 <!--=====================================================
@@ -443,11 +449,14 @@
 
                 <input type="hidden" name="property_code"  value="{{$row->property_code}}">
 
-                <button type="submit" class="btn btn-block btn-danger text-white">Send Email</button>
+                {{-- <button type="submit" class="btn btn-block btn-danger text-white">Send Email</button> --}}
+                <div class="more more2">
+                    <button type="submit" class="btn btn-block text-white bg-transparent button-pipaluk button--inverted" style="font-size: 17px; padding:8px;">Send Email</button>
+                </div>
             </form>
         </div>
-        <div class="modal-footer">
-          <span class="text-muted" style="font-size: 10px;">You agree to Bariwala's Terms of Use & Privacy Policy By choosing to contact a property, Property managers may call,text or email you about any inquiries you submit through our services, which may involve use of automated means and prerecorded/artificial voices. You don't need to consent as a condition of renting any property, or buying any other goods or services. Message/data rates may apply.</span>
+        <div class="modal-footer mt-0 pt-1">
+          <span class="text-muted text-justify" style="font-size: 10px;">You agree to Bariwala's Terms of Use & Privacy Policy By choosing to contact a property, Property managers may call,text or email you about any inquiries you submit through our services, which may involve use of automated means and prerecorded/artificial voices. You don't need to consent as a condition of renting any property, or buying any other goods or services. Message/data rates may apply.</span>
         </div>
         </div>
       </div>

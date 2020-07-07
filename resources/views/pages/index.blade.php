@@ -4,7 +4,7 @@
 @section('content')
 @include('layouts.menubar')
 
-<script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>   <!--f_A--->
+<script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>   <!--f_Ajx--->
 
 
 <!---------------------- Start 'Deals of the week'(hot_new_arrival)---------------------------->
@@ -87,7 +87,9 @@
 
 
                                     <div class="row mb-4">
-                                        <div class="col-md-12 mb-2">{{$ht->address}}</div>
+                                        <div class="col-md-12 mb-2" title="Place">
+                                            <i class="fas fa-map-marker-alt mr-2 p-0" style="font-size:13px;" title="Place"></i>{{$ht->address}}
+                                        </div>
                                         <div class="col-md-12">
                                             <i class="fas fa-bed" title="Bed Room"> {{$ht->bedroom}}</i>|
                                             <i class="fas fa-bath" title="Bath Room"> {{$ht->bathroom}}</i>|
@@ -206,10 +208,10 @@
                                             </div>
 
     <!--------"Call & Email" (app.balde.php e niche "Modal" er code ache)-------->
-                                            <div class="product_extras product_cart_button">
+                                            <div class="product_extras product_cart_button more moreFront">
                                                 {{-- <button class="product_cart_button">Check Availability</button> --}}
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                             </div>
                                         </div>
 
@@ -232,8 +234,10 @@
                                             <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                             @else
                                             @php
-                                            $amount= $row->price - $row->discount_price;
-                                            $discount= $amount/$row->price * 100;
+                                                $price= implode(explode(',',$row->price));
+                                                $discount_price= implode(explode(',',$row->discount_price));
+                                                $amount= $price - $discount_price;
+                                                $discount= $amount/$price * 100;
                                             @endphp
                                             <li class="product_mark product_discount" title="Discount Available">
                                                 {{ intval($discount) }}%
@@ -311,9 +315,9 @@
                                         </div>
 
         <!--------"Call & Email" (app.balde.php e niche "Modal" er code ache)-------->
-                                        <div class="product_extras product_cart_button">
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+                                        <div class="product_extras product_cart_button more moreFront">
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                         </div>
                                     </div>
 
@@ -330,8 +334,10 @@
                                         <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                         @else
                                         @php
-                                        $amount= $row->price - $row->discount_price;
-                                        $discount= $amount/$row->price * 100;
+                                            $price= implode(explode(',',$row->price));
+                                            $discount_price= implode(explode(',',$row->discount_price));
+                                            $amount= $price - $discount_price;
+                                            $discount= $amount/$price * 100;
                                         @endphp
                                         <li class="product_mark product_discount" title="Discount Percentage">
                                             {{ intval($discount) }}%
@@ -407,9 +413,9 @@
                                     </div>
 
         <!--------"Call & Email" (app.balde.php e niche "Modal" er code ache)-------->
-                                    <div class="product_extras product_cart_button">
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-3 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+                                    <div class="product_extras product_cart_button more moreFront">
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+    <a class="btn py-2 px-3 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                     </div>
                                 </div>
 
@@ -426,8 +432,10 @@
                                     <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                     @else
                                     @php
-                                    $amount= $row->price - $row->discount_price;
-                                    $discount= $amount/$row->price * 100;
+                                        $price= implode(explode(',',$row->price));
+                                        $discount_price= implode(explode(',',$row->discount_price));
+                                        $amount= $price - $discount_price;
+                                        $discount= $amount/$price * 100;
                                     @endphp
                                     <li class="product_mark product_discount" title="Discount Percentage">
                                         {{ intval($discount) }}%
@@ -549,9 +557,9 @@
                                             <i class="fas fa-home" title="Area"> {{$row->area}}</i>
                                         </div>
                                     </div>
-                                    <div class="" style="margin: 0px 0px;">
-    <a class="btn btn-outline-primary py-2 px-3 mr-3" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-2"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-3" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-2"></i> Email </a>
+                                    <div class="more" style="margin: 0px 0px;">
+    <a class="btn text-white py-2 px-3 mr-3 button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-2"></i> Call </a>
+    <a class="btn text-white py-2 px-3 button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-2"></i> Email </a>
                                     </div>
                                 </div>
 
@@ -568,8 +576,10 @@
                                         <li class="trends_mark trends_new" style="background: #6868cc;">New</li>
                                     @else
                                     @php
-                                    $amount= $row->price - $row->discount_price;
-                                    $discount= $amount/$row->price * 100;
+                                        $price= implode(explode(',',$row->price));
+                                        $discount_price= implode(explode(',',$row->discount_price));
+                                        $amount= $price - $discount_price;
+                                        $discount= $amount/$price * 100;
                                     @endphp
                                     <li class="trends_mark trends_new bg-danger" title="Discount Percentage">
                                         {{ intval($discount) }}%
@@ -582,11 +592,11 @@
                     @endforeach
 
                 </div>
-            </div>  <!--col-->
-        </div> <!--row-->
+            </div>
+        </div>  <!--col-->
 
-    </div> <!--container-->
-</div>
+    </div>  <!--row-->
+</div>  <!--container-->
 </div>
 
 <!--------//------------//----------//---------End Best Rated----------//------------//-------------//------------>
@@ -676,10 +686,10 @@
                                                     </div>
 
             <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                    <div class="product_extras product_cart_button">
+                                                    <div class="product_extras product_cart_button more moreFront">
                                                         {{-- <button class="product_cart_button">Check Availability</button> --}}
-    <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+    <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+    <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                     </div>
                                                 </div>
 
@@ -702,8 +712,10 @@
                                                     <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                     @else
                                                     @php
-                                                    $amount= $row->price - $row->discount_price;
-                                                    $discount= $amount/$row->price * 100;
+                                                        $price= implode(explode(',',$row->price));
+                                                        $discount_price= implode(explode(',',$row->discount_price));
+                                                        $amount= $price - $discount_price;
+                                                        $discount= $amount/$price * 100;
                                                     @endphp
                                                     <li class="product_mark product_discount" title="Discount Percentage">
                                                         {{ intval($discount) }}%
@@ -781,10 +793,10 @@
                                                 </div>
 
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                <div class="product_extras product_cart_button">
+                                                <div class="product_extras product_cart_button more moreFront">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -807,8 +819,10 @@
                                                 <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                 @else
                                                 @php
-                                                $amount= $row->price - $row->discount_price;
-                                                $discount= $amount/$row->price * 100;
+                                                    $price= implode(explode(',',$row->price));
+                                                    $discount_price= implode(explode(',',$row->discount_price));
+                                                    $amount= $price - $discount_price;
+                                                    $discount= $amount/$price * 100;
                                                 @endphp
                                                 <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
@@ -882,10 +896,10 @@
                                                 </div>
 
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                <div class="product_extras product_cart_button">
+                                                <div class="product_extras product_cart_button more moreFront">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -908,8 +922,10 @@
                                                 <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                 @else
                                                 @php
-                                                $amount= $row->price - $row->discount_price;
-                                                $discount= $amount/$row->price * 100;
+                                                    $price= implode(explode(',',$row->price));
+                                                    $discount_price= implode(explode(',',$row->discount_price));
+                                                    $amount= $price - $discount_price;
+                                                    $discount= $amount/$price * 100;
                                                 @endphp
                                                 <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
@@ -1111,9 +1127,9 @@
                                             <i class="fas fa-home" title="Area"> {{$row->area}}</i>
                                         </div>
                                     </div>
-                                    <div class="" style="margin: 0px 0px;">
-    <a class="btn btn-outline-primary py-2 px-3 mr-3" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-2"></i> Call </a>
-    <a class="btn btn-outline-primary py-2 px-3" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-2"></i> Email </a>
+                                    <div class="more" style="margin: 0px 0px;">
+    <a class="btn text-white py-2 px-3 mr-3 button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-2"></i> Call </a>
+    <a class="btn text-white py-2 px-3 button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-2"></i> Email </a>
                                     </div>
                                 </div>
 
@@ -1130,8 +1146,10 @@
                                         <li class="trends_mark trends_new" style="background: #6868cc;">New</li>
                                     @else
                                     @php
-                                    $amount= $row->price - $row->discount_price;
-                                    $discount= $amount/$row->price * 100;
+                                        $price= implode(explode(',',$row->price));
+                                        $discount_price= implode(explode(',',$row->discount_price));
+                                        $amount= $price - $discount_price;
+                                        $discount= $amount/$price * 100;
                                     @endphp
                                     <li class="trends_mark trends_new bg-danger" title="Discount Percentage">
                                         {{ intval($discount) }}%
@@ -1152,94 +1170,6 @@
 </div>
 
 <!--------//------------//----------//---------End Trends----------//------------//-------------//------------>
-
-
-
-
-<!------------------------------------Start Trends(Html Template)--------------------------------------->
-{{-- <div class="trends">
-    <div class="trends_background"></div>
-    <div class="trends_overlay"></div>
-    <div class="container">
-        <div class="row">
-
-            <!-- Trends Content -->
-            <div class="col-lg-3">
-                <div class="trends_container">
-                    <h2 class="trends_title text-light">Trends 2020</h2>
-                    <div class="trends_text"><p style="color: white">Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p></div>
-                    <div class="trends_slider_nav">
-                        <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                        <div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Trends Slider -->
-            <div class="col-lg-9">
-                <div class="trends_slider_container">
-
-                    <!-- Trends Slider -->
-
-                    <div class="owl-carousel owl-theme trends_slider">
-
-                        <!-- Trends Slider Item -->
-                        <div class="owl-item">
-                            <div class="trends_item is_new">
-
-                                <div class="trends_image portfolio-item d-flex flex-column align-items-center justify-content-center">
-                                    <img src="{{asset('public/frontend/images/sample/int (1).jpg')}}">
-                                    <div class="portfolio-item-overlay" title="Click for details">
-                                        <div class="portfolio-item-details text-center">
-                                            <!--item logo-->
-                                            <h3 style="font-size:12px">Apartment For Rent</h3>
-                                            <!--item strips-->
-                                            <span></span>
-                                            <!--item description-->
-                                            <p style="font-size:13px">Moradpur, Chattogram</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trends_content" style="margin-top: 5px">
-                                    <div class="trends_category"><a href="#">Chattogram</a></div>
-                                    <div class="trends_info clearfix">
-                                        <div class="trends_name"><a href="product.html">Bahaddarhat</a></div>
-                                        <div class="trends_price">৳5,500,000</div>
-                                    </div>
-
-                                    <div class="DealsWeek row no-gutters align-items-center justify-content-start mt-0" style="color:blue">
-                                        <span class="col-md-7">Building For Rent</span> <span class="col-md-5 mr-auto justify-content-start"><hr></span>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <div class="col-md-12">
-                                            <i class="fas fa-bed" title="Bed Room"> 5 </i> |
-                                            <i class="fas fa-bath" title="Bath Room"> 4 </i> |
-                                            <i class="fas fa-car" title="Parking"> 1 </i> |
-                                            <i class="fas fa-home" title="Area"> 1,686 sqft.</i>
-                                        </div>
-                                    </div>
-                                     <form action="#"><button class="arrivals_single_button" style="margin: 0px 0px;">Confirm Property</button></form>
-
-                                </div>
-                                <ul class="trends_marks">
-                                    <li class="trends_mark trends_discount">-25%</li>
-                                    <li class="trends_mark trends_new">new</li>
-                                </ul>
-                                <div class="trends_fav"><i class="fas fa-heart"></i></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div> --}}
-<!---------//-----------//-------------End Trends(Html Template)-----------//-----------//--------------//------------>
-
 
 
 
@@ -1325,10 +1255,10 @@
                                                     </div>
 
             <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                    <div class="product_extras product_cart_button">
+                                                    <div class="product_extras product_cart_button more moreFront">
                                                         {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                     </div>
                                                 </div>
 
@@ -1351,8 +1281,10 @@
                                                     <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                     @else
                                                     @php
-                                                    $amount= $row->price - $row->discount_price;
-                                                    $discount= $amount/$row->price * 100;
+                                                        $price= implode(explode(',',$row->price));
+                                                        $discount_price= implode(explode(',',$row->discount_price));
+                                                        $amount= $price - $discount_price;
+                                                        $discount= $amount/$price * 100;
                                                     @endphp
                                                     <li class="product_mark product_discount" title="Discount Percentage">
                                                         {{ intval($discount) }}%
@@ -1430,10 +1362,10 @@
                                                 </div>
 
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                <div class="product_extras product_cart_button">
+                                                <div class="product_extras product_cart_button more moreFront">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -1456,8 +1388,10 @@
                                                 <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                 @else
                                                 @php
-                                                $amount= $row->price - $row->discount_price;
-                                                $discount= $amount/$row->price * 100;
+                                                    $price= implode(explode(',',$row->price));
+                                                    $discount_price= implode(explode(',',$row->discount_price));
+                                                    $amount= $price - $discount_price;
+                                                    $discount= $amount/$price * 100;
                                                 @endphp
                                                 <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
@@ -1533,10 +1467,10 @@
                                                 </div>
 
         <!--------"Check Availability" (niche "Modal" er code ache)-------->
-                                                <div class="product_extras product_cart_button">
+                                                <div class="product_extras product_cart_button more moreFront">
                                                     {{-- <button class="product_cart_button">Check Availability</button> --}}
-        <a class="btn btn-outline-primary py-2 px-4 mr-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-outline-primary py-2 px-4 ml-2 text-white" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        <a class="btn py-2 px-4 mr-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn py-2 px-4 ml-2 text-white button-pipaluk button--inverted" style="font-size: 16px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
                                                 </div>
                                             </div>
 
@@ -1559,8 +1493,10 @@
                                                 <li class="product_mark product_discount" style="background: #6868cc;">New</li>
                                                 @else
                                                 @php
-                                                $amount= $row->price - $row->discount_price;
-                                                $discount= $amount/$row->price * 100;
+                                                    $price= implode(explode(',',$row->price));
+                                                    $discount_price= implode(explode(',',$row->discount_price));
+                                                    $amount= $price - $discount_price;
+                                                    $discount= $amount/$price * 100;
                                                 @endphp
                                                 <li class="product_mark product_discount" title="Discount Percentage">
                                                     {{ intval($discount) }}%
@@ -1837,122 +1773,6 @@
 
 
 
-<!--------------------------Start Recently Viewed ------------------------>
-
-{{-- <div class="viewed">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="viewed_title_container">
-                    <h3 class="viewed_title">Recently Viewed</h3>
-                    <div class="viewed_nav_container">
-                        <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
-                    </div>
-                </div>
-
-                <div class="viewed_slider_container">
-
-                    <!-- Recently Viewed Slider -->
-
-                    <div class="owl-carousel owl-theme viewed_slider">
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="{{asset('public/frontend/images/sample/w (3).jpg')}}" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Beoplay H7</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="{{asset('public/frontend/images/sample/k (3).jpg')}}" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="{{asset('public/frontend/images/sample/w (2).jpg')}}" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225</div>
-                                    <div class="viewed_name"><a href="#">Samsung J730F...</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="images/view_4.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="images/view_5.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="images/view_6.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$375</div>
-                                    <div class="viewed_name"><a href="#">Speedlink...</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-<!--------------------------End Recently Viewed ------------------------>
 
 
 
@@ -2002,7 +1822,7 @@
             <div class="card bg-light text-dark my-2">
                 <div class="card-header text-primary" role="tab">
                     <h4 class="mb-0">
-                    <div data-toggle="collapse" href="#questionOne"><i class="fa fa-arrow-circle-down pr-2"></i>How do I post a property for sale/rent? </div>
+                    <div data-toggle="collapse" href="#questionOne"><i class="fa fa-arrow-circle-down pr-2"></i>How do I post a property for sale/rent?</div>
                     </h4>
                 </div>
                 <div class="collapse" id="questionOne" data-parent="#accordion">

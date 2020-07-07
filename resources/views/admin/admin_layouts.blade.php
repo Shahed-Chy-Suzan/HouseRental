@@ -152,10 +152,10 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link">Today Order</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Today Delevered</a></li>
-          <li class="nav-item"><a href="" class="nav-link">This Month</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Search Report</a></li>
+          <li class="nav-item"><a href="{{ route('today.order') }}" class="nav-link">Today's Order</a></li>
+          <li class="nav-item"><a href="{{ route('today.delevered') }}" class="nav-link">Today Delevered</a></li>
+          <li class="nav-item"><a href="{{ route('this.month') }}" class="nav-link">This Month</a></li>
+          <li class="nav-item"><a href="{{ route('search.report') }}" class="nav-link">Search Report</a></li>
         </ul>
         @else
         @endif
@@ -232,7 +232,7 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{ route('admin.database.backup') }}" class="nav-link">Databse Backup </a></li>
+            <li class="nav-item"><a href="{{ route('admin.database.backup') }}" class="nav-link">Database Backup </a></li>
         </ul>
         @else
         @endif

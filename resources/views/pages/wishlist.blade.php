@@ -3,9 +3,7 @@
 
 
 @php
-    $setting=DB::table('sitesetting')->first();
     $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();   //for count-wishlist
-    $property1=DB::table('user_properties')->where('user_id',Auth::id())->get();
 @endphp
 
 
@@ -15,7 +13,7 @@
     <div class="py-4">
         <div class="container">
             <h3 style="font-size: 30px" class="text-primary mb-0"><a href="{{ route('user.wishlist') }}">Your Wishlists : </a></h3>
-            <p style="font-size: 17px; margin-top:0px"> <span class="badge badge-success text-white rounded-circle p-1">{{ count($wishlist) }}</span> Saved Property.</p>
+            <p style="font-size: 17px; margin-top:0px"> <span class="badge badge-success text-white rounded-circle p-1">{{ count($wishlistCount) }} </span> Saved Property.</p>
         </div>
     </div>
 
@@ -50,8 +48,10 @@
                     <li style="font-size: 15px; padding-top:8px; height:41px; width: 41px; border-radius:50%;">New</li>
                     @else
                     @php
-                    $amount= $row->price - $row->discount_price;
-                    $discount= $amount/$row->price * 100;
+                        $price= implode(explode(',',$row->price));
+                        $discount_price= implode(explode(',',$row->discount_price));
+                        $amount= $price - $discount_price;
+                        $discount= $amount/$price * 100;
                     @endphp
                     <li style="font-size: 15px; padding-top:8px; height:41px; width: 41px; border-radius:50%;" title="Discount Available">
                         {{ intval($discount) }}%
@@ -96,14 +96,15 @@
             </a>
         </h3>
     @endif
-        <p style="font-size: 15px" class="text-dark mb-0 pb-0">{{$row->address}}, {{$row->subcity_name}}, {{$row->city_name}}.</p>
+        <p style="font-size: 15px" class="text-dark mb-0 pb-0" title="Place"><i class="fas fa-map-marker-alt mr-2 p-0" style="font-size:13px;"></i>{{$row->address}}, {{$row->subcity_name}}, {{$row->city_name}}.</p>
         <p style="font-size: 16px" class="text-primary mt-0 pt-1">Property Code: {{$row->property_code}}</p>
 
 
     @if($row->discount_price == NULL)
         <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->price}}</div>
     @else
-        <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}}<span style="font-size: 17px"><del><b> BDT {{$row->price}}</b></del></span></div>
+        <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}}<span style="font-size: 17px"><del><b>BDT {{$row->price}}</b></del></span></div>
+        {{-- <div style="font-size: 25px" class="product_price discount my-0"> BDT {{$row->discount_price}} / month<span style="font-size: 17px"><del><b>BDT {{$row->price}}</b></del></span></div> --}}
     @endif
 
         <div class="col-md-12 ml-0 pl-1" style="font-size: 20px">
@@ -113,8 +114,13 @@
             <i class="fas fa-home p-4" title="Area"> {{$row->area}} </i> |
             <i class="fas fa-building p-4" title="Floor Level"> {{$row->floor}} </i> |
         </div>
-        <a class="btn btn-primary py-2 px-4 mr-3 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->property_id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-        <a class="btn btn-primary py-2 px-4 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->property_id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+
+        {{-- <a class="btn btn-primary py-2 px-4 mr-3 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->property_id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+        <a class="btn btn-primary py-2 px-4 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->property_id}}"><i class="far fa-envelope pr-1"></i> Email </a> --}}
+        <div class="more">
+            <a class="btn btn-white py-2 px-4 mr-3 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+            <a class="btn py-2 px-4 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+        </div>  <!--div class="more" extra added, & In <a> removed 'btn-primary',added button-pipaluk button--inverted-->
 
     </div>
     </div>
