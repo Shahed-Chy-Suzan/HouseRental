@@ -1,6 +1,7 @@
 @extends('admin.admin_layouts')
 
 @section('admin_content')
+
 <br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">

@@ -42,10 +42,10 @@ class PropertyController extends Controller
 //--------------Read---Nav-(Pending_Properties)------------------------
     public function backendUserProperty(){
         $property=DB::table('user_properties')
-                        ->join('cities','user_properties.city_id','cities.id')
-                        ->select('user_properties.*','cities.city_name')
-                        ->where('status',0)
-                        ->get();
+                ->join('cities','user_properties.city_id','cities.id')
+                ->select('user_properties.*','cities.city_name')
+                ->where('status',0)
+                ->get();
         return view('admin.properties.user_property_request',compact('property'));
         // dd($userProperties);
     }

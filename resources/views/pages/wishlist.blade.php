@@ -118,8 +118,8 @@
         {{-- <a class="btn btn-primary py-2 px-4 mr-3 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->property_id}}"><i class="fas fa-phone pr-1"></i> Call </a>
         <a class="btn btn-primary py-2 px-4 text-white" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->property_id}}"><i class="far fa-envelope pr-1"></i> Email </a> --}}
         <div class="more">
-            <a class="btn btn-white py-2 px-4 mr-3 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->id}}"><i class="fas fa-phone pr-1"></i> Call </a>
-            <a class="btn py-2 px-4 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->id}}"><i class="far fa-envelope pr-1"></i> Email </a>
+            <a class="btn btn-white py-2 px-4 mr-3 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#call{{$row->property_id}}"><i class="fas fa-phone pr-1"></i> Call </a>
+            <a class="btn py-2 px-4 text-white button-pipaluk button--inverted" style="font-size: 18px" roll="button" data-toggle="modal" data-target="#email{{$row->property_id}}"><i class="far fa-envelope pr-1"></i> Email </a>
         </div>  <!--div class="more" extra added, & In <a> removed 'btn-primary',added button-pipaluk button--inverted-->
 
     </div>

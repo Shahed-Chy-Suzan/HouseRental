@@ -342,17 +342,6 @@
 </div><!-- sl-mainpanel -->
 
 
-
-
-
-
-
-
-
-
-
-
-
 @endsection
 
 

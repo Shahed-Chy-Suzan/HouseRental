@@ -4,26 +4,11 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/blog_responsive.css') }}">
 
 
-{{-- <div class="home">
-	<div class="home_background parallax-window" data-parallax="scroll" data-image-src="{{ asset('public/frontend/images/shop_background.jpg') }}"></div>
-	<div class="home_overlay"></div>
-	<div class="home_content d-flex flex-column align-items-center justify-content-center">
-		<h2 class="home_title font-weight-bold text-primary h1">
-            @if(session()->get('lang') == 'bangla')
-                আমাদের ব্লগে আপনাকে স্বাগতম
-            @else
-                Welcome to our Blog
-            @endif
-        </h2>
-	</div>
-</div> --}}
-
 
 <section id="homeBlog" class="text-left text-light" style="background-image:url({{ asset('public/frontend/images/Cover/blog5.jpg') }})">
     <div class="primary-overlay1">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-9 offset-lg-1 pt-5 mt-5" data-aos="zoom-in">
             <div class="shadow-lg rounded" style=" background:#AC5488; opacity: .8; color:white">
                 <h1 class="home_title text-center p-5 mt-5 shadow-lg">
@@ -35,16 +20,6 @@
                 </h1>
             </div>
         </div>
-
-          {{-- <div class="col-md-6">
-            <h2 class="home_title">
-                @if(session()->get('lang') == 'bangla')
-                    আমাদের ব্লগে আপনাকে স্বাগতম
-                @else
-                    Welcome to our Blog
-                @endif
-            </h2>
-          </div> --}}
 
         </div>
       </div>

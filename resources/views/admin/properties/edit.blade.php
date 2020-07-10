@@ -265,7 +265,7 @@
 
 
 
-<!---------- Update Product With Photo ---------------->
+<!---------- Update Property With Photo ---------------->
 
 
        <div class="sl-pagebody">

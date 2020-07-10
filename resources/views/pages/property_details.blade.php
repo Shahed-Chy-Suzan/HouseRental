@@ -232,7 +232,6 @@
 
 
 <!-------- Start Facebook_Comment_Box-----Video Link------>
-    <!-----Map----->
     <div class="row mt-5 pt-0">
         <h3 class="col-md-12 p-2 mb-3 text-success" style="background-color: #e1f1e9e5; font-size:29px;">Property Review</h3>
         <div class="col-md-12 ml-2 pr-2">

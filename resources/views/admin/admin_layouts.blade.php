@@ -20,15 +20,15 @@
     <link href="{{asset('public/backend/lib/Ionicons/css/ionicons.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/rickshaw/rickshaw.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/highlightjs/github.css') }}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/highlightjs/github.css') }}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
     <link href="{{asset('public/backend/lib/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
+    <link href="{{asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
 
-    <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css"> --}}
 
+    <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('public/backend/css/starlight.css')}}">
 
   </head>
@@ -451,7 +451,7 @@
     @yield('admin_content')
 
 
-
+    <!-----Js_Files------->
     <script src="{{ asset('public/backend/lib/jquery/jquery.js') }}"></script>
     <script src="{{ asset('public/backend/lib/popper.js/popper.js') }}"></script>
     <script src="{{ asset('public/backend/lib/bootstrap/bootstrap.js') }}"></script>

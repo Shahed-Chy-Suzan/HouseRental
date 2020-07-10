@@ -49,11 +49,6 @@
                     @else
                     @endif
 
-                    {{-- @if($row->properties == 1)
-                        <span class="badge badge-primary">Properties</span>
-                    @else
-                    @endif --}}
-
                     @if($row->orders == 1)
                         <span class="badge badge-danger p-1">Orders</span>
                     @else
