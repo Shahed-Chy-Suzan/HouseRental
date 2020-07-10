@@ -171,7 +171,15 @@
                     @guest
                     @else
                         @php
-                        $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();
+                        $wishlistCount=DB::table('wishlists')
+                                ->join('user_properties','wishlists.property_id','user_properties.id')
+                                ->join('cities','user_properties.city_id','cities.id')
+                                ->join('subcities','user_properties.subcity_id','subcities.id')
+                                ->join('users','wishlists.user_id','users.id')
+                                ->select('user_properties.*','wishlists.*','cities.city_name','subcities.subcity_name','users.*')
+                                ->where('wishlists.user_id',$userid)
+                                ->whereIn('status', [1,2])
+                                ->get();
                         @endphp
                     <div class="wishlist d-flex flex-row align-items-center justify-content-end" data-aos="fade-up-left">
                         <a href="{{route('user.wishlist')}}" style="width: 28px;">
@@ -190,11 +198,11 @@
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                             <div class="cart_icon">
                                 <img src="{{asset('public/frontend/images/cart.png')}}" alt="">
-                                <div class="cart_count"><span>10</span></div>
+                                <div class="cart_count"><span>0</span></div>
                             </div>
                             <div class="cart_content">
                                 <div class="cart_text"><a href="#">Cart</a></div>
-                                <div class="cart_price">$85</div>
+                                <div class="cart_price">$0</div>
                             </div>
                         </div>
                     </div>
