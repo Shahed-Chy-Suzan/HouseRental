@@ -188,7 +188,7 @@ class FrontController extends Controller
             return redirect()->route('home')->with($notification);
         }else{
             $notification=array(
-                    'message'=>'Nothing To Updated',
+                    'message'=>'Nothing To Update',
                     'alert-type'=>'success'
             );
             return redirect()->route('home')->with($notification);
