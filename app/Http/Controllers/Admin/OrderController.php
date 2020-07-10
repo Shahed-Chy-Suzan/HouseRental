@@ -39,15 +39,15 @@ class OrderController extends Controller
 
 
 //------------View-------------
-public function ViewProperty($property_code){
-    $property=DB::table('user_properties')
-            ->join('cities','user_properties.city_id','cities.id')
-            ->join('subcities','user_properties.subcity_id','subcities.id')
-            ->select('user_properties.*','cities.city_name','subcities.subcity_name')
-            ->where('user_properties.property_code',$property_code)
-            ->first();
-    return view('admin.properties.show',compact('property'));
-}
+    public function ViewProperty($property_code){
+        $property=DB::table('user_properties')
+                ->join('cities','user_properties.city_id','cities.id')
+                ->join('subcities','user_properties.subcity_id','subcities.id')
+                ->select('user_properties.*','cities.city_name','subcities.subcity_name')
+                ->where('user_properties.property_code',$property_code)
+                ->first();
+        return view('admin.properties.show',compact('property'));
+    }
 
 //-----------------Delete----------------------
     public function deleteOrder($id){

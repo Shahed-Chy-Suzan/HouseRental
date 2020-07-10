@@ -97,7 +97,6 @@ class ReportController extends Controller
         $data['coupon']=$request->coupon;
         $data['blogs']=$request->blogs;
         $data['all_properties']=$request->all_properties;
-        // $data['properties']=$request->properties;
         $data['orders']=$request->orders;
         $data['reports']=$request->reports;
         $data['user_role']=$request->user_role;
@@ -115,6 +114,7 @@ class ReportController extends Controller
         return Redirect()->back()->with($notification);
     }
 
+
     public function UserDelete($id){
         DB::table('admins')->where('id',$id)->delete();
         $notification=array(
@@ -123,6 +123,7 @@ class ReportController extends Controller
             );
         return Redirect()->back()->with($notification);
     }
+
 
     public function UserEdit($id){
         $user=DB::table('admins')->where('id',$id)->first();
@@ -140,7 +141,6 @@ class ReportController extends Controller
         $data['coupon']=$request->coupon;
         $data['blogs']=$request->blogs;
         $data['all_properties']=$request->all_properties;
-        // $data['properties']=$request->properties;
         $data['orders']=$request->orders;
         $data['reports']=$request->reports;
         $data['user_role']=$request->user_role;

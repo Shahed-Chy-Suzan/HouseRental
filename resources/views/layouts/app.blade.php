@@ -88,7 +88,7 @@
                             </div>
                         @else
                             <ul class="standard_dropdown top_bar_dropdown ">
-                                <li class="more moreApp"> <a href="{{ route('home') }}" class="button-pipaluk button--inverted px-4" style="font-size:16px; color:black; font-family: Arial, Helvetica, sans-serif;"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
+                                <li class="more moreApp"> <a href="{{ route('home') }}" class="button-pipaluk button--inverted px-4" style="font-size:16px; color:#333333; font-family: Arial, Helvetica, sans-serif;"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
                                     @if(session()->get('lang') == 'bangla')
                                         প্রোপাইল
                                     @else
@@ -143,7 +143,7 @@
         <div class="header_search">
             <div class="header_search_content" style="left: 81px;">
                 <div class="header_search_form_container">
-                    <form action="{{ route('product.search') }}" class="header_search_form clearfix" method="GET">
+                    <form action="{{ route('property.search') }}" class="header_search_form clearfix" method="GET">
                         @csrf
                         <input type="search" required="required" class="header_search_input" placeholder="Search by city or state..." name="search">
                         <div class="custom_dropdown">
@@ -174,7 +174,7 @@
                         $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();
                         @endphp
                     <div class="wishlist d-flex flex-row align-items-center justify-content-end" data-aos="fade-up-left">
-                        <a href="http://localhost/HouseRental/user/wishlist" style="width: 28px;">
+                        <a href="{{route('user.wishlist')}}" style="width: 28px;">
                         <div class="wishlist_icon"><img src="{{asset('public/frontend/images/heart.png')}}"></div>
                         <div class="wishlist_content">
                         <div class="wishlist_text"><a href="{{ route('user.wishlist') }}">Wishlist</div>

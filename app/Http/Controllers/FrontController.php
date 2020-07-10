@@ -119,7 +119,7 @@ class FrontController extends Controller
 
                 $userProperty=DB::table('user_properties')->insert($data);
 
-                Mail::to($email)->send(new invoiceMail($data));    //-------For mail send to user-----------
+                Mail::to($email)->send(new invoiceMail($data));    //-------For sending Mail to user---------
 
                 $notification=array(
                     'message'=>'Successfully Property Inserted',
@@ -134,7 +134,7 @@ class FrontController extends Controller
 
 
 //----------------Search (frontend)--------------------------
-    public function ProductSearch(Request $request){
+    public function PropertySearch(Request $request){
 
         $item=$request->search;
 
@@ -180,11 +180,20 @@ class FrontController extends Controller
 
         $profile= DB::table('users')->where('id',$id)->update($data);
 
-        $notification = array(
-            'message'=>'Successfully Profile Updated',
-            'alert-type'=>'success'
-        );
-        return redirect()->route('home')->with($notification);
+        if ($profile) {
+            $notification=array(
+                    'message'=>'Successfully Profile Updated',
+                    'alert-type'=>'success'
+            );
+            return redirect()->route('home')->with($notification);
+        }else{
+            $notification=array(
+                    'message'=>'Nothing To Updated',
+                    'alert-type'=>'success'
+            );
+            return redirect()->route('home')->with($notification);
+        }
+
     }
 
 

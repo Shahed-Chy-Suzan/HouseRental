@@ -40,6 +40,7 @@ class AdminController extends Controller
         return view('admin.auth.passwordchange');
     }
 
+
     public function Update_pass(Request $request)
     {
       $password=Auth::user()->password;

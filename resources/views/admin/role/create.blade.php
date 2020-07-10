@@ -68,12 +68,6 @@
 					  <span>All Properties</span>
 					</label>
             	</div>
-            	{{-- <div class="col-lg-4">
-            		<label class="ckbox">
-					  <input type="checkbox" name="properties" value="1">
-					  <span>Orders</span>
-					</label>
-            	</div> --}}
             	<div class="col-lg-4">
             		<label class="ckbox">
       					<input type="checkbox" name="orders" value="1">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-@php                    //------For Calculating total Search_Count.
+@php                    //------For Counting total Search_Count.
 $property1=DB::table('user_properties')
                 ->join('cities','user_properties.city_id','cities.id')
                 ->select('user_properties.*','cities.city_name')

@@ -5,7 +5,7 @@
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
         //------------blog-------------------
-Route::get('blog/post','BlogController@blog')->name('blog.post');
+Route::get('blog/post','BlogController@blog')->name('blog.post');   //--nav--
 Route::get('language/bangla','BlogController@Bangla')->name('language.bangla');
 Route::get('language/english','BlogController@English')->name('language.english');
 Route::get('blog/description/{id}','BlogController@description');
@@ -26,7 +26,7 @@ Route::get('/user/logout', 'HomeController@Logout')->name('user.logout');
 
             //-------admin---------------
 Route::get('admin/home', 'AdminController@index');
-Route::get('admin', 'Admin\LoginController@showLoginForm')->name('admin.login');
+Route::get('admin', 'Admin\LoginController@showLoginForm')->name('admin.login'); //--1-
 Route::post('admin', 'Admin\LoginController@login');	//--d--
 
             //-------Password Reset Routes------------
@@ -74,22 +74,22 @@ Route::get('mark/read/contact/{id}','Admin\CouponController@markAsRead');
 Route::get('mark/unread/contact/{id}','Admin\CouponController@markAsUnRead');
 Route::get('admin/all/contact','Admin\CouponController@allContact')->name('admin.all.contact');  //--nav
         //--------Blog routes(en/bn)---------------
-Route::get('admin/post/categoryName','Admin\PostController@postCategory')->name('postCategory.name');
+Route::get('admin/post/categoryName','Admin\PostController@postCategory')->name('postCategory.name');   //--nav-
 Route::get('admin/post/add/categoryName','Admin\PostController@addCategory')->name('add.categoryName');
 Route::post('admin/post/store/categoryName','Admin\PostController@storeCategory')->name('store.categoryName');
 Route::get('delete/category/name/{id}','Admin\PostController@deleteCat');
 Route::get('edit/category/name/{id}','Admin\PostController@editCat');
 Route::post('update/categoryName/{id}','Admin\PostController@updateCat');
 //----------------------
-Route::get('admin/add/post', 'Admin\PostController@create')->name('add.blogpost');
+Route::get('admin/add/post', 'Admin\PostController@create')->name('add.blogpost');  //--nav--
 Route::post('admin/store/post', 'Admin\PostController@store')->name('store.post');
-Route::get('admin/all/post', 'Admin\PostController@index')->name('all.blogpost');
+Route::get('admin/all/post', 'Admin\PostController@index')->name('all.blogpost');   //--nav--
 Route::get('delete/post/{id}','Admin\PostController@destroy');
 Route::get('edit/post/{id}','Admin\PostController@edit');
 Route::post('update/post/{id}','Admin\PostController@update');
         //----------user role(add_admin_(child))----------------
-Route::get('admin/create/admin', 'Admin\ReportController@UserCreate')->name('create.admin');
-Route::get('admin/create/role', 'Admin\ReportController@UserRole')->name('create.user.role');
+Route::get('admin/create/admin', 'Admin\ReportController@UserCreate')->name('create.admin');    //--nav--
+Route::get('admin/create/role', 'Admin\ReportController@UserRole')->name('create.user.role');   //--nav--
 Route::post('admin/store/admin', 'Admin\ReportController@UserStore')->name('store.admin');
 Route::get('delete/admin/{id}', 'Admin\ReportController@UserDelete');
 Route::get('edit/admin/{id}', 'Admin\ReportController@UserEdit');
@@ -154,7 +154,7 @@ Route::post('store/user/property','FrontController@storeUserProperty')->name('st
         //-----for All_Property_View/showing-----------
 Route::get('properties/{id}', 'PropertyController@subcityPropertyView');   //All_subcity_property
 Route::get('city/properties/{id}', 'PropertyController@cityPropertyView'); //All_city_property
-        //---------Showing_Individual_Property_deatails----------------
+        //---------Showing_Individual_Property_deatails-----------
 Route::get('property/details/{id}','PropertyController@PropertyDetails');
         //----------Newsletter-------------
 Route::post('store/newsletters','FrontController@storeNewsletter')->name('store.newsletters');
@@ -167,14 +167,12 @@ Route::get('user/wishlist/','WishlistController@Wishlist')->name('user.wishlist'
         //----------Modal_Email-------------
 Route::post('store/modal/email','WishlistController@storeModal')->name('store.modal.email'); //using Tostr
         //----------Search-----------
-Route::get('product/search','FrontController@ProductSearch')->name('product.search');
+Route::get('property/search','FrontController@PropertySearch')->name('property.search');
         //-----------Edit_Profile----------------
 Route::get('edit/user/profile','FrontController@editProfile')->name('edit.user.profile');
 Route::post('update/user/profile/{id}','FrontController@updateProfile');
 
-        //---------Order Tracking----------
 
-        //---------UserOrderView-----------
-
+//------------//--------------//-------------//-------------//-------------//------------//------------//
 
 

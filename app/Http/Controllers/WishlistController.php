@@ -70,7 +70,7 @@ class WishlistController extends Controller
 
 
 
-//----------------Read/View_Wishlist_for Modal-(call & email)----------------------------
+//----------------/Read/View_Wishlist_(Top_Nav)-Button/----------------------------
     public function Wishlist(){
         $userid=Auth::id();
         $property=DB::table('wishlists')
