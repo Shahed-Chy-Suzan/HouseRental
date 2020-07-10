@@ -177,7 +177,7 @@
                                 ->join('subcities','user_properties.subcity_id','subcities.id')
                                 ->join('users','wishlists.user_id','users.id')
                                 ->select('user_properties.*','wishlists.*','cities.city_name','subcities.subcity_name','users.*')
-                                ->where('wishlists.user_id',$userid)
+                                ->where('wishlists.user_id',Auth::id())
                                 ->whereIn('status', [1,2])
                                 ->get();
                         @endphp
@@ -186,7 +186,7 @@
                         <div class="wishlist_icon"><img src="{{asset('public/frontend/images/heart.png')}}"></div>
                         <div class="wishlist_content">
                         <div class="wishlist_text"><a href="{{ route('user.wishlist') }}">Wishlist</div>
-                            <div class="wishlist_count text-primary">{{ count($wishlist) }}</div>
+                            <div class="wishlist_count text-primary">{{ count($wishlistCount) }}</div>
                         </a>
                         </div>
                     </div>
