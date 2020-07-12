@@ -66,14 +66,14 @@
               </div>
             </div>
          	</div><!-- card -->
-         </div>
+         </div> <br>
 
 
         @if($view->status == 0)
             <a href="mailto:{{ $view->email }}" class="btn btn-block btn-info"><i class="fa fa-reply"></i>&nbsp; Want to sent replay ?</a>
             <a href="{{ URL::to('mark/read/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger"><i class="fa fa-check-square"></i>&nbsp; Mark as Read</a>
         @else
-            <a href="{{ URL::to('mark/unread/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger"><i class="fa fa-thumbs-down"></i>&nbsp; Mark as Unread</a>
+            <a href="{{ URL::to('mark/unread/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger py-2"><i class="fa fa-thumbs-down"></i>&nbsp; Mark as Unread</a>
         @endif
 
 

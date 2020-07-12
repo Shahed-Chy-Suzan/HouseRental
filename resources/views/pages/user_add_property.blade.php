@@ -13,7 +13,7 @@
     <div class=" text-light formHeader w-75 text-center p-4 rounded">
         <h3 style="font-size: 30px; word-spacing: 5px;">Want To Add Your Property Here...?</h3>
         <p class="text-light mb-0">
-            Post a room,apartment or home for rent or sell on here and access free tools to manage your properties. Adding your property with us is simple and easy. Just fill in the form below and we will email your confirmation & details.Please don't forget you have to submit the all required field we have added here.
+            Post a room,apartment or home to rent or sell on here and access free tools to manage your properties. Adding your property with us is simple and easy. Just fill in the form below and we will email your confirmation & details.Please don't forget you have to submit the all required field we have added here. For more <a href="#accordion">click here.</a>
         </p>
     </div>
 

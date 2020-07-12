@@ -545,7 +545,7 @@ section
 }
 .header_search_form_container
 {
-	width: 100%;
+	width: 117%;
 	height: 43px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
@@ -748,7 +748,7 @@ select option
 }
 .wishlist
 {
-	margin-right: 50px;
+	margin-right: 25px;
 }
 .wishlist_icon img
 {
