@@ -29,7 +29,7 @@
                 <!-- Deals -->
 
                 <div class="deals">
-                    <div class="deals_title">Deals of the Week</div>
+                    <div class="deals_title">New arrival</div>
                     <div class="deals_slider_container">
 
                         <!-- Deals Slider -->

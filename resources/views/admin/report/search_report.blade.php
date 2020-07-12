@@ -23,6 +23,7 @@
                     <th class="wd-10p">Price (৳)</th>
                     <th class="wd-10p">Status</th>
                     <th class="wd-10p">Action</th>
+                    <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +58,7 @@
                     </td>
                     <td>
                         <a href="{{ URL::to('view/property/'.$row->id) }}" class="btn btn-sm btn-info">View</a>
-                    </td>
+                    </td> <td></td>
                 </tr>
 
                 @endforeach

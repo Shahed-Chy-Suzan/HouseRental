@@ -145,7 +145,7 @@
                 <div class="header_search_form_container">
                     <form action="{{ route('property.search') }}" class="header_search_form clearfix" method="GET">
                         @csrf
-                        <input type="search" required="required" class="header_search_input" placeholder="Search by city or state..." name="search">
+                        <input type="search" required="required" class="header_search_input" placeholder="Search by city, state or property-code" name="search">
                         <div class="custom_dropdown">
                             <div class="custom_dropdown_list">
                                 <span class="custom_dropdown_placeholder clc">All Cities</span>
@@ -194,7 +194,7 @@
 
 
                     <!-- Cart -->
-                    <div class="cart" data-aos="fade-up-left">
+                    {{-- <div class="cart" data-aos="fade-up-left">
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                             <div class="cart_icon">
                                 <img src="{{asset('public/frontend/images/cart.png')}}" alt="">
@@ -205,7 +205,7 @@
                                 <div class="cart_price">$0</div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -227,7 +227,7 @@
 
     <!--------------------- Contact/Get in Touch ----------------------->
     <section id="contact">
-        <div class="container-box-md">
+        <div class="container-box-md" id="contact_nav">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">

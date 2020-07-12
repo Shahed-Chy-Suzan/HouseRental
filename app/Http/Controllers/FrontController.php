@@ -143,7 +143,8 @@ class FrontController extends Controller
                 ->select('user_properties.*','cities.city_name')
                 ->where([ ['status','1'],['subcity','LIKE', "%{$item}%"] ])
                 ->orWhere([ ['status','1'],['city_name','LIKE', "%{$item}%"] ])
-                ->orWhere([ ['status','1'],['address','LIKE', "%{$item}%"] ]);
+                ->orWhere([ ['status','1'],['address','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','1'],['property_code','LIKE', "%{$item}%"] ]);
 
         $property=DB::table('user_properties')
                 ->join('cities','user_properties.city_id','cities.id')
@@ -151,6 +152,7 @@ class FrontController extends Controller
                 ->where([ ['status','2'],['subcity','LIKE', "%{$item}%"] ])
                 ->orWhere([ ['status','2'],['city_name','LIKE', "%{$item}%"] ])
                 ->orWhere([ ['status','2'],['address','LIKE', "%{$item}%"] ])
+                ->orWhere([ ['status','2'],['property_code','LIKE', "%{$item}%"] ])
                 ->union($property1)
                 ->paginate(4);
 

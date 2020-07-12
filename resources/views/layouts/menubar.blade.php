@@ -46,9 +46,9 @@
                     <div class="main_nav_menu ml-auto">
                         <ul class="standard_dropdown main_nav_dropdown">
 
-                            <li><a href="#">@if(session()->get('lang') == 'bangla') হোম @else Home @endif</a></li>
+                            <li><a href="{{ url('/') }}">@if(session()->get('lang') == 'bangla') হোম @else Home @endif</a></li>
 
-                            <li class="hassubs">
+                            {{-- <li class="hassubs">
                                 <a href="#">@if(session()->get('lang') == 'bangla') পেইজ @else Pages @endif<i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
@@ -59,9 +59,10 @@
                                     <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li><a href="{{ route('blog.post') }}">@if(session()->get('lang') == 'bangla') ব্লগ @else Blog @endif </a></li>
+                            <li><a href="#contact_nav">@if(session()->get('lang') == 'bangla') যোগাযোগ @else Contact @endif </a></li>
                             <li><a href="#">@if(session()->get('lang') == 'bangla') আমাদের সম্পর্কে @else About Us @endif </a></li>
                         </ul>
                     </div>

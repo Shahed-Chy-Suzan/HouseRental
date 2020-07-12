@@ -19,7 +19,7 @@
 
     <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
-        <a class="breadcrumb-item" href="{{url('admin/home')}}">Starlight</a>
+        <a class="breadcrumb-item" href="{{url('admin/home')}}">BariWala</a>
         <span class="breadcrumb-item active">Dashboard</span>
       </nav>
 
