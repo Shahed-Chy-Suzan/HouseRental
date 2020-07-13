@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2020 at 11:27 PM
+-- Generation Time: Jul 13, 2020 at 05:00 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -57,7 +57,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `remember_token`, `places`, `coupon`, `blogs`, `all_properties`, `orders`, `reports`, `user_role`, `newsletter`, `contact_messages`, `site_setting`, `database_backup`, `type`, `created_at`, `updated_at`) VALUES
-(3, 'Admin', '01711212121', 'admin@gmail.com', NULL, '$2y$10$Wo43r5R2lxeZuFlxJH8hu.wbUPbvhkho0DtNxg6bnTtC7.IlJwF0e', 'xiurWqYoWClncyD8hvce0Bg6sK2zOvXz1q11BFoSQQmRQbOB5fXnFTEwP2YT', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2020-02-21 04:49:25', '2020-04-25 10:25:32'),
+(3, 'Admin', '01711212121', 'admin@gmail.com', NULL, '$2y$10$Wo43r5R2lxeZuFlxJH8hu.wbUPbvhkho0DtNxg6bnTtC7.IlJwF0e', 'IhsRHyEIC6sKAjy54mDoh5idrezNODQfRzRpJDqIZnv8jqOgld50GIZzbCar', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2020-02-21 04:49:25', '2020-04-25 10:25:32'),
 (4, 'Arman', '01877638277', 'arman@gmail.com', NULL, '$2y$10$qs1oDV2HhydK2Jzo57kdnOw9TQHasF2iVBEpLI8uDlWkkJtTTx3a6', NULL, '1', '1', NULL, '1', NULL, '1', NULL, NULL, NULL, NULL, '1', '2', '2020-05-06 20:51:01', '2020-05-06 20:51:01');
 
 -- --------------------------------------------------------
@@ -454,8 +454,10 @@ CREATE TABLE `users` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(121) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(121) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -465,9 +467,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'user', 'user@gmail.com', '01878377565', '2020-04-25 04:59:02', '$2y$10$Q0v2cnf6.6ta6yH3xa5AeOnaaLpHhken44M1.PJjyFMlavQczz5Au', NULL, '2020-04-25 04:57:57', '2020-04-25 04:59:02'),
-(3, 'newuser', 'newuser@gmail.com', '01788888888', '2020-04-25 05:56:07', '$2y$10$OpwV3y4D2b1evPIyxRrR.OpEQTL4DxAxbBztgNipOkuWN9Ev9GLIy', NULL, '2020-04-25 05:34:51', '2020-04-25 05:59:17');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `provider`, `provider_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'user', 'user@gmail.com', '01878377565', NULL, NULL, '2020-04-25 04:59:02', '$2y$10$Q0v2cnf6.6ta6yH3xa5AeOnaaLpHhken44M1.PJjyFMlavQczz5Au', NULL, '2020-04-25 04:57:57', '2020-04-25 04:59:02'),
+(3, 'newuser', 'newuser@gmail.com', '01788888888', NULL, NULL, '2020-04-25 05:56:07', '$2y$10$OpwV3y4D2b1evPIyxRrR.OpEQTL4DxAxbBztgNipOkuWN9Ev9GLIy', NULL, '2020-04-25 05:34:51', '2020-04-25 05:59:17');
 
 -- --------------------------------------------------------
 
@@ -649,7 +651,8 @@ INSERT INTO `wishlists` (`id`, `user_id`, `property_id`, `created_at`, `updated_
 (25, 2, 11, '2020-07-05 19:00:54', '2020-07-05 19:00:54'),
 (27, 2, 93, '2020-07-10 19:53:44', '2020-07-10 19:53:44'),
 (28, 2, 75, '2020-07-10 20:03:55', '2020-07-10 20:03:55'),
-(29, 2, 7, '2020-07-12 12:48:31', '2020-07-12 12:48:31');
+(29, 2, 7, '2020-07-12 12:48:31', '2020-07-12 12:48:31'),
+(30, 4, 94, '2020-07-13 12:17:05', '2020-07-13 12:17:05');
 
 --
 -- Indexes for dumped tables
@@ -833,7 +836,7 @@ ALTER TABLE `subcities`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_properties`
@@ -845,7 +848,7 @@ ALTER TABLE `user_properties`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

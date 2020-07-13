@@ -52,6 +52,11 @@
                 </div>
 
 
+
+<!------------//---------------//---------------//------------------//-----------------//--------------//---------------->
+
+
+
 <!--------------- Register Form --------------->
                  <div class="col-lg-5 offset-lg-1 logreg">
                     <div class="contact_form_container">
@@ -70,14 +75,24 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email </label>
                                 <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  aria-describedby="emailHelp" placeholder="Email " required="">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Password</label>
-                                <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Password" name="password" required="">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" aria-describedby="emailHelp" placeholder="Password" name="password" required="" autocomplete="new-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Confirm Password</label>
-                                <input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Re-type Password" name="password_confirmation" required="">
+                                <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Re-type Password" name="password_confirmation" required="" autocomplete="new-password">
                             </div>
                             <div class="contact_form_button more">
                                 <button type="submit" class="btn bg-transparent text-white button-pipaluk button--inverted px-4 py-2" style="font-size:16px;">Sign Up</button>

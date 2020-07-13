@@ -1786,7 +1786,7 @@
                     <div class="newsletter_title_container">
                         <div class="newsletter_icon"><img src="{{ asset('public/frontend/images/send.png') }}" alt=""></div>
                         <div class="newsletter_title">Sign up for Newsletter</div>
-                        <div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
+                        <div class="newsletter_text"><p>...and get the latest update.</p></div>
                     </div>
                     <div class="newsletter_content clearfix">
                         <form action="{{ route('store.newsletters') }}" class="newsletter_form" method="post">
