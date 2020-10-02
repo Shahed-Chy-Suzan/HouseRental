@@ -1,6 +1,6 @@
 <div align="center">
   
-# HouseRental - Bariwala
+# HouseRental - BariWala
 
 </div>
 
@@ -11,7 +11,7 @@
 - Authentication
 - City/Subcity
 - Property setup
-- Upload property by user + admin
+- Upload property by User + Admin
 - Multiple image upload
 - Discount
 - Coupon
