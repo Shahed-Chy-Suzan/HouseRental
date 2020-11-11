@@ -38,7 +38,7 @@
 
 ## Database Schema
 
-- Visit this - https://drawsql.app/shahed-chy-suzan/diagrams/bariwala-com#
+- Visit this - https://drawsql.app/shahed-chy-suzan/diagrams/bariwala-com
 
 ## Packages
 
