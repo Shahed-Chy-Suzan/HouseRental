@@ -88,7 +88,7 @@
                             </div>
                         @else
                             <ul class="standard_dropdown top_bar_dropdown ">
-                                <li class="more moreApp"> <a href="{{ route('home') }}" class="button-pipaluk button--inverted px-4" style="font-size:16px; color:#333333; font-family: Arial, Helvetica, sans-serif;"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
+                                <li class="more moreApp"> <a href="#" class="button-pipaluk button--inverted px-4" style="font-size:16px; color:#333333; font-family: Arial, Helvetica, sans-serif;"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}"></div>
                                     @if(session()->get('lang') == 'bangla')
                                         প্রোপাইল
                                     @else
@@ -98,7 +98,7 @@
                                     <ul style="padding-top:2px; padding-bottom:1px;">
                                         <li class="more moreS"><a href="{{ route('home') }}" class="button-pipaluk button--inverted pl-5">Profile</a></li>
                                         <li class="more moreS"><a href="{{ route('add.property.user')}}" class="button-pipaluk button--inverted px-4">Add Property</a></li>
-                                        <li class="more moreS"><a href="{{ route('user.logout') }}" class="button-pipaluk button--inverted px-5">Logout</a></li>
+                                        {{-- <li class="more moreS"><a href="{{ route('user.logout') }}" class="button-pipaluk button--inverted px-5">Logout</a></li> --}}
                                     </ul>
                                 </li>
 
@@ -285,7 +285,7 @@
     <div id="contact-right">
         <form action="{{route('store.contact')}}" method="post">
                 @csrf
-            <h4 style="color: blue">Send Message</h4>
+            <h4 style="color: blue">Send Feedback</h4>
             <p>Feel free to contact with us at any moment...</p>
 
             <div class="row">

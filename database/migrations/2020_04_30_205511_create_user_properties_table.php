@@ -15,9 +15,9 @@ class CreateUserPropertiesTable extends Migration
     {
         Schema::create('user_properties', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id')->nullable();
-            $table->string('city_id')->nullable();
-            $table->string('subcity_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->integer('subcity_id')->nullable();
             $table->string('name');
             $table->string('email');
             $table->string('phone');
