@@ -40,12 +40,13 @@ class FrontController extends Controller
         $data['subject']=$request->subject;
         $data['message']=$request->message;
         $data['status']=0;
+        $data['review']=0;
         $data['date']=date('d-m-y');
 
         $contact= DB::table('contacts')->insert($data);
 
         $notification = array(
-            'message'=>'Thanks for your Message! We will replay you soon',
+            'message'=>'Thanks for your Feedback! We will replay you soon',
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
@@ -117,15 +118,30 @@ class FrontController extends Controller
                 Image::make($image_three)->resize(1140,702)->save('public/media/user_property/'.$image_three_name);
                 $data['image_three']='public/media/user_property/'.$image_three_name;
 
-                $userProperty=DB::table('user_properties')->insert($data);
 
-                Mail::to($email)->send(new invoiceMail($data));    //-------For sending Mail to user---------
+            $property_id = DB::table('user_properties')->insertGetId($data);
 
-                $notification=array(
-                    'message'=>'Successfully Property Inserted',
-                    'alert-type'=>'success'
-                );
-                return Redirect()->back()->with($notification);
+            Mail::to($email)->send(new invoiceMail($data));     //-------For sending Mail to user---------
+
+            $user = Auth::user();
+            $price = $request->price;
+
+            //session()->flash('type','success');
+            //session()->flash('message','Successfully Property Inserted');
+
+            return view('exampleHosted', compact('user','property_id','price'));
+
+
+            //-------------------before implementing payment gateway-----------------------------
+                // $userProperty=DB::table('user_properties')->insert($data);
+
+                // Mail::to($email)->send(new invoiceMail($data));   //--For sending Mail to user--
+
+                // $notification=array(
+                //     'message'=>'Successfully Property Inserted',
+                //     'alert-type'=>'success'
+                // );
+                // return Redirect()->back()->with($notification);
         }
     }
 
@@ -196,6 +212,12 @@ class FrontController extends Controller
             return redirect()->route('home')->with($notification);
         }
 
+    }
+
+
+//----------------------Terms & Privacy Policy-----------------------
+    public function PrivacyPolicy(){
+        return view('pages.privacy_policy');
     }
 
 

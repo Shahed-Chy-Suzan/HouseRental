@@ -38,13 +38,23 @@
          	    		 	<th>Date : </th>
          	    		 	<th>{{ $view->date }}</th>
                           </tr>
-                          <tr>
+                        <tr>
                             <th>Status : </th>
                             <th style="font-size: 15px">
                                 @if($view->status == 0)
                                  <span class="badge badge-warning p-1">New Message</span>
                                 @else
                                 <span class="badge badge-primary p-1">Already Responded</span>
+                                @endif
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Review : </th>
+                            <th style="font-size: 15px">
+                                @if($view->review == 0)
+                                    <span class="badge badge-primary p-1">Not showing as a review</span>
+                                @else
+                                    <span class="badge badge-success p-1">Showing as a review</span>
                                 @endif
                             </th>
                         </tr>
@@ -74,6 +84,12 @@
             <a href="{{ URL::to('mark/read/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger"><i class="fa fa-check-square"></i>&nbsp; Mark as Read</a>
         @else
             <a href="{{ URL::to('mark/unread/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger py-2"><i class="fa fa-thumbs-down"></i>&nbsp; Mark as Unread</a>
+        @endif
+         <br>
+        @if($view->review == 0)
+            <a href="{{ URL::to('show/review/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger"><i class="fa fa-check-square"></i>&nbsp; Show as a Review</a>
+        @else
+            <a href="{{ URL::to('dont/review/contact/'.$view->id) }}" class="btn btn-block btn-sm btn-danger py-2"><i class="fa fa-thumbs-down"></i>&nbsp; Don't Show as a Review</a>
         @endif
 
 

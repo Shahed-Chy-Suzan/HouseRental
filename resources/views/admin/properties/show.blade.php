@@ -88,14 +88,23 @@
                                 @endif
                             </th>
                         </tr>
-                        {{-- <tr><th></th><th></th></tr> --}}
+
+                        @if(isset($property->amount) && isset($property->transaction_id))
+                            <tr>
+                                <th>Payment :</th>
+                                <th>৳ {{$property->amount}}</th>
+                            </tr>
+                            <tr>
+                                <th>Transaction Id :</th>
+                                <th>{{$property->transaction_id}}</th>
+                            </tr>
+                        @endif
 
          	    	</table>
 
          	        </div>
          	    </div>
              </div>
-
 
 
          	<div class="col-md-6">

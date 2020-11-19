@@ -6,7 +6,7 @@
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<title>HouseRental</title>
+<title>Bariwala - Online House Rental System</title>
 <meta charset="utf-8">
 
 <!----------this for ajax ----------->
@@ -98,7 +98,7 @@
                                     <ul style="padding-top:2px; padding-bottom:1px;">
                                         <li class="more moreS"><a href="{{ route('home') }}" class="button-pipaluk button--inverted pl-5">Profile</a></li>
                                         <li class="more moreS"><a href="{{ route('add.property.user')}}" class="button-pipaluk button--inverted px-4">Add Property</a></li>
-                                        {{-- <li class="more moreS"><a href="{{ route('user.logout') }}" class="button-pipaluk button--inverted px-5">Logout</a></li> --}}
+                                        <li class="more moreS"><a href="{{ route('user.logout') }}" class="button-pipaluk button--inverted px-5">Logout</a></li>
                                     </ul>
                                 </li>
 
@@ -340,6 +340,7 @@
                     <p>
                         Copyright &copy; 2020 All Rights Reserved By : <span><a href="https://facebook.com/arman.u.alam" target="_blank"> Arman-Ul-Alam </a> & <a href="https://facebook.com/Shahedchysuzan/" target="_blank"> Shahed Chy Suzan </a></span>
                     </p>
+                    <a href="{{ url('terms/privacy')}}" class="text-light small" style="opacity: .7">Terms & Privacy Policy</a>
                 </div>
             </div>
         </div>

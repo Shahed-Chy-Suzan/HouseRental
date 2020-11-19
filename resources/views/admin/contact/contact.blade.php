@@ -32,6 +32,7 @@
                   <th class="wd-15p">Phone</th>
                   <th class="wd-15p">Email</th>
                   <th class="wd-15p">Status</th>
+                  <th class="wd-15p">Review</th>
                   <th class="wd-20p">Action</th>
                 </tr>
               </thead>
@@ -46,6 +47,13 @@
                      <span class="badge badge-warning p-1">New Message</span>
                     @else
                      <span class="badge badge-primary p-1">Already Responded</span>
+                    @endif
+                  </td>
+                  <td style="font-size: 15px">
+                    @if($row->review == 0)
+                     <span class="badge badge-warning p-1">Not Showing</span>
+                    @else
+                     <span class="badge badge-primary p-1">Showing </span>
                     @endif
                   </td>
                   <td>

@@ -197,7 +197,7 @@
         </label>
       </div>
     </div>
-    <button class="btn btn-warning" type="submit">Submit Form</button>
+    <button class="btn btn-warning" type="submit">Proceed to Payment</button>
   </form>
 
 </div>

@@ -96,6 +96,10 @@ class CouponController extends Controller
 // --ekhane Database onosare "Status" er term gular rules holo :--
 //         Status = 0 = New Message
 //         Status = 1 = Already Replayed Message
+
+// --ekhane Database onosare "review" er term gular rules holo :--
+//         Status = 0 = Dont show(default)
+//         Status = 1 = Show as a review
 //--------------------------------------------------------------------------------
 
 //----------------User Contact Message//Get_in_Touch--------------------------
@@ -131,9 +135,9 @@ class CouponController extends Controller
     public function markAsRead($id){
         DB::table('contacts')->where('id',$id)->update(['status'=> 1]);
         $notification=array(
-                    'message'=>'Successfully message marked as read',
-                    'alert-type'=>'success'
-                );
+                'message'=>'Successfully message marked as read',
+                'alert-type'=>'success'
+            );
         return Redirect()->back()->with($notification);
     }
 
@@ -141,9 +145,29 @@ class CouponController extends Controller
     public function markAsUnRead($id){
         DB::table('contacts')->where('id',$id)->update(['status'=> 0]);
         $notification=array(
-                    'message'=>'Message marked as Unread',
-                    'alert-type'=>'success'
-                );
+                'message'=>'Message marked as Unread',
+                'alert-type'=>'success'
+            );
+        return Redirect()->back()->with($notification);
+    }
+
+//------------Show as Review----------------------
+    public function showReview($id){
+        DB::table('contacts')->where('id',$id)->update(['review'=> 1]);
+        $notification=array(
+                'message'=>'Review added in website',
+                'alert-type'=>'success'
+            );
+        return Redirect()->back()->with($notification);
+    }
+
+//-------------Dont show as a Review--------------------
+    public function dontShowReview($id){
+        DB::table('contacts')->where('id',$id)->update(['review'=> 0]);
+        $notification=array(
+                'message'=>'Removed this as a review',
+                'alert-type'=>'success'
+            );
         return Redirect()->back()->with($notification);
     }
 

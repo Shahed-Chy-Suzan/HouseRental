@@ -146,12 +146,12 @@
                       </tr>
                       <tr>
                           <td>Price :</td>
-                          <td>৳ {{ $property->price }} / Month</td>
+                          <td>৳ {{ $property->price }}</td>
                       </tr>
                       <tr>
                           @if (isset($property->discount_price))
                             <td>Discount Price ({{ intval($discount) }}%) :</td>
-                            <td>৳ {{ $property->discount_price }} / Month</td>
+                            <td>৳ {{ $property->discount_price }}</td>
                           @else
                             <td>Discount Price :</td>
                             <td>Not Available</td>

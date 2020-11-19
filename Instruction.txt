@@ -29,7 +29,7 @@
 		##-----------------ADMIN's Work-----------------##
 
 	(1) To Upload a property in website, At first Admin have to go "All_Properties"--->>"Pending_Properties"
-	(2) Then,IN "pending_property" we have to must Add/Check --> Subcity, Map Link, Trend/Best_rated/Hot_new, Details, & others Options.
+	(2) Then,IN "pending_property" we have to must Add/Check --> Subcity, Payment, Map Link, Trend/Best_rated/Hot_new, Details, & others Options.
 	(3) After making sure all of them options are OK as we expected then Click "Update",
 	(4) After Updating this property, Our next task is to go to "VIEW" option of this property, If all of the options are OK, Then now we can "UPLOAD" this peoperty in website by clicking "UPLOAD" or we may cancell a property also by clicking "CANCEL" button.
 

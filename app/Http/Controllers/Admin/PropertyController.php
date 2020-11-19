@@ -71,14 +71,32 @@ class PropertyController extends Controller
 
 //------------view-------------
     public function ViewProperty($id){
-        $property=DB::table('user_properties')
+
+        $check = DB::table('orders')->where('property_id',$id)->exists();
+
+        if($check){
+            $property=DB::table('user_properties')
+                ->join('cities','user_properties.city_id','cities.id')
+                ->join('subcities','user_properties.subcity_id','subcities.id')
+                ->join('orders','user_properties.id','orders.property_id')
+                ->select('user_properties.*','cities.city_name','subcities.subcity_name','orders.amount','orders.transaction_id')
+                ->where('user_properties.id',$id)
+                ->first();
+            return view('admin.properties.show',compact('property'));
+        }
+        else{
+            $property=DB::table('user_properties')
                 ->join('cities','user_properties.city_id','cities.id')
                 ->join('subcities','user_properties.subcity_id','subcities.id')
                 ->select('user_properties.*','cities.city_name','subcities.subcity_name')
                 ->where('user_properties.id',$id)
                 ->first();
-        return view('admin.properties.show',compact('property'));
+            return view('admin.properties.show',compact('property'));
+        }
+
     }
+
+
 
 //--------------------------------------------------------------------------------------------------------------------
 

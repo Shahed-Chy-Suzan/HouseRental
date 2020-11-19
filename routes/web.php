@@ -1,6 +1,22 @@
 <?php
 
 
+        //------------SSLCOMMERZ Start---------------
+Route::post('/checkout', 'SslCommerzPaymentController@checkout');
+
+//Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+//Route::post('/pay', 'SslCommerzPaymentController@index');  //host default
+
+//Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout'); //pop-up
+//Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+        //------------SSLCOMMERZ END-------------
+
         //---------Socialite----------
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
@@ -66,12 +82,14 @@ Route::post('update/coupon/{id}', 'Admin\CouponController@updateCoupon');
         //--------------Newsletter--------------------
 Route::get('admin/newsletter','Admin\CouponController@newsletter')->name('admin.newsletter');
 Route::get('delete/newsletter/{id}', 'Admin\CouponController@deletenewsletter');
-        //----------Contact/Get_in_Touch-------------
+        //----------Contact/Get_in_Touch/Review-------------
 Route::get('admin/contact','Admin\CouponController@contact')->name('admin.new.contact');  //--nav
 Route::get('delete/contact/{id}','Admin\CouponController@deleteContact');
 Route::get('view/contact/{id}','Admin\CouponController@viewContact');
 Route::get('mark/read/contact/{id}','Admin\CouponController@markAsRead');
 Route::get('mark/unread/contact/{id}','Admin\CouponController@markAsUnRead');
+Route::get('show/review/contact/{id}','Admin\CouponController@showReview');
+Route::get('dont/review/contact/{id}','Admin\CouponController@dontShowReview');
 Route::get('admin/all/contact','Admin\CouponController@allContact')->name('admin.all.contact');  //--nav
         //--------Blog routes(en/bn)---------------
 Route::get('admin/post/categoryName','Admin\PostController@postCategory')->name('postCategory.name');   //--nav-
@@ -141,9 +159,6 @@ Route::get('view/property/order/{property_code}','Admin\OrderController@ViewProp
 
 
 
-
-
-
 //============================================================================================
                 //---------Frontend All Routes are here:-----------
 //============================================================================================
@@ -171,6 +186,8 @@ Route::get('property/search','FrontController@PropertySearch')->name('property.s
         //-----------Edit_Profile----------------
 Route::get('edit/user/profile','FrontController@editProfile')->name('edit.user.profile');
 Route::post('update/user/profile/{id}','FrontController@updateProfile');
+        //-----------Terms & Privacy Policy-----------
+Route::get('/terms/privacy','FrontController@PrivacyPolicy');
 
 
 //------------//--------------//-------------//-------------//-------------//------------//------------//
