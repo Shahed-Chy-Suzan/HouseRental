@@ -15,7 +15,7 @@
                     @if(session()->get('lang') == 'bangla')
                         আমাদের ব্লগে আপনাকে স্বাগতম
                     @else
-                        Welcome to our Blog
+                        Welcome to Our Blog
                     @endif
                 </h1>
             </div>
