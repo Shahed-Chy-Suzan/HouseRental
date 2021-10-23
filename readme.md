@@ -4,7 +4,7 @@
 
 </div>
 
-<p align="center"><img src="https://primelegal.in/wp-content/uploads/2021/06/house-rent-concept-background_23-2147779983.jpg" height="500px"></p>
+<p align="center"><img src="https://primelegal.in/wp-content/uploads/2021/06/house-rent-concept-background_23-2147779983.jpg" height="400px"></p>
 
 ## Features
 
