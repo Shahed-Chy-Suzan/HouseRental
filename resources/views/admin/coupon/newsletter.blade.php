@@ -10,7 +10,7 @@
 
         <div class="card pd-20 pd-sm-40">
         <h6 class="card-body-title">Subscriber List
-            <a href="#" class="btn btn-sm btn-danger" style="float: right;" id="delete" >Delete All</a>
+            <a href="#" class="btn btn-sm btn-danger" style="float: right;" id="delete" ></a>
         </h6>
         <br>
 

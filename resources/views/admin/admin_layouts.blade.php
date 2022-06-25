@@ -115,7 +115,7 @@
     </div><!-- menu-item -->
 </a><!-- sl-menu-link -->
 <ul class="sl-menu-sub nav flex-column">
-    <li class="nav-item"><a href="{{ route('admin.add.property') }}" class="nav-link">Add New Property</a></li>
+    {{-- <li class="nav-item"><a href="{{ route('admin.add.property') }}" class="nav-link">Add New Property</a></li> --}}
     <li class="nav-item"><a href="{{ route('pending.user_property') }}" class="nav-link">Pending for Approval</a></li>
     <li class="nav-item"><a href="{{ route('admin.uploaded.property') }}" class="nav-link">Uploaded Properties</a></li>
     <li class="nav-item"><a href="{{ route('admin.delivery.progress') }}" class="nav-link">Delivery On Progress</a></li>
@@ -574,7 +574,7 @@
         var link = $(this).attr("href");
            swal({
              title: "Are you Want to Cancel?",
-             text: "Once Cancel,You will find it in 'Cancelled Properties' option!",
+             text: "Once Cancel,You will find it in 'Cancelled Order' option!",
              icon: "warning",
              buttons: true,
              dangerMode: true,
@@ -583,7 +583,7 @@
              if (willDelete) {
                   window.location.href = link;
              } else {
-               swal("Safe Property!");
+               swal("Safe Order!");
              }
            });
        });

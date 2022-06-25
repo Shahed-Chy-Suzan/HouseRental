@@ -1609,7 +1609,7 @@
                 <div class="reviews_slider_container">
                     <!-- Reviews Slider -->
                     <div class="owl-carousel owl-theme reviews_slider">
-                        
+
                         <!-- Reviews Slider Item -->
                         @foreach($review as $row)
                             <div class="owl-item">
@@ -1760,6 +1760,7 @@
                             <li> Then a “form” will appear in your screens to fill up and submit.</li>
                             <li> Enter basic information about your properties including lease terms and utilities.</li>
                             <li> Upload a few photos too of your properties for rent or sell.</li>
+                            <li> Last but not the list you have pay BDT 500 for uploading your property here.</li>
                             <li> The more information you provide, the more likely a renter will find your listing.</li>
                             <li> Preview your listing to make sure everything looks right.</li>
                             <li> “Submit” your listing.</li>

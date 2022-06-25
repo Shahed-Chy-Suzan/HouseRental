@@ -8,12 +8,11 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4|^8.0",
         "bumbummen99/shoppingcart": "^2.8",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
-        "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
         "spatie/laravel-backup": "^6.9"
     },

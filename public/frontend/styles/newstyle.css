@@ -584,7 +584,7 @@ div.shadow-lg:hover{
             contact
 ====================================*/
 #contact {
-    background: url(../images/Cover/testimonial-bg.jpg) no-repeat scroll center center;
+    background: url("../images/Cover/testimonial-bg.jpg") no-repeat scroll center center;
     background-size: cover;
 }
 

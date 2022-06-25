@@ -22,7 +22,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->setStorePassword($this->config['apiCredentials']['store_password']);
     }
 
-    public function orderValidate($trx_id = '', $amount = 0, $currency = "BDT", $post_data)
+    public function orderValidate($post_data, $trx_id = '', $amount = 0, $currency = "BDT",)
     {
         if ($post_data == '' && $trx_id == '' && !is_array($post_data)) {
             $this->error = "Please provide valid transaction ID and post request data";
@@ -150,7 +150,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     }
 
     # FUNCTION TO CHECK HASH VALUE
-    protected function SSLCOMMERZ_hash_varify($store_passwd = "", $post_data)
+    protected function SSLCOMMERZ_hash_varify($post_data, $store_passwd = "")
     {
         if (isset($post_data) && isset($post_data['verify_sign']) && isset($post_data['verify_key'])) {
             # NEW ARRAY DECLARED TO TAKE VALUE OF ALL POST
