@@ -174,7 +174,7 @@ class SslCommerzPaymentController extends Controller
         //Data received in variable
 
         $user_properties = DB::table('user_properties')
-                        ->select('id')
+                        ->select('id','user_id')
                         ->where('user_id',Auth::user()->id)
                         ->latest()
                         ->first();
