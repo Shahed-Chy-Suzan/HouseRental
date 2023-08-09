@@ -1,6 +1,6 @@
 <div align="center">
   
-# BariWala.com - Online Based HouseRental System
+# Online Based HouseRental System
 
 </div>
 
