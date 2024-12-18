@@ -121,5 +121,5 @@
 
 > Run **_npm install_**
 
-> Run **_php artisan serve_**
+> Go to any browser and enter this URL  **_localhost/HouseRental_**
 
